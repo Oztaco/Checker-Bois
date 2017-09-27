@@ -6,7 +6,7 @@ microframework.
 
 ## Team
 
-- Jane Doe
+- Andrew Shin
 
 - John Doe
 
