@@ -8,7 +8,7 @@ microframework.
 
 - Andrew Shin
 
-- John Doe
+- Cameron Hudson
 
 
 ## Prerequisites
