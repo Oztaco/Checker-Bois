@@ -12,6 +12,8 @@ microframework.
 
 - Efe Ozturkoglu
 
+- Jonathan Hubbard
+
 
 ## Prerequisites
 
