@@ -10,6 +10,10 @@ microframework.
 
 - Cameron Hudson
 
+- Efe Ozturkoglu
+
+- Jonathan Hubbard
+
 
 ## Prerequisites
 
