@@ -6,9 +6,9 @@ public class Player {
 
     private void setupPlayer(){
         /**
-         * Sets up a player to play the game with 24 pieces and 0 kings
+         * Sets up a player to play the game with 12 pieces and 0 kings
          */
-        this.pieces = 24;
+        this.pieces = 12;
         this.kings = 0;
     }
 
@@ -24,6 +24,11 @@ public class Player {
         /**
          * Subtracts a single piece based on it's type
          */
-        
+        if(type.equals(CheckersBoard.space.PLAYER1) || type.equals(CheckersBoard.space.PLAYER2)){
+            this.pieces--;
+        }
+        else{
+            this.kings--;
+        }
     }
 }
