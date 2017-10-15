@@ -109,7 +109,7 @@ public class CheckersBoard {
                 }
                 System.out.print("[" + val + "]");
             }
+            System.out.println("");
         }
-        System.out.println("");
     }
 }
