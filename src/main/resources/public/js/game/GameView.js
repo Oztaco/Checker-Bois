@@ -3,7 +3,7 @@
  * 
  * This component manages the Client-side behavior of the Game view.
  */
-define(function(require){
+define(function(require){//
   'use strict';
   
   // imports
