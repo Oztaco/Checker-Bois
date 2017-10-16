@@ -128,15 +128,44 @@ public class CheckersBoard {
      * Moves a piece for the player specified
      * @param
      */
-    public void move(int xcoord0, int ycoord0, int xcoord1, int ycoord1, Player player, moveType movetype){
-        if(movetype == moveType.move){
+    public void move(int x0, int y0, int x1, int y1, Player player, moveType movetype) throws InvalidMoveException{
+        int changeInX = 0;
+        int changeInY = 0;
+        boolean greaterx1 = false;
+        boolean greatery1 = false;
 
+        if(x1 > x0){
+            greaterx1 = true;
+            changeInX = x1 - x0;
+            if(y1 > y0){
+                greatery1 = true;
+                changeInY = y1 - y0;
+            }
+            else if(y1 < y0){
+                changeInY = y0 - y1;
+            }
+        }
+        else if(x1 < x0) {
+            changeInX = x0 - x1;
+            if (y1 > y0) {
+                greatery1 = true;
+                changeInY = y1 - y0;
+            } else if (y1 < y0) {
+                changeInY = y0 - y1;
+            }
+        }
+
+        if(movetype == moveType.move){
+            if(changeInX != 1 && changeInY != 1){
+                throw new InvalidMoveException("Moves must be a distance of 1 from the piece!");
+            }
+            else{
+
+            }
         }
         else if(movetype == moveType.attack){
-            if( ((xcoord1-xcoord0 == 2) || (xcoord0-xcoord1 == 2)) &&
-                ((ycoord1-ycoord0 == 2) || (ycoord0-ycoord1 == 2)) &&
-                () ){
-
+            if(changeInX != 2 && changeInY != 2){
+                throw new InvalidMoveException("Attacks must be a distance of two from the piece!");
             }
         }
     }
