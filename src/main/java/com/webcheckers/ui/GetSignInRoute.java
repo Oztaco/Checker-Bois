@@ -13,6 +13,8 @@ import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 
+import com.webcheckers.appl.GameCenter;
+
 /**
  * The UI Controller to GET the Sign in page.
  *
@@ -22,6 +24,7 @@ public class  GetSignInRoute implements Route {
   private static final Logger LOG = Logger.getLogger( GetSignInRoute.class.getName());
 
   private final TemplateEngine templateEngine;
+  private final GameCenter gameCenter;
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -30,7 +33,7 @@ public class  GetSignInRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public  GetSignInRoute(final TemplateEngine templateEngine) {
+  public  GetSignInRoute(GameCenter gameCenter, final TemplateEngine templateEngine) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
@@ -53,7 +56,8 @@ public class  GetSignInRoute implements Route {
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer(" GetSignInRoute is invoked.");
-    //
+    
+    gameCenter.addSession(request.attribute("username"), request.ip());
     Map<String, Object> vm = new HashMap<>();
     return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
   }
