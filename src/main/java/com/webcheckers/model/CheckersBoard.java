@@ -1,7 +1,5 @@
 package com.webcheckers.model;
 
-import org.omg.CORBA.INVALID_ACTIVITY;
-
 public class CheckersBoard {
 
     public enum space{
@@ -10,11 +8,18 @@ public class CheckersBoard {
         PLAYER1,
         PLAYER2,
         PLAYER1KING,
-        PLAYER2KING
+        PLAYER2KING;
     }
     private space[][] board;
     private Player player1;
     private Player player2;
+
+
+    private CheckersBoard(){
+        this.board = new space[8][8];
+        player1 = new Player();
+        player2 = new Player();
+    }
 
     /**
      * Initializes the board, filling it with enums
@@ -111,5 +116,11 @@ public class CheckersBoard {
             }
             System.out.println("");
         }
+    }
+
+    public static void main(String args[]){
+        CheckersBoard cb1 = new CheckersBoard();
+        cb1.initBoard();
+        cb1.printBoard();
     }
 }
