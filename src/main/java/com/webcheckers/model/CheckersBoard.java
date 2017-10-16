@@ -73,7 +73,7 @@ public class CheckersBoard {
                         board[y][x] = space.INVALID;
                     }
                 }
-                else{   //y == 6
+                else if (y==6){   //y == 6
                     if(x % 2 == 0){
                         board[y][x] = space.INVALID;
                     }
