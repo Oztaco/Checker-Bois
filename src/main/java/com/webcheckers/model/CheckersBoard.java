@@ -10,6 +10,10 @@ public class CheckersBoard {
         PLAYER1KING,
         PLAYER2KING;
     }
+    public enum moveType{
+        move,
+        attack;
+    }
     private space[][] board;
     private Player player1;
     private Player player2;
@@ -18,7 +22,9 @@ public class CheckersBoard {
     private CheckersBoard(){
         this.board = new space[8][8];
         player1 = new Player();
+        player1.setupPlayer();
         player2 = new Player();
+        player2.setupPlayer();
     }
 
     /**
@@ -115,6 +121,23 @@ public class CheckersBoard {
                 System.out.print("[" + val + "]");
             }
             System.out.println("");
+        }
+    }
+
+    /**
+     * Moves a piece for the player specified
+     * @param
+     */
+    public void move(int xcoord0, int ycoord0, int xcoord1, int ycoord1, Player player, moveType movetype){
+        if(movetype == moveType.move){
+
+        }
+        else if(movetype == moveType.attack){
+            if( ((xcoord1-xcoord0 == 2) || (xcoord0-xcoord1 == 2)) &&
+                ((ycoord1-ycoord0 == 2) || (ycoord0-ycoord1 == 2)) &&
+                () ){
+
+            }
         }
     }
 
