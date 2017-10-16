@@ -21,6 +21,8 @@ import spark.TemplateEngine;
 public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
+  static final String TITLE_ATTR = "title";
+
   private final TemplateEngine templateEngine;
 
   /**
