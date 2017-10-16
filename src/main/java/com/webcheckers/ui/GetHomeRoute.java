@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import static spark.Spark.halt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
