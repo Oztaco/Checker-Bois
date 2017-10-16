@@ -33,7 +33,7 @@ public class  GetSignInRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public  GetSignInRoute(GameCenter gameCenter, final TemplateEngine templateEngine) {
+  public  GetSignInRoute(final TemplateEngine templateEngine) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
