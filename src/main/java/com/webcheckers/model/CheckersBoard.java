@@ -124,6 +124,8 @@ public class CheckersBoard {
 
     /**
      * Moves a piece for the player specified
+     *
+     * //TODO reverse indexing
      * @param
      */
     public void move(int x0, int y0, int x1, int y1, Player player, moveType movetype) throws InvalidMoveException{
@@ -179,56 +181,57 @@ public class CheckersBoard {
                 }
             }
         }
-        else if(movetype == moveType.attack){
-            if(changeInX != 2 && changeInY != 2){
-                throw new InvalidMoveException("Attacks must be a distance of 2 from the piece");
-            }
-            else{
-                if(greaterx1 && greatery1){
-                    if(this.board[x0+1][y0+1] == other || this.board[x0+1][y0+1] == otherKing){
-                        space tempSpace = this.board[x0][y0];
-                        this.board[x0][y0]= space.EMPTY;
-                        this.board[x1][y1] = tempSpace;
-                    }
-                    else{
-                        throw new InvalidMoveException("There is no enemy piece in your path");
-                    }
-                }
-                else if(greaterx1 && !greatery1){
-                    if(this.board[x0+1][y0-1] == other || this.board[x0+1][y0-1] == otherKing){
-                        space tempSpace = this.board[x0][y0];
-                        this.board[x0][y0]= space.EMPTY;
-                        this.board[x1][y1] = tempSpace;
-                    }
-                    else{
-                        throw new InvalidMoveException("There is no enemy piece in your path");
-                    }
-                }
-                else if(!greaterx1 && greatery1){
-                    if(this.board[x0-1][y0+1] == other || this.board[x0-1][y0+1] == otherKing){
-                        space tempSpace = this.board[x0][y0];
-                        this.board[x0][y0]= space.EMPTY;
-                        this.board[x1][y1] = tempSpace;
-                    }
-                    else{
-                        throw new InvalidMoveException("There is no enemy piece in your path");
-                    }
-
-                }
-                else if(!greaterx1 && !greatery1){
-                    if(this.board[x0-1][y0-1] == other || this.board[x0-1][y0-1] == otherKing){
-                        space tempSpace = this.board[x0][y0];
-                        this.board[x0][y0]= space.EMPTY;
-                        this.board[x1][y1] = tempSpace;
-
-                    }
-                    else{
-                        throw new InvalidMoveException("There is no enemy piece in your path");
-                    }
-                }
-
-            }
-        }
+        //TODO fix movetype attack
+//        else if(movetype == moveType.attack){
+//            if(changeInX != 2 && changeInY != 2){
+//                throw new InvalidMoveException("Attacks must be a distance of 2 from the piece");
+//            }
+//            else{
+//                if(greaterx1 && greatery1){
+//                    if(this.board[x0+1][y0+1] == other || this.board[x0+1][y0+1] == otherKing){
+//                        space tempSpace = this.board[x0][y0];
+//                        this.board[x0][y0]= space.EMPTY;
+//                        this.board[x1][y1] = tempSpace;
+//                    }
+//                    else{
+//                        throw new InvalidMoveException("There is no enemy piece in your path");
+//                    }
+//                }
+//                else if(greaterx1 && !greatery1){
+//                    if(this.board[x0+1][y0-1] == other || this.board[x0+1][y0-1] == otherKing){
+//                        space tempSpace = this.board[x0][y0];
+//                        this.board[x0][y0]= space.EMPTY;
+//                        this.board[x1][y1] = tempSpace;
+//                    }
+//                    else{
+//                        throw new InvalidMoveException("There is no enemy piece in your path");
+//                    }
+//                }
+//                else if(!greaterx1 && greatery1){
+//                    if(this.board[x0-1][y0+1] == other || this.board[x0-1][y0+1] == otherKing){
+//                        space tempSpace = this.board[x0][y0];
+//                        this.board[x0][y0]= space.EMPTY;
+//                        this.board[x1][y1] = tempSpace;
+//                    }
+//                    else{
+//                        throw new InvalidMoveException("There is no enemy piece in your path");
+//                    }
+//
+//                }
+//                else if(!greaterx1 && !greatery1){
+//                    if(this.board[x0-1][y0-1] == other || this.board[x0-1][y0-1] == otherKing){
+//                        space tempSpace = this.board[x0][y0];
+//                        this.board[x0][y0]= space.EMPTY;
+//                        this.board[x1][y1] = tempSpace;
+//
+//                    }
+//                    else{
+//                        throw new InvalidMoveException("There is no enemy piece in your path");
+//                    }
+//                }
+//
+//           }
+//        }
     }
 
     public static void main(String args[]) throws InvalidMoveException {
