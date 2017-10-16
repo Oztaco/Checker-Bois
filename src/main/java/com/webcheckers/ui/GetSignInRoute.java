@@ -24,7 +24,7 @@ public class  GetSignInRoute implements Route {
   private static final Logger LOG = Logger.getLogger( GetSignInRoute.class.getName());
 
   private final TemplateEngine templateEngine;
-  private final GameCenter gameCenter;
+  private final GameCenter gameCenter = new GameCenter();
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -57,7 +57,7 @@ public class  GetSignInRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer(" GetSignInRoute is invoked.");
     
-    gameCenter.addSession(request.attribute("username"), request.ip());
+//    gameCenter.addSession(request.attribute("username"), request.ip());  //TODO
     Map<String, Object> vm = new HashMap<>();
     return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
   }

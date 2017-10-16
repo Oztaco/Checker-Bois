@@ -19,12 +19,10 @@ public class CheckersBoard {
     private Player player2;
 
 
-    private CheckersBoard(){
+    public CheckersBoard(Player username1, Player username2){
         this.board = new space[8][8];
-        player1 = new Player();
-        player1.setupPlayer();
-        player2 = new Player();
-        player2.setupPlayer();
+        player1 = username1;
+        player2 = username2;
     }
 
     /**
@@ -168,38 +166,76 @@ public class CheckersBoard {
 
         if(movetype == moveType.move){
             if(changeInX != 1 && changeInY != 1){
-                throw new InvalidMoveException("Moves must be a distance of 1 from the piece!");
+                throw new InvalidMoveException("Moves must be a distance of 1 from the piece");
             }
             else{
-                if(board[x1][y1] == space.PLAYER1);
+                if(board[y1][x1] == space.EMPTY){
+                    space tempSpace = this.board[x0][y0];
+                    this.board[y0][x0]= space.EMPTY;
+                    this.board[y1][x1] = tempSpace;
+                }
+                else{
+                    throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                }
             }
         }
         else if(movetype == moveType.attack){
             if(changeInX != 2 && changeInY != 2){
-                throw new InvalidMoveException("Attacks must be a distance of 2 from the piece!");
+                throw new InvalidMoveException("Attacks must be a distance of 2 from the piece");
             }
             else{
                 if(greaterx1 && greatery1){
-
+                    if(this.board[x0+1][y0+1] == other || this.board[x0+1][y0+1] == otherKing){
+                        space tempSpace = this.board[x0][y0];
+                        this.board[x0][y0]= space.EMPTY;
+                        this.board[x1][y1] = tempSpace;
+                    }
+                    else{
+                        throw new InvalidMoveException("There is no enemy piece in your path");
+                    }
                 }
                 else if(greaterx1 && !greatery1){
-
+                    if(this.board[x0+1][y0-1] == other || this.board[x0+1][y0-1] == otherKing){
+                        space tempSpace = this.board[x0][y0];
+                        this.board[x0][y0]= space.EMPTY;
+                        this.board[x1][y1] = tempSpace;
+                    }
+                    else{
+                        throw new InvalidMoveException("There is no enemy piece in your path");
+                    }
                 }
                 else if(!greaterx1 && greatery1){
+                    if(this.board[x0-1][y0+1] == other || this.board[x0-1][y0+1] == otherKing){
+                        space tempSpace = this.board[x0][y0];
+                        this.board[x0][y0]= space.EMPTY;
+                        this.board[x1][y1] = tempSpace;
+                    }
+                    else{
+                        throw new InvalidMoveException("There is no enemy piece in your path");
+                    }
 
                 }
                 else if(!greaterx1 && !greatery1){
-                    if(this.board[x0-1][x0-1] == other || this.board[x0-1][x0-1] == otherKing){
+                    if(this.board[x0-1][y0-1] == other || this.board[x0-1][y0-1] == otherKing){
+                        space tempSpace = this.board[x0][y0];
+                        this.board[x0][y0]= space.EMPTY;
+                        this.board[x1][y1] = tempSpace;
 
                     }
+                    else{
+                        throw new InvalidMoveException("There is no enemy piece in your path");
+                    }
                 }
+
             }
         }
     }
 
-    public static void main(String args[]){
-        CheckersBoard cb1 = new CheckersBoard();
+    public static void main(String args[]) throws InvalidMoveException {
+        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
+        cb1.printBoard();
+        cb1.move(1,2, 0,3, cb1.player1, moveType.move);
         cb1.printBoard();
     }
 }

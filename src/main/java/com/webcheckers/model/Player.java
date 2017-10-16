@@ -13,15 +13,6 @@ public class Player{
     }
 
 
-    /**
-     * Sets up a player to play the game with 12 pieces and 0 kings
-     */
-    public void setupPlayer(String playerName){
-        this.pieces = 12;
-        this.kings = 0;
-        this.name = playerName;
-    }
-
     public String getName(){
         return name;
     }
@@ -45,5 +36,12 @@ public class Player{
         else{
             this.kings--;
         }
+    }
+
+    public boolean equals(Player other){
+        if(this.name.equals(other.name)){
+            return true;
+        }
+        return false;
     }
 }
