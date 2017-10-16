@@ -135,14 +135,20 @@ public class CheckersBoard {
         boolean greatery1 = false;
         space other = null;
         space otherKing = null;
+        space me = null;
+        space meKing = null;
 
         if(player.equals(this.player1)){
             other = space.PLAYER2;
             otherKing = space.PLAYER2KING;
+            me = space.PLAYER1;
+            meKing = space.PLAYER1KING;
         }
         else if(player.equals(this.player2)){
             other = space.PLAYER1;
             otherKing = space.PLAYER1KING;
+            me = space.PLAYER2;
+            meKing = space.PLAYER2KING;
         }
 
         if(x1 > x0){
@@ -164,6 +170,9 @@ public class CheckersBoard {
             } else if (y1 < y0) {
                 changeInY = y0 - y1;
             }
+        }
+        if(!(board[y1][x1] == me || board[y1][x1] == meKing)){
+            throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
         }
 
         if(movetype == moveType.move){
@@ -240,5 +249,6 @@ public class CheckersBoard {
         cb1.printBoard();
         cb1.move(1,2, 0,3, cb1.player1, moveType.move);
         cb1.printBoard();
+        cb1.move(1,2, 0,3, cb1.player1, moveType.move);
     }
 }

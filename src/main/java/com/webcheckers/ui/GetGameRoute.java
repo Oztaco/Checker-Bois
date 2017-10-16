@@ -42,7 +42,7 @@ public class GetGameRoute implements Route {
         com.webcheckers.model.CheckersBoard board = new com.webcheckers.model.CheckersBoard(red, blue);
 
         final Map<String, Object> vm = new HashMap<>();
-//        vm.put(GetHomeRoute.TITLE_ATTR, TITLE);       //TODO
+//        vm.put(GetHomeRoute.TITLE_ATTR, TITLE);//TODO
         vm.put(CURRENT_PLAYER_ATTR, ploop);
         vm.put(VIEWMODE_ATTR, "Unknown");
         vm.put(RED_PLAYER_ATTR, red);
