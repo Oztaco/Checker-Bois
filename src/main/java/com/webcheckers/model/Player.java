@@ -1,6 +1,7 @@
 package com.webcheckers.model;
 
 public class Player{
+    private String username;
     private int pieces;
     private int kings;
 
@@ -30,5 +31,9 @@ public class Player{
         else{
             this.kings--;
         }
+    }
+
+    public boolean equals(Player other){
+        if(this)
     }
 }

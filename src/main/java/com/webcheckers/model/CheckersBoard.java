@@ -133,6 +133,17 @@ public class CheckersBoard {
         int changeInY = 0;
         boolean greaterx1 = false;
         boolean greatery1 = false;
+        space other = null;
+        space otherKing = null;
+
+        if(player.equals(this.player1)){
+            other = space.PLAYER2;
+            otherKing = space.PLAYER2KING;
+        }
+        else if(player.equals(this.player2)){
+            other = space.PLAYER1;
+            otherKing = space.PLAYER1KING;
+        }
 
         if(x1 > x0){
             greaterx1 = true;
@@ -160,12 +171,28 @@ public class CheckersBoard {
                 throw new InvalidMoveException("Moves must be a distance of 1 from the piece!");
             }
             else{
-
+                if(board[x1][y1] == space.PLAYER1);
             }
         }
         else if(movetype == moveType.attack){
             if(changeInX != 2 && changeInY != 2){
-                throw new InvalidMoveException("Attacks must be a distance of two from the piece!");
+                throw new InvalidMoveException("Attacks must be a distance of 2 from the piece!");
+            }
+            else{
+                if(greaterx1 && greatery1){
+
+                }
+                else if(greaterx1 && !greatery1){
+
+                }
+                else if(!greaterx1 && greatery1){
+
+                }
+                else if(!greaterx1 && !greatery1){
+                    if(this.board[x0-1][x0-1] == other || this.board[x0-1][x0-1] == otherKing){
+
+                    }
+                }
             }
         }
     }
