@@ -8,7 +8,7 @@
 <body>
   <div class="login modal">
     <h1 class="title">Web Checkers</h1>
-    <form action="./signin" method="POST">
+    <form action="./signin" method="GET">
       <input type="text" placeholder="Username" />
       <input type="password" placeholder="Password" /><br/>
       <input type="submit" value="Login" /><br/>
