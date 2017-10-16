@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import javax.xml.bind.SchemaOutputResolver;
+
 public class CheckersBoard {
 
     public enum space{
@@ -171,7 +173,7 @@ public class CheckersBoard {
                 changeInY = y0 - y1;
             }
         }
-        if(!(board[y1][x1] == me || board[y1][x1] == meKing)){
+        if(!(board[y0][x0] == me || board[y0][x0] == meKing)){
             throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
         }
 
@@ -181,7 +183,7 @@ public class CheckersBoard {
             }
             else{
                 if(board[y1][x1] == space.EMPTY){
-                    space tempSpace = this.board[x0][y0];
+                    space tempSpace = this.board[y0][x0];
                     this.board[y0][x0]= space.EMPTY;
                     this.board[y1][x1] = tempSpace;
                 }
@@ -246,9 +248,62 @@ public class CheckersBoard {
     public static void main(String args[]) throws InvalidMoveException {
         CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
+        System.out.println("---------------------BOARD 1---------------------");
+        System.out.println("Test1: Prove Move Works");
         cb1.printBoard();
         cb1.move(1,2, 0,3, cb1.player1, moveType.move);
         cb1.printBoard();
-        cb1.move(1,2, 0,3, cb1.player1, moveType.move);
+
+
+        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb2.initBoard();
+        System.out.println("\n---------------------BOARD 2---------------------");
+        System.out.println("Test2: Throws Error when player != player at tile");
+        cb2.printBoard();
+        try{
+            cb2.move(1,2, 0,3, cb2.player2, moveType.move);
+        }
+        catch(InvalidMoveException e){
+            System.out.println("Error Caught: \"The contents of the tile do not match the player trying to play\"");
+        }
+
+
+        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb3.initBoard();
+        System.out.println("\n---------------------BOARD 3---------------------");
+        System.out.println("Test3: Throws Error when distance to next move > 1");
+        cb3.printBoard();
+        try{
+            cb3.move(1,2, 1,4, cb2.player1, moveType.move);
+        }
+        catch(InvalidMoveException e){
+            System.out.println("Error Caught: \"Moves must be a distance of 1 from the piece\"");
+        }
+
+
+        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb4.initBoard();
+        System.out.println("\n---------------------BOARD 4---------------------");
+        System.out.println("Test4: Throws Error when space is occupied");
+        cb4.printBoard();
+        try{
+            cb3.move(1,0, 0,1, cb2.player1, moveType.move);
+        }
+        catch(InvalidMoveException e){
+            System.out.println("Error Caught: \"Space you want to move to is Occupied or Invalid\"");
+        }
+
+        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb5.initBoard();
+        System.out.println("\n---------------------BOARD 5---------------------");
+        System.out.println("Test5: Throws Error when space is invalid");
+        cb5.printBoard();
+        try{
+            cb3.move(1,0, 1,1, cb2.player1, moveType.move);
+        }
+        catch(InvalidMoveException e){
+            System.out.println("Error Caught: \"Space you want to move to is Occupied or Invalid\"");
+        }
+
     }
 }
