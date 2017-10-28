@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CheckersBoardTest {
     @Test(expected = InvalidMoveException.class)
-    private void move() {
+    private void testMoveNotRightPlayer() {
         CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb2.initBoard();
-        System.out.println("\n---------------------BOARD 2---------------------");
-        System.out.println("Test2: Throws Error when player != player at tile");
         cb2.printBoard();
-        try{
-            cb2.move(1,2, 0,3, cb2.getPlayer(2), CheckersBoard.moveType.move);
-        }
-        catch(InvalidMoveException e){
-            System.out.println("Error Caught: \"The contents of the tile do not match the player trying to play\"");
-        }
+        cb2.move(1,2, 0,3, cb2.getPlayer(2), CheckersBoard.moveType.move);
     }
-
+    @Test
+    private void testValidMove(){
+        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb1.initBoard();
+        cb1.printBoard();
+        cb1.move(1,2, 0,3, cb1.getPlayer(1), CheckersBoard.moveType.move);
+    }
+    
 }
