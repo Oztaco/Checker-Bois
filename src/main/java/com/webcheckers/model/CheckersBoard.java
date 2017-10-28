@@ -14,7 +14,7 @@ public class CheckersBoard {
     }
     public enum moveType{
         move,
-        attack;
+        attack
     }
     private space[][] board;
     private Player player1;
