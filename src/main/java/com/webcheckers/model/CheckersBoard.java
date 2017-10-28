@@ -31,7 +31,7 @@ public class CheckersBoard {
      * Initializes the board, filling it with enums
      * corresponding to the contents of the spaces.
      */
-    private void initBoard(){
+    public void initBoard(){
         for(int y = 0; y < 8; y++){
             for(int x = 0; x < 8; x++){
                 //player 1 side
@@ -94,7 +94,7 @@ public class CheckersBoard {
     /**
      * Prints the board for testing purposes.
      */
-    private void printBoard(){
+    public void printBoard(){
         System.out.println("");
         String val;
 
@@ -243,6 +243,16 @@ public class CheckersBoard {
 //
 //           }
 //        }
+    }
+
+    public Player getPlayer(int player){
+        if(player == 1){
+            return player1;
+        }
+        else if(player == 2){
+            return player2;
+        }
+        return null;
     }
 
     public static void main(String args[]) throws InvalidMoveException {
