@@ -8,7 +8,7 @@ import org.junit.Test;
 //import static org.junit.jupiter.api.Assertions.*; //TODO
 
 //<<<<<<< Updated upstream //TODO
-class CheckersBoardTest {
+public class CheckersBoardTest {
     @Test
     public void testBoardConstructor(){
         new CheckersBoard(new Player("player1"),(new Player("player2")));
