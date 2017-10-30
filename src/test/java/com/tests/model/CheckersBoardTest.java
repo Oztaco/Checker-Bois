@@ -22,5 +22,4 @@ class CheckersBoardTest {
         cb1.printBoard();
         cb1.move(1,2, 0,3, cb1.getPlayer(1), CheckersBoard.moveType.move);
     }
-    
 }
