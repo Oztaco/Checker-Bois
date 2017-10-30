@@ -10,12 +10,12 @@ import org.junit.Test;
 //<<<<<<< Updated upstream //TODO
 class CheckersBoardTest {
     @Test
-    private void testBoardConstructor(){
+    public void testBoardConstructor(){
         new CheckersBoard(new Player("player1"),(new Player("player2")));
     }
 
     @Test(expected = InvalidMoveException.class)
-    private void testMoveNotRightPlayer() throws InvalidMoveException {
+    public void testMoveNotRightPlayer() throws InvalidMoveException {
         CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb2.initBoard();
         cb2.printBoard();
@@ -23,7 +23,7 @@ class CheckersBoardTest {
     }
 
     @Test
-    private void testValidMove() throws InvalidMoveException {
+    public void testValidMove() throws InvalidMoveException {
         CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
         cb1.printBoard();

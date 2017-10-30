@@ -6,12 +6,12 @@ import org.junit.Test;
 public class PlayerTest {
 
     @Test
-    private void testPlayerSessionConstructor(){
+    public void testPlayerSessionConstructor(){
         new Player("test name");
     }
 
     @Test
-    private void testKingPiece(){
+    public void testKingPiece(){
         Player p1 = new Player("p1");
         p1.kingPiece();
     }

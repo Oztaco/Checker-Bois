@@ -6,7 +6,7 @@ import org.junit.Test;
 public class PlayerSessionTest {
 
     @Test
-    private void testPlayerSessionConstructor(){
+    public void testPlayerSessionConstructor(){
         new PlayerSession("username","1234");
     }
 }
