@@ -259,19 +259,35 @@ public class CheckersBoard {
      * @param player - player making the move
      */
     public void attack(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
-        if(board[y1][x1] == space.EMPTY){
-            if(board[y0][x0] == space.PLAYER1 && player == player1){
+        if (board[y1][x1] == space.EMPTY) {
+            if (board[y0][x0] == space.PLAYER1 && player == player1) {
+                if (y1 < y0) {
+                    if(x1 < x0){
+                        if(board[x0-1][y1+1] == space.PLAYER2 || board[x0-1][y1+1] == space.PLAYER2KING){
 
+                        }
+                    }
+                }
+                else { //y1 >= y0
+                    throw new InvalidMoveException("This piece cannot move in this direction");
+                }
             }
-            else if(board[y0][x0] == space.PLAYER2 && player == player2){
+            else if (board[y0][x0] == space.PLAYER2 && player == player2) {
+                if (y1 > y0) {
 
+                }
+                else { //y1 <= y0
+                    throw new InvalidMoveException("This piece cannot move in this direction");
+                }
             }
+
             //handle king movement
-            else{
+
+            else {
                 throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
             }
         }
-        else{
+        else {
             throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
         }
     }
