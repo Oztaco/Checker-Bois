@@ -245,6 +245,36 @@ public class CheckersBoard {
 //        }
     }
 
+    /**
+     * Performs an attack, where the current player's
+     * piece leaps over an enemy piece, which is then
+     * removed from the board.
+     *
+     * //TODO reverse indexing
+     * @param x0 - initial x position
+     * @param y0 - initial y position
+     * @param x1 - final x position
+     * @param y1 - final y position
+     * @param player - player making the move
+     */
+    public void attack(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+        if(board[y1][x1] == space.EMPTY){
+            if(board[y0][x0] == space.PLAYER1 && player == player1){
+
+            }
+            else if(board[y0][x0] == space.PLAYER2 && player == player2){
+
+            }
+            //handle king movement
+            else{
+                throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
+            }
+        }
+        else{
+            throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+        }
+    }
+
     public Player getPlayer(int player){
         if(player == 1){
             return player1;
