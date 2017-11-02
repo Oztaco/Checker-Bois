@@ -125,30 +125,29 @@ public class CheckersBoard {
     }
 
     /**
-     * Moves a piece for the player specified
+     * Moves a piece for the player specified.
      *
-     * //TODO reverse indexing
-     * @param
+     * Checks:
+     *      Whether the piece moved belongs to the correct player
+     *      Whether the piece moved
+     *
+     * @param x0, y0, x1, y1, player
      */
-    public void move(int x0, int y0, int x1, int y1, Player player, moveType movetype) throws InvalidMoveException{
+    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException{
+
+
+
         int changeInX = 0;
         int changeInY = 0;
-        boolean greaterx1 = false;
-        boolean greatery1 = false;
-        space other = null;
-        space otherKing = null;
         space me = null;
         space meKing = null;
 
+        //Set me and meKing to the current Player Enums
         if(player.equals(this.player1)){
-            other = space.PLAYER2;
-            otherKing = space.PLAYER2KING;
             me = space.PLAYER1;
             meKing = space.PLAYER1KING;
         }
         else if(player.equals(this.player2)){
-            other = space.PLAYER1;
-            otherKing = space.PLAYER1KING;
             me = space.PLAYER2;
             meKing = space.PLAYER2KING;
         }
