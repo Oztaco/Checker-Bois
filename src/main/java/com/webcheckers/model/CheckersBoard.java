@@ -245,6 +245,7 @@ public class CheckersBoard {
 //        }
     }
 
+
     /**
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
