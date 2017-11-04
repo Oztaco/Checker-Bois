@@ -9,6 +9,11 @@ public class Lobby {
     private ArrayList<Player> players;
     private ArrayList<CheckersBoard> games;
 
+    public Lobby(){
+        this.games = new ArrayList<CheckersBoard>();
+        this.players = new ArrayList<Player>();
+    }
+
     /**
      * getPlayers()
      *
@@ -64,7 +69,53 @@ public class Lobby {
         }
     }
 
+    /**
+     * Prints lobby for testing purposes
+     */
+    public void printLobby(){
+        System.out.println("Lobby:");
+        String players = "";
+        for(int i = 0;i < this.players.size();i++){
+            players += (this.players.get(i).getName() + ", " );
+        }
+        System.out.println("\tUnique players: " + players);
+        System.out.println("\tNumber of unique games: " + this.games.size());
+    }
+
     public static void main(String args[]){
-        //TODO MAKE SOME TESTS
+        Lobby mainroom = new Lobby();
+        System.out.println("TEST 1: PRINT EMPTY LOBBY");
+        mainroom.printLobby();          //Should be empty
+
+        Player fluffy = new Player("Fluffy");
+        Player fatty = new Player("Fatty");
+
+        try{
+            System.out.println("\nTEST 2: ADD FLUFFY");
+            mainroom.addPlayer(fluffy);
+            mainroom.printLobby();
+            System.out.println("STATUS: PASSED");
+        } catch(PlayerNotAddedException e){
+            System.out.println("STATUS: FAILED");
+        }
+
+        try{
+            System.out.println("\nTEST 3: ADD FATTYY");
+            mainroom.addPlayer(fatty);
+            mainroom.printLobby();
+            System.out.println("STATUS: PASSED");
+        } catch(PlayerNotAddedException e){
+            System.out.println("STATUS: FAILED");
+        }
+
+        try{
+            System.out.println("\nTEST 3: ADD GAME WITH FLUFFY AND FATTY");
+            mainroom.addGame(new CheckersBoard(fluffy, fatty));
+            mainroom.printLobby();
+            System.out.println("STATUS: PASSED");
+        } catch (GameNotAddedException e) {
+            System.out.println("STATUS: FAILED");
+        }
+
     }
 }
