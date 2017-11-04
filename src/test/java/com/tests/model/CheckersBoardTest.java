@@ -18,14 +18,14 @@ public class CheckersBoardTest {
     public void testMoveNotRightPlayer() throws InvalidMoveException {
         CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb2.initBoard();
-        cb2.move(1, 2, 0, 3, cb2.getPlayer(2), CheckersBoard.moveType.move);
+        cb2.move(1, 2, 0, 3, cb2.getPlayer(2));
     }
 
     @Test
     public void testValidMove() throws InvalidMoveException {
         CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
-        cb1.move(1,2, 0,3, cb1.getPlayer(1), CheckersBoard.moveType.move);
+        cb1.move(1,2, 0,3, cb1.getPlayer(1));
     }
 //=======
 //>>>>>>> Stashed changes //TODO
