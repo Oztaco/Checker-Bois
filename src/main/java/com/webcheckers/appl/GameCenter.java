@@ -11,6 +11,8 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 /**
  * The class that centralizes communication within the server,
  * glueing the model and the UI together and maintaining state.
+ * This class should coordinate everything, like the signing in
+ * and management stuff.
  *
  * @author <a href='mailto:exo3392@rit.edu'>Efe Ozturkoglu</a>
  */
