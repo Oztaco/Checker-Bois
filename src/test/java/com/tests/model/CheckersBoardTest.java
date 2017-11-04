@@ -1,7 +1,7 @@
 package com.tests.model;
 
 import com.webcheckers.model.CheckersBoard;
-import com.webcheckers.model.InvalidMoveException;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.Player;
 import org.junit.Test;
 

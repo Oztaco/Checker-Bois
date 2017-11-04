@@ -1,6 +1,6 @@
 package com.webcheckers.model;
 
-import javax.xml.bind.SchemaOutputResolver;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 
 public class CheckersBoard {
 
@@ -147,7 +147,7 @@ public class CheckersBoard {
      *
      * @param x0, y0, x1, y1, player
      */
-    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException{
+    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
 
         //Setup changInX and changeInY for determining validity later
         int changeInX = x1-x0;
