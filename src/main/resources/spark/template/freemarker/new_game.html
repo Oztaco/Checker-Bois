@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            body, html {
+                margin: auto;
+                padding: 0;
+            }
+            p, h1, h2, h3, h4, h5, h6, li, a {
+                font-family: Helvetica, Arial, sans-serif;
+            }
+            #sidebar {
+                width: 240px;
+                background: #222;
+                height: 100vh;
+                float: left;
+                box-shadow: 3px 0 9px rgba(0,0,0,0.15);
+            }
+            #sidebar ul {
+                display: block;
+                margin: 0 auto;
+                padding: 0;
+            }
+            #sidebar ul .user {
+                padding: 20px 0 30px 15px;
+                color: #ddd;
+            }
+            #sidebar ul .user img {
+                height: 32px;
+                width: 32px;
+                margin-right: 10px;
+                background: red;
+                border-radius: 50%;
+                overflow: hidden;
+                vertical-align: middle;
+            }
+            #sidebar ul .title {
+                padding-left: 15px;
+                cursor: default;
+                font-family: Arial;
+                color: #ddd;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            #sidebar ul li {
+                display: block;
+                font-size: 16px;
+            }
+            #sidebar ul a {
+                display: block;
+                margin: 4px 0;
+                padding: 13px 0 13px 25px;
+                text-decoration: none;
+                color: #bbb;
+            }
+            #sidebar ul a:hover {
+                background: #333;
+                color: #3cb0de;
+                text-shadow: 1px 2px 0px #004b4e;
+            }
+            #content {
+                margin-left: 240px;
+                background: #f0f0f0;
+                height: 100vh;
+            }
+            #boardContainer {
+                background: #f77;
+                width: 75%;
+                margin: auto;
+            }
+            canvas#board {
+                background: #7f7;
+                display: block;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="sidebar">
+            <ul>
+                <li class="user"><img src="" class="userPic" />Efe Ozturkoglu</li>
+                <li class="title">My Games</li>
+                <li><a href="#">Person</a></li>
+                <li class="title">Other Games</li>
+                <li><a href="#">Something</a></li>
+                <li><a href="#">Efe</a></li>
+                <li><a href="#">Steven</a></li>
+                <li><a href="#">Ozai</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="boardContainer">
+                <canvas id="board">
+                    Your browser does not support HTML5 canvas. Please update your browser.
+                </canvas>
+            </div>
+        </div>
+    </body>
+</html>
