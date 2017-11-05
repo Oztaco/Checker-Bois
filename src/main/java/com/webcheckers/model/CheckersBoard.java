@@ -254,50 +254,42 @@ public class CheckersBoard {
             if (board[y0][x0] == space.PLAYER1 && player == player1) { //player 1 is trying to move their piece
 
                 if (y1 < y0) { //moving the piece in the correct direction
-                    if(x1 < x0){ //piece is moving left on the board
-                        if(board[y0+1][x0-1] == space.PLAYER2 || board[y0+1][x0-1] == space.PLAYER2KING){ //jumped space is occupied by an enemy piece
+                    if (x1 < x0) { //piece is moving left on the board
+                        if (board[y0 + 1][x0 - 1] == space.PLAYER2 || board[y0 + 1][x0 - 1] == space.PLAYER2KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER1;
-                            board[y0+1][x0-1] = space.EMPTY;
+                            board[y0 + 1][x0 - 1] = space.EMPTY;
                         }
-                    }
-                    else if(x1 > x0){ //piece is moving right on the board
-                        if(board[y0+1][x0+1] == space.PLAYER2 || board[y0+1][x0+1] == space.PLAYER2KING){ //jumped space is occupied by an enemy piece
+                    } else if (x1 > x0) { //piece is moving right on the board
+                        if (board[y0 + 1][x0 + 1] == space.PLAYER2 || board[y0 + 1][x0 + 1] == space.PLAYER2KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER1;
-                            board[y0+1][x0+1] = space.EMPTY;
+                            board[y0 + 1][x0 + 1] = space.EMPTY;
                         }
-                    }
-                    else{ //x1 == x0?
+                    } else { //x1 == x0?
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
-                }
-                else { //y1 >= y0
+                } else { //y1 >= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
-            }
-
-            else if (board[y0][x0] == space.PLAYER2 && player == player2) { //player 2 is trying to move their piece
+            } else if (board[y0][x0] == space.PLAYER2 && player == player2) { //player 2 is trying to move their piece
                 if (y1 > y0) { //moving piece in the correct direction
-                    if(x1 < x0){ //piece is moving left on the board
-                        if(board[y0-1][x0-1] == space.PLAYER1 || board[y0-1][x0-1] == space.PLAYER1KING){ //jumped space is occupied by an enemy piece
+                    if (x1 < x0) { //piece is moving left on the board
+                        if (board[y0 - 1][x0 - 1] == space.PLAYER1 || board[y0 - 1][x0 - 1] == space.PLAYER1KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER2;
-                            board[y0-1][x0-1] = space.EMPTY;
+                            board[y0 - 1][x0 - 1] = space.EMPTY;
                         }
-                    }
-                    else if(x1 > x0){ //piece is moving right on the board
-                        if(board[y0-1][x0+1] == space.PLAYER1 || board[y0-1][x0+1] == space.PLAYER1KING){ //jumped space is occupied by an enemy piece
+                    } else if (x1 > x0) { //piece is moving right on the board
+                        if (board[y0 - 1][x0 + 1] == space.PLAYER1 || board[y0 - 1][x0 + 1] == space.PLAYER1KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER2;
-                            board[y0-1][x0+1] = space.EMPTY;
+                            board[y0 - 1][x0 + 1] = space.EMPTY;
                         }
-                    }
-                    else{ //x1 == x0?
+                    } else { //x1 == x0?
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
-                }
-                else { //y1 <= y0
+                } else { //y1 <= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
             }
@@ -307,10 +299,10 @@ public class CheckersBoard {
             else {
                 throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
             }
-        }
-        else {
+        } else {
             throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
         }
+    }
 
     /**
      * Gets the player based the number input
