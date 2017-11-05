@@ -236,8 +236,8 @@ public class CheckersBoard {
             }
         }
     }
-
-    /**
+  
+      /**
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
      * removed from the board.
@@ -253,7 +253,7 @@ public class CheckersBoard {
         if (board[y1][x1] == space.EMPTY) { //desired space is empty
             if (board[y0][x0] == space.PLAYER1 && player == player1) { //player 1 is trying to move their piece
 
-                if (y1 > y0) { //moving the piece in the correct direction
+                if (y1 < y0) { //moving the piece in the correct direction
                     if(x1 < x0){ //piece is moving left on the board
                         if(board[y0+1][x0-1] == space.PLAYER2 || board[y0+1][x0-1] == space.PLAYER2KING){ //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
@@ -269,16 +269,16 @@ public class CheckersBoard {
                         }
                     }
                     else{ //x1 == x0?
-                        throw new InvalidMoveException("Space you want to move to is Invalid");
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
                 }
-                else { //y1 <= y0
+                else { //y1 >= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
             }
 
             else if (board[y0][x0] == space.PLAYER2 && player == player2) { //player 2 is trying to move their piece
-                if (y1 < y0) { //moving piece in the correct direction
+                if (y1 > y0) { //moving piece in the correct direction
                     if(x1 < x0){ //piece is moving left on the board
                         if(board[y0-1][x0-1] == space.PLAYER1 || board[y0-1][x0-1] == space.PLAYER1KING){ //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
@@ -294,10 +294,10 @@ public class CheckersBoard {
                         }
                     }
                     else{ //x1 == x0?
-                        throw new InvalidMoveException("Space you want to move to is Invalid");
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
                 }
-                else { //y1 >= y0
+                else { //y1 <= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
             }
@@ -311,7 +311,6 @@ public class CheckersBoard {
         else {
             throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
         }
-    }
 
     /**
      * Gets the player based the number input
