@@ -1,0 +1,16 @@
+{
+    "activePlayer": -1, // 1 = Player 1's turn, 2 = Player 2's turn
+    "spectating": false,
+    "gameID": "bcsdhjcbsdbcsdjcb",
+    "player1Name": "Bill Gates", // Player 1 is "myself"
+    "player2Name": "Donald Knuth", // Player 2 is "my opponent"
+    "board": 
+        [  [0], [0], [0], [0], [0], [0], [0], [0],      // First ROW not column!!!
+           [0], [0], [0], [0], [0], [0], [0], [0],      // each cell is equal to:
+           [0], [0], [0], [0], [0], [0], [0], [0],      // 0: Space that cant be moved to
+           [0], [0], [0], [0], [0], [0], [0], [0],      // 1: Empty space, but CAN be moved
+           [0], [0], [0], [0], [0], [0], [0], [0],      // 2: Player 1 piece (player 1 is "myself")
+           [0], [0], [0], [0], [0], [0], [0], [0],      // 3: Player 2 piece (player 2 is "my opponent")
+           [0], [0], [0], [0], [0], [0], [0], [0],      // 4: Player 1 king
+           [0], [0], [0], [0], [0], [0], [0], [0]   ]   // 5: Player 2 king
+}
