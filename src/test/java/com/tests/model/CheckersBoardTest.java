@@ -256,6 +256,82 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
+    public void testAttack3() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 2 makes an attack with player 1's piece");
+        cb.emptyBoard();
+        cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
+        cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
+        cb.printBoard();
+        try {
+            cb.attack(3, 4, 5, 6, cb.getPlayer(2));
+            cb.printBoard();
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:PASSED");
+        }
+    }
+
+    @Test
+    public void testAttack4() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 makes an attack into an occupied space");
+        cb.emptyBoard();
+        cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
+        cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
+        cb.putPiece(5,6, CheckersBoard.space.PLAYER2);
+        cb.printBoard();
+        try{
+            cb.attack(3,4,5,6,cb.getPlayer(2));
+            cb.printBoard();
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:PASSED");
+        }
+    }
+
+    @Test
+    public void testAttack5() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 makes an attack over an empty space");
+        cb.emptyBoard();
+        cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
+        cb.printBoard();
+        try{
+            cb.attack(3,4,5,6,cb.getPlayer(2));
+            cb.printBoard();
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:PASSED");
+        }
+    }
+
+    @Test
+    public void testAttack6() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 makes an attack into a space outside the board");
+        cb.emptyBoard();
+        cb.putPiece(3,6, CheckersBoard.space.PLAYER1);
+        cb.putPiece(4,7, CheckersBoard.space.PLAYER2);
+        cb.printBoard();
+        try{
+            cb.attack(3,6,5,8,cb.getPlayer(2));
+            cb.printBoard();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e.getMessage() + "\nSTATUS:PASSED");
+        }
+    }
+
 //=======
 //>>>>>>> Stashed changes //TODO
     
