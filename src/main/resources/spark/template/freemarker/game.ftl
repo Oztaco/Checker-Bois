@@ -17,7 +17,7 @@
                 <li><a href="#">Efe</a></li>
                 <li><a href="#">Steven</a></li>
                 <li><a href="#">Ozai</a></li>
-                <li><a href="./" method="GET">Sign Out</a></li>
+                <li><a href="./">Sign Out</a></li>
             </ul>
         </div>
         <div id="content">
