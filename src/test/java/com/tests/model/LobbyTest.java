@@ -31,11 +31,11 @@ public class LobbyTest {
         Lobby l = new Lobby();
         Player p1 = new Player("testy");
         Player p2 = new Player("testo");
-        CheckersBoard cb = new CheckersBoard(p1,p2);
+        CheckersBoard cb = new CheckersBoard(p1,p2,"test");
         try{
             l.addPlayer(p1);
             l.addPlayer(p2);
-            l.addGame(cb);
+            l.addNewGame(cb);
         }
         catch(PlayerNotAddedException e){
             System.out.println("ERROR: Player was not added to lobby");
@@ -51,11 +51,11 @@ public class LobbyTest {
         Player p1 = new Player("testy");
         Player p2 = new Player("testo");
         Player p3 = new Player("bad man");
-        CheckersBoard cb = new CheckersBoard(p1,p2);
+        CheckersBoard cb = new CheckersBoard(p1,p2,"test");
         try{
             l.addPlayer(p1);
             l.addPlayer(p3);
-            l.addGame(cb);
+            l.addNewGame(cb);
         }
         catch(PlayerNotAddedException e){
             System.out.println("ERROR: Player was not added to lobby");
