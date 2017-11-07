@@ -319,6 +319,26 @@ public class CheckersBoard {
         return null;
     }
 
+    /**
+     * Puts a piece directly on the board.
+     * For testing purposes only.
+     */
+    public void putPiece(int x, int y, space space){
+        board[x][y] = space;
+    }
+
+    /**
+     * Empties the entire board.
+     * For testing purposes only.
+     */
+    public void emptyBoard() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                board[y][x] = space.EMPTY;
+            }
+        }
+    }
+
     public static void main(String args[]) throws InvalidMoveException {
 
 
@@ -453,7 +473,7 @@ public class CheckersBoard {
         System.out.println("Test 6.2: Player 2 Moves Backwards");
         cb6.printBoard();
         try{
-            cb6.move(1,4,0,5,cb1.getPlayer(2));
+            cb6.move(1,4,0,5,cb6.getPlayer(2));
             System.out.println("STATUS: FAILED");
         }
         catch(InvalidMoveException e){

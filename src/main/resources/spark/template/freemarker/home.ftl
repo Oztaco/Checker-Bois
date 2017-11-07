@@ -10,7 +10,7 @@
     <h1 class="title">Web Checkers</h1>
     <form action="./signin" method="GET">
       <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" /><br/>
+      <#--<input type="password" placeholder="Password" /><br/>-->
       <input type="submit" value="Login" /><br/>
       <a href="#">Sign Up</a><br/>
     </form>
