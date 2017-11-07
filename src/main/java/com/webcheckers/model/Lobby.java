@@ -20,28 +20,6 @@ public class Lobby {
     }
 
     /**
-     * getPlayers()
-     *
-     * Getter for players
-     * @return ArrayList<Player>
-     */
-    public ArrayList<Player> getPlayers(){
-        return this.players;
-    }
-
-    /**
-     * getGames()
-     *
-     * Getter for games
-     * @return ArrayList<CheckersBoard>
-     */
-    public ArrayList<CheckersBoard> getGamesJson(){
-        //Jon owes me $5 for wings
-
-        return null;
-    }
-
-    /**
      * addPlayer(Player player)
      *
      * adds a player specified to the lobby.
@@ -78,15 +56,18 @@ public class Lobby {
 
     /**
      * Generates a Random ID to assign to every game.
-     * @return
+     * @return Int randID
      */
     public String generateID(){
         int range = this.validChars.length()-1;
         String randId = "";
-
         for(int i = 0; i <= 6; i++){
             int index = (int)(Math.random()*range);
             randId = randId + validChars.charAt(index);
+        }
+
+        if(games.containsKey(randId)){
+            randId = generateID();    //Make a new ID if the ID generated is already in use
         }
         return randId;
     }
@@ -104,7 +85,22 @@ public class Lobby {
         System.out.println("\tNumber of unique games: " + this.games.size());
     }
 
+    /**
+     * //TODO WRITE THIS WHOLE THING LOL
+     * @return
+     */
     public String getPlayersJson(){
+
+        return null;
+    }
+
+    /**
+     * //TODO WRITE THIS TOO LOL
+     * Getter for games
+     * @return ArrayList<CheckersBoard>
+     */
+    public ArrayList<CheckersBoard> getGamesJson(){
+        //Jon owes me $5 for wings
 
         return null;
     }
