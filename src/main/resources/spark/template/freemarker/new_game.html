@@ -10,6 +10,9 @@
             p, h1, h2, h3, h4, h5, h6, li, a {
                 font-family: Helvetica, Arial, sans-serif;
             }
+            br.clear {
+                clear: both;
+            }
             #sidebar {
                 width: 240px;
                 background: #222;
@@ -69,6 +72,19 @@
                 background: #f77;
                 width: 75%;
                 margin: auto;
+            }
+            #boardContainer p {
+                display: block;
+                margin: 0 auto;
+            }
+            #boardContainer div.topbar {
+                height: 25px;
+            }
+            #boardContainer p.player.left {
+                float: left;
+            }
+            #boardContainer p.player.right {
+                float: right;
             }
             canvas#board {
                 background: #7f7;
@@ -197,7 +213,11 @@
         </div>
         <div id="content">
             <div id="boardContainer">
-                <canvas id="board">
+                <div class="topbar">
+                    <p class="player left">Player 1 Name</p>
+                    <p class="player right">Player 2 Name</p>
+                </div>
+                <canvas id="board" height="500" width="500">
                     Your browser does not support HTML5 canvas. Please update your browser.
                 </canvas>
             </div>
