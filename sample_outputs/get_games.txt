@@ -1,7 +1,39 @@
 {
-    "games": [
-        "dsfasdfasdfsdf",
-        "fdushreksdjfeu",
-        "cxvbdjsnveiwcn"
+    // Games I am in right now ====================================
+    "myGames": [
+        {
+            "id": "game1ewfqewfer",
+            "playerOneUsername": "Efe",
+            "playerTwoUsername": "Bill Gates"
+        },
+        {
+            "id": "werfwerf",
+            "playerOneUsername": "Efe",
+            "playerTwoUsername": "Steve Jobs"
+        },
+        {
+            "id": "ewfrw",
+            "playerOneUsername": "Dennis Ritchie",
+            "playerTwoUsername": "Efe"
+        }
+    ],
+
+    // Games other players are playing ===========================
+    "playerGames": [
+        {
+            "id": "somegameidsaf",
+            "playerOneUsername": "Cam",
+            "playerTwoUsername": "Jon"
+        },
+        {
+            "id": "wfeeqerf",
+            "playerOneUsername": "Jon",
+            "playerTwoUsername": "Drew"
+        },
+        {
+            "id": "asdferrq",
+            "playerOneUsername": "Drew",
+            "playerTwoUsername": "Bill Gates"
+        }
     ]
 }
