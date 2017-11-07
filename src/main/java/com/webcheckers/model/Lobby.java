@@ -4,34 +4,19 @@ import com.webcheckers.model.Exceptions.GameNotAddedException;
 import com.webcheckers.model.Exceptions.PlayerNotAddedException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Lobby {
+    private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
     private ArrayList<Player> players;
-    private ArrayList<CheckersBoard> games;
+    private HashMap<String,CheckersBoard> games;
+
 
     public Lobby(){
-        this.games = new ArrayList<CheckersBoard>();
+        this.games = new HashMap<String,CheckersBoard>();
         this.players = new ArrayList<Player>();
-    }
-
-    /**
-     * getPlayers()
-     *
-     * Getter for players
-     * @return ArrayList<Player>
-     */
-    public ArrayList<Player> getPlayers(){
-        return this.players;
-    }
-
-    /**
-     * getGames()
-     *
-     * Getter for games
-     * @return ArrayList<CheckersBoard>
-     */
-    public ArrayList<CheckersBoard> getGames(){
-        return this.games;
     }
 
     /**
@@ -57,16 +42,34 @@ public class Lobby {
      * @param game
      * @throws GameNotAddedException
      */
-    public void addGame(CheckersBoard game) throws GameNotAddedException{
+    public void addNewGame(CheckersBoard game) throws GameNotAddedException{
         Player player1 = game.getPlayer(1);
         Player player2 = game.getPlayer(2);
 
         if(this.players.contains(player1) && this.players.contains(player2)){
-            this.games.add(game);
+            this.games.put(game.getId(),game);
         }
         else{
             throw new GameNotAddedException("The players trying to play are not in the lobby yet");
         }
+    }
+
+    /**
+     * Generates a Random ID to assign to every game.
+     * @return Int randID
+     */
+    public String generateID(){
+        int range = this.validChars.length()-1;
+        String randId = "";
+        for(int i = 0; i <= 6; i++){
+            int index = (int)(Math.random()*range);
+            randId = randId + validChars.charAt(index);
+        }
+
+        if(games.containsKey(randId)){
+            randId = generateID();    //Make a new ID if the ID generated is already in use
+        }
+        return randId;
     }
 
     /**
@@ -82,40 +85,27 @@ public class Lobby {
         System.out.println("\tNumber of unique games: " + this.games.size());
     }
 
+    /**
+     * //TODO WRITE THIS WHOLE THING LOL
+     * @return
+     */
+    public String getPlayersJson(){
+
+        return null;
+    }
+
+    /**
+     * //TODO WRITE THIS TOO LOL
+     * Getter for games
+     * @return ArrayList<CheckersBoard>
+     */
+    public ArrayList<CheckersBoard> getGamesJson(){
+        //Jon owes me $5 for wings
+
+        return null;
+    }
+
     public static void main(String args[]){
-        Lobby mainroom = new Lobby();
-        System.out.println("TEST 1: PRINT EMPTY LOBBY");
-        mainroom.printLobby();          //Should be empty
-
-        Player fluffy = new Player("Fluffy");
-        Player fatty = new Player("Fatty");
-
-        try{
-            System.out.println("\nTEST 2: ADD FLUFFY");
-            mainroom.addPlayer(fluffy);
-            mainroom.printLobby();
-            System.out.println("STATUS: PASSED");
-        } catch(PlayerNotAddedException e){
-            System.out.println("STATUS: FAILED");
-        }
-
-        try{
-            System.out.println("\nTEST 3: ADD FATTYY");
-            mainroom.addPlayer(fatty);
-            mainroom.printLobby();
-            System.out.println("STATUS: PASSED");
-        } catch(PlayerNotAddedException e){
-            System.out.println("STATUS: FAILED");
-        }
-
-        try{
-            System.out.println("\nTEST 3: ADD GAME WITH FLUFFY AND FATTY");
-            mainroom.addGame(new CheckersBoard(fluffy, fatty));
-            mainroom.printLobby();
-            System.out.println("STATUS: PASSED");
-        } catch (GameNotAddedException e) {
-            System.out.println("STATUS: FAILED");
-        }
 
     }
 }

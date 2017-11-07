@@ -1,10 +1,13 @@
 package com.webcheckers.model;
 
+import java.util.ArrayList;
+
 public class Player{
     private String name;
 
     private int pieces;
     private int kings;
+    private ArrayList<String> ids;
 
     public Player(String name) {
         this.pieces = 12;
