@@ -16,11 +16,11 @@ public class GetGameRoute implements Route {
 
     static final String VIEW_NAME = "game.ftl";
 
-    static final String CURRENT_PLAYER_ATTR = "currentPlayer";
+//    static final String CURRENT_PLAYER_ATTR = "currentPlayer";
     static final String VIEWMODE_ATTR = "viewMode";
-    static final String RED_PLAYER_ATTR = "redPlayer";
-    static final String WHITE_PLAYER_ATTR = "whitePlayer";
-    static final String ACTIVE_COLOR_ATTR = "activeColor";
+//    static final String RED_PLAYER_ATTR = "redPlayer";
+//    static final String WHITE_PLAYER_ATTR = "whitePlayer";
+//    static final String ACTIVE_COLOR_ATTR = "activeColor";
     static final String TITLE = "Web Checkers";
     static final String GAME_BOARD_ATTR = "gameBoard";
 
@@ -43,11 +43,11 @@ public class GetGameRoute implements Route {
 
         final Map<String, Object> vm = new HashMap<>();
 //        vm.put(GetHomeRoute.TITLE_ATTR, TITLE);//TODO
-        vm.put(CURRENT_PLAYER_ATTR, ploop);
+//        vm.put(CURRENT_PLAYER_ATTR, ploop);
         vm.put(VIEWMODE_ATTR, "Unknown");
-        vm.put(RED_PLAYER_ATTR, red);
-        vm.put(WHITE_PLAYER_ATTR, blue);
-        vm.put(ACTIVE_COLOR_ATTR, "RED PLAYER GOES");
+//        vm.put(RED_PLAYER_ATTR, red);
+//        vm.put(WHITE_PLAYER_ATTR, blue);
+//        vm.put(ACTIVE_COLOR_ATTR, "RED PLAYER GOES");
         vm.put(GAME_BOARD_ATTR, board);
 
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
