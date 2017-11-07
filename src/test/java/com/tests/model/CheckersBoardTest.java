@@ -28,6 +28,7 @@ public class CheckersBoardTest {
         cb1.move(1,2, 0,3, cb1.getPlayer(1));
     }
 
+    @Test
     public void testMove1() throws InvalidMoveException{
         CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
@@ -54,6 +55,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove2() throws InvalidMoveException{
         CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb2.initBoard();
@@ -69,6 +71,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove3() throws InvalidMoveException{
         CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb3.initBoard();
@@ -84,6 +87,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove4() throws InvalidMoveException{
         CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb4.initBoard();
@@ -99,6 +103,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove5() throws InvalidMoveException{
         CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb5.initBoard();
@@ -114,6 +119,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove6() throws InvalidMoveException{
         CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb6.initBoard();
@@ -139,6 +145,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testMove7() throws InvalidMoveException{
         CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb7.initBoard();
@@ -153,6 +160,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testKing1() throws InvalidMoveException {
         CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb.initBoard();
@@ -170,6 +178,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testKing2() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb.initBoard();
@@ -188,6 +197,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testKing3() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb.initBoard();
@@ -206,6 +216,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testAttack1() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb.initBoard();
@@ -225,6 +236,7 @@ public class CheckersBoardTest {
         }
     }
 
+    @Test
     public void testAttack2() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb.initBoard();
