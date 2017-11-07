@@ -152,6 +152,98 @@ public class CheckersBoardTest {
             System.out.println(e.getMessage() + "\nSTATUS:PASSED");
         }
     }
+
+    public void testKing1() throws InvalidMoveException {
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 kings a piece");
+        cb.emptyBoard();
+        cb.putPiece(1, 6, CheckersBoard.space.PLAYER1);
+        cb.printBoard();
+        try {
+            cb.move(1, 6, 0, 7, cb.getPlayer(1));
+            cb.printBoard();
+            System.out.println("STATUS: PASSED");
+        } catch (InvalidMoveException e) {
+            System.out.println(e.getMessage() + "\nSTATUS:FAILED");
+        }
+    }
+
+    public void testKing2() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 moves a king forwards");
+        cb.emptyBoard();
+        cb.putPiece(1,6, CheckersBoard.space.PLAYER1KING);
+        cb.printBoard();
+        try{
+            cb.move(1,6,0,7,cb.getPlayer(1));
+            cb.printBoard();
+            System.out.println("STATUS: PASSED");
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:FAILED");
+        }
+    }
+
+    public void testKing3() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 moves a king backwards");
+        cb.emptyBoard();
+        cb.putPiece(1,6, CheckersBoard.space.PLAYER1KING);
+        cb.printBoard();
+        try{
+            cb.move(1,6,0,5,cb.getPlayer(1));
+            cb.printBoard();
+            System.out.println("STATUS: PASSED");
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:FAILED");
+        }
+    }
+
+    public void testAttack1() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 1 makes an attack");
+        cb.emptyBoard();
+        cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
+        cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
+        cb.printBoard();
+        try{
+            cb.attack(3,4,5,6,cb.getPlayer(1));
+            cb.printBoard();
+            System.out.println("STATUS: PASSED");
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:FAILED");
+        }
+    }
+
+    public void testAttack2() throws InvalidMoveException{
+        CheckersBoard cb = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        cb.initBoard();
+        System.out.println("\n---------------------BOARD-----------------------");
+        System.out.println("Player 2 makes an attack");
+        cb.emptyBoard();
+        cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
+        cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
+        cb.printBoard();
+        try{
+            cb.attack(4,5,2,3,cb.getPlayer(2));
+            cb.printBoard();
+            System.out.println("STATUS: PASSED");
+        }
+        catch (InvalidMoveException e){
+            System.out.println(e.getMessage() + "\nSTATUS:FAILED");
+        }
+    }
+
 //=======
 //>>>>>>> Stashed changes //TODO
     
