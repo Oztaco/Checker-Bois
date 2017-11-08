@@ -55,14 +55,24 @@ public class WebServer {
   public static final String HOME_URL = "/";
 
   /**
-   * The URL patter to request the Game page.
+   * The URL pattern to request the Game page.
    */
   public static final String GAME_URL = "/game";
 
   /**
-   * The URL patter to request the Sign In page.
+   * The URL pattern to request the Sign In page.
    */
   public static final String SIGN_IN_URL = "/signin";
+
+  /**
+   * The URL pattern to access the getAllGames API call
+   */
+  public static final String API_GET_ALL_GAMES_URL = "/api/get_all_games";
+
+  /**
+   * The URL pattern to access the getGame API call
+   */
+  public static final String API_GET_GAME_URL = "/api/get_game";
 
   //
   // Attributes
@@ -150,10 +160,16 @@ public class WebServer {
     get(HOME_URL, new GetHomeRoute(templateEngine));
 
     // Shows the Checkers game Game page.
-    get(GAME_URL, new GetGameRoute(templateEngine));
+    get(GAME_URL, new GetGamePageRoute(templateEngine));
 
     // Shows the Checkers game Sign In page.
     get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+
+    // The API call to get all the active games
+    get(API_GET_ALL_GAMES_URL, new GetAllGamesRoute(templateEngine));
+
+    // The API call to get a specific game's data
+    get(API_GET_GAME_URL, new GetGameRoute(templateEngine));
 
     //
     LOG.config("WebServer is initialized.");
