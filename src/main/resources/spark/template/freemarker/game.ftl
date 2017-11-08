@@ -25,12 +25,13 @@
         <div id="content">
             <div id="boardContainer">
                 <div class="topbar">
-                    <p class="player left">Player 1 Name</p>
-                    <p class="player right">Player 2 Name</p>
+                    <p class="player left">Efe Ozturkoglu</p>
+                    <p class="player right">Person</p>
                 </div>
                 <canvas id="board" height="600" width="600">
                     Your browser does not support HTML5 canvas. Please update your browser.
                 </canvas>
+                <a href="#">Resign</a>
             </div>
         </div>
     </body>
