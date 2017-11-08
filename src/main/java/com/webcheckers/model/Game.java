@@ -9,6 +9,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private String id;
+    private Boolean test;
 
     public Game(Player p1, Player p2, String id){
         this.player1 = p1;
