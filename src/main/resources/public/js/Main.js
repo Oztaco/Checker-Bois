@@ -7,8 +7,8 @@ PLAYER_2 = 2;
 
 // Enum for possible values of a space on the board
 BOARD_SPACE = {
-    NULL: 0,
-    EMPTY: 1,
+    EMPTY: 0,
+    INVALID: 1,
     PLAYER_1_PIECE: 2, // Player's self
     PLAYER_2_PIECE: 3, // Opponent
     PLAYER_1_KING: 4,
