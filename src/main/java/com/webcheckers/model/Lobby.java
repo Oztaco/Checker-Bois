@@ -69,6 +69,7 @@ public class Lobby {
         if(games.containsKey(randId)){
             randId = generateID();    //Make a new ID if the ID generated is already in use
         }
+
         return randId;
     }
 
