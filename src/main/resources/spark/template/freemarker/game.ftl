@@ -10,8 +10,8 @@
     <body>
         <div id="sidebar">
             <ul>
-                <li><a href="./">Sign Out</a></li>
                 <li class="user"><img src="" class="userPic" style="display: none" />Efe Ozturkoglu</li>
+                <li><a href="./" style="color: #cc1b1b">Sign Out</a></li>
                 <li class="title">My Games</li>
                 <li><a href="#">Person</a></li>
                 <li class="title">Other Games</li>
@@ -27,7 +27,7 @@
                     <p class="player left">Player 1 Name</p>
                     <p class="player right">Player 2 Name</p>
                 </div>
-                <canvas id="board" height="500" width="500">
+                <canvas id="board" height="600" width="600">
                     Your browser does not support HTML5 canvas. Please update your browser.
                 </canvas>
             </div>

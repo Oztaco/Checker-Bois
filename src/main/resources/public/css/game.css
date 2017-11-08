@@ -67,8 +67,8 @@ br.clear {
     height: 100vh;
 }
 #boardContainer {
-    background: #f77;
-    width: 75%;
+    background: 0;
+    width: 600px;
     margin: auto;
 }
 #boardContainer p {
@@ -87,4 +87,5 @@ br.clear {
 canvas#board {
     background: #7f7;
     display: block;
+    border: 6px solid #222;
 }
