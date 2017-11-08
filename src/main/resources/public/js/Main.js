@@ -9,8 +9,8 @@ PLAYER_2 = 2;
 BOARD_SPACE = {
     EMPTY: 0,
     INVALID: 1,
-    PLAYER_1_PIECE: 2, // Player's self
-    PLAYER_2_PIECE: 3, // Opponent
+    PLAYER_1: 2, // Player's self
+    PLAYER_2: 3, // Opponent
     PLAYER_1_KING: 4,
     PLAYER_2_KING: 5
 }
