@@ -10,23 +10,12 @@ import java.util.logging.Logger;
  */
 public class PlayerSession {
 
-  //
-  // Constants
-  //
-
-
-
-  //
-  // Attributes
-  //
-
   private String username;
   private String ip;
 
   //
   // Constructors
   //
-
   public PlayerSession(String _username, String _ip) {
     username = _username;
     ip = _ip;

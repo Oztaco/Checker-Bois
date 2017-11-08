@@ -17,6 +17,10 @@ public class CheckersBoard {
     private Player player1;
     private Player player2;
 
+
+    //
+    //CONSTRUCTORS
+    //
     /**
      * Constructor for a board.  Uses two players as input
      * @param username1
@@ -27,20 +31,7 @@ public class CheckersBoard {
         player1 = username1;
         player2 = username2;
     }
-    //GETTERS
-    public Player getPlayer(int player){
-        if(player == 1){
-            return player1;
-        }
-        else if(player == 2){
-            return player2;
-        }
-        return null;
-    }
 
-
-
-    //Initializer
     /**
      * Initializes the board, filling it with enums
      * corresponding to the contents of the spaces.
@@ -106,8 +97,23 @@ public class CheckersBoard {
     }
 
 
+    //
+    //GETTERS
+    //
+    public Player getPlayer(int player){
+        if(player == 1){
+            return player1;
+        }
+        else if(player == 2){
+            return player2;
+        }
+        return null;
+    }
 
-    //Board Manipulation Methods
+
+    //
+    //PUBLIC METHODS
+    //
     /**
      * Kings the piece at x,y if it is not already a king.  Does nothing otherwise.
      * @param x
@@ -303,9 +309,9 @@ public class CheckersBoard {
     }
 
 
-
-
+    //
     //TESTING METHODS BELOW
+    //
     /**
      * Puts a piece directly on the board.
      * For testing purposes only.

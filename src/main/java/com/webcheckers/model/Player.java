@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import spark.Session;
+
 import java.util.ArrayList;
 
 public class Player{
@@ -8,6 +10,7 @@ public class Player{
     private int pieces;
     private int kings;
     private ArrayList<String> ids;
+    private Session playerSession;      //TODO ADD PLAYERSESSION
 
     public Player(String name) {
         this.pieces = 12;
