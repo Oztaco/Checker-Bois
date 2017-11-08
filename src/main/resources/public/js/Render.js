@@ -23,6 +23,19 @@ renderBoard = function(canvasElm, checkerBoard) {
             }
         }
     }
+
+    for (var x = 0; x < 8; x++) {
+        for (var y = 0; y < 8; y++) {
+            if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1) {
+                ctx.fillStyle = "#f00";
+                ctx.fillRect(x * squareSize, y * squareSize, squareSize / 2, squareSize / 2);
+            }
+            else if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2) {
+                ctx.fillStyle = "#00f";
+                ctx.fillRect(x * squareSize, y * squareSize, squareSize / 2, squareSize / 2);
+            }
+        }
+    }
 }
 
 

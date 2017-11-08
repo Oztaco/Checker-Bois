@@ -39,7 +39,7 @@ public class GetGamePageRoute implements Route {
         com.webcheckers.model.Player ploop = new com.webcheckers.model.Player("blub");
         com.webcheckers.model.Player red = new com.webcheckers.model.Player("red");
         com.webcheckers.model.Player blue = new com.webcheckers.model.Player("blue");
-        com.webcheckers.model.CheckersBoard board = new com.webcheckers.model.CheckersBoard(red, blue,"ABC");
+        com.webcheckers.model.CheckersBoard board = new com.webcheckers.model.CheckersBoard(red, blue);
 
         final Map<String, Object> vm = new HashMap<>();
 //        vm.put(GetHomeRoute.TITLE_ATTR, TITLE);//TODO

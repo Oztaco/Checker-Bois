@@ -37,7 +37,33 @@ checkersBoard = {};
 function init() {
     DOM.canvas = document.getElementById("board");
     checkersBoard = new CheckersBoard();
-    renderBoard(DOM.canvas, checkersBoard);
+    initBoard();
+}
+
+function updateAllBoards() {
+    req = new ajaxRequest(
+        "GET",
+        "api/get_all_boards",
+        {},
+        function(r) {
+            // Fill me in
+        }
+    );
+}
+
+function initBoard() {
+    req = new ajaxRequest(
+        "GET",
+        "api/get_game",
+        {},
+        function(r) {
+            console.log("Lets do stuff");
+            game = JSON.parse(r);
+            checkersBoard.data = game.board;
+            renderBoard(DOM.canvas, checkersBoard);
+        }
+    );
+    req.send();
 }
 
 window.addEventListener("load", init);

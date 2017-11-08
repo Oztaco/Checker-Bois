@@ -6,6 +6,7 @@
         <script type="text/javascript" src="/js/CheckersBoard.js"></script>
         <script type="text/javascript" src="/js/Render.js"></script>
         <script type="text/javascript" src="/js/Main.js"></script>
+        <script type="text/javascript" src="/js/Network.js"></script>
     </head>
     <body>
         <div id="sidebar">
