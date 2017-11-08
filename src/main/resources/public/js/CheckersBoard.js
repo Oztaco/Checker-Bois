@@ -12,7 +12,7 @@ CheckersBoard = function () {
     for (var col = 0; col < 8; col++) {
         var newCol = [];
         for (var row = 0; row < 8; row++) {
-            newRow.push(BOARD_SPACE.INVALID);
+            newCol.push(BOARD_SPACE.INVALID);
         }
         this.data.push(newCol);
     }

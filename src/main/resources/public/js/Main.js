@@ -30,3 +30,14 @@ currentGame = {
     activePlayer: -1, // Whose turn is it?
     board: null // checkersBoard
 }
+
+DOM = {}
+checkersBoard = {};
+
+function init() {
+    DOM.canvas = document.getElementById("board");
+    checkersBoard = new CheckersBoard();
+    renderBoard(DOM.canvas, checkersBoard);
+}
+
+window.addEventListener("load", init);
