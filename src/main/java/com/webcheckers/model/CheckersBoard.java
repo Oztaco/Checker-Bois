@@ -16,20 +16,31 @@ public class CheckersBoard {
     private space[][] board;
     private Player player1;
     private Player player2;
-    private String id;
 
     /**
      * Constructor for a board.  Uses two players as input
      * @param username1
      * @param username2
      */
-    public CheckersBoard(Player username1, Player username2, String id){
+    public CheckersBoard(Player username1, Player username2){
         this.board = new space[8][8];
-        this.id = id;
         player1 = username1;
         player2 = username2;
     }
+    //GETTERS
+    public Player getPlayer(int player){
+        if(player == 1){
+            return player1;
+        }
+        else if(player == 2){
+            return player2;
+        }
+        return null;
+    }
 
+
+
+    //Initializer
     /**
      * Initializes the board, filling it with enums
      * corresponding to the contents of the spaces.
@@ -94,43 +105,9 @@ public class CheckersBoard {
         }
     }
 
-    public String getId(){
-        return this.id;
-    }
 
-    /**
-     * Prints the board for testing purposes
-     */
-    public void printBoard(){
-        System.out.println("");
-        String val;
 
-        for(int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
-                if(board[y][x] == space.INVALID){
-                    val = ".";
-                }
-                else if(board[y][x] == space.EMPTY){
-                    val = " ";
-                }
-                else if(board[y][x] == space.PLAYER1){
-                    val = "1";
-                }
-                else if(board[y][x] == space.PLAYER2){
-                    val = "2";
-                }
-                else if(board[y][x] == space.PLAYER1KING){
-                    val = "A";
-                }
-                else{
-                    val = "B";
-                }
-                System.out.print("[" + val + "]");
-            }
-            System.out.println("");
-        }
-    }
-
+    //Board Manipulation Methods
     /**
      * Kings the piece at x,y if it is not already a king.  Does nothing otherwise.
      * @param x
@@ -251,7 +228,7 @@ public class CheckersBoard {
         }
     }
   
-      /**
+    /**
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
      * removed from the board.
@@ -325,21 +302,10 @@ public class CheckersBoard {
         }
     }
 
-    /**
-     * Gets the player based the number input
-     * @param player
-     * @return Player player, NULL
-     */
-    public Player getPlayer(int player){
-        if(player == 1){
-            return player1;
-        }
-        else if(player == 2){
-            return player2;
-        }
-        return null;
-    }
 
+
+
+    //TESTING METHODS BELOW
     /**
      * Puts a piece directly on the board.
      * For testing purposes only.
@@ -357,6 +323,39 @@ public class CheckersBoard {
             for (int x = 0; x < 8; x++) {
                 board[y][x] = space.EMPTY;
             }
+        }
+    }
+
+    /**
+     * Prints the board for testing purposes
+     */
+    public void printBoard(){
+        System.out.println("");
+        String val;
+
+        for(int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                if(board[y][x] == space.INVALID){
+                    val = ".";
+                }
+                else if(board[y][x] == space.EMPTY){
+                    val = " ";
+                }
+                else if(board[y][x] == space.PLAYER1){
+                    val = "1";
+                }
+                else if(board[y][x] == space.PLAYER2){
+                    val = "2";
+                }
+                else if(board[y][x] == space.PLAYER1KING){
+                    val = "A";
+                }
+                else{
+                    val = "B";
+                }
+                System.out.print("[" + val + "]");
+            }
+            System.out.println("");
         }
     }
 
@@ -386,7 +385,7 @@ public class CheckersBoard {
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb1.initBoard();
         System.out.println("---------------------BOARD 1---------------------");
         System.out.println("Test 1.1: Player 1 makes a Valid Move");
@@ -411,7 +410,7 @@ public class CheckersBoard {
         //TESTS 2
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb2.initBoard();
         System.out.println("\n---------------------BOARD 2---------------------");
         System.out.println("Test 2: Throws Error when player != player at tile");
@@ -426,7 +425,7 @@ public class CheckersBoard {
         //TESTS 3
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb3.initBoard();
         System.out.println("\n---------------------BOARD 3---------------------");
         System.out.println("Test 3: Throws Error when distance to next move > 1");
@@ -441,7 +440,7 @@ public class CheckersBoard {
         //TESTS 4
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb4.initBoard();
         System.out.println("\n---------------------BOARD 4---------------------");
         System.out.println("Test 4: Throws Error when space is occupied");
@@ -457,7 +456,7 @@ public class CheckersBoard {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb5.initBoard();
         System.out.println("\n---------------------BOARD 5---------------------");
         System.out.println("Test 5: Throws Error when space is invalid");
@@ -472,7 +471,7 @@ public class CheckersBoard {
         //TESTS 6
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb6.initBoard();
         System.out.println("\n---------------------BOARD 6---------------------");
         System.out.println("Test 6.1: Player 2 Makes A Valid Move");
@@ -496,7 +495,7 @@ public class CheckersBoard {
         //TESTS 7
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
+        CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
         cb7.initBoard();
         System.out.println("\n---------------------BOARD 7---------------------");
         System.out.println("Test 7: Player 2 makes an invalid move");

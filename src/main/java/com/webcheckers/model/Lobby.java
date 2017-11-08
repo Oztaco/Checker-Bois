@@ -10,25 +10,26 @@ import java.util.Random;
 public class Lobby {
     private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
-    private ArrayList<Player> players;
-    private HashMap<String,CheckersBoard> games;
+    private HashMap<String,Player> players;     //Maps Usernames to Player Objects
+    private HashMap<String,Game> games;         //Maps IDs to Game Objects
 
 
     public Lobby(){
-        this.games = new HashMap<String,CheckersBoard>();
-        this.players = new ArrayList<Player>();
+        this.games = new HashMap<String,Game>();
+        this.players = new HashMap<String,Player>();
     }
 
     /**
      * addPlayer(Player player)
      *
      * adds a player specified to the lobby.
-     * @param player
+     * @param username
      * @throws PlayerNotAddedException
      */
-    public void addPlayer(Player player) throws PlayerNotAddedException {
+    public void addPlayer(String username) throws PlayerNotAddedException {
         try{
-            this.players.add(player);
+            Player newPlayer = new Player(username);
+            this.players.put(username,newPlayer);
         }
         catch(Exception e){
             throw new PlayerNotAddedException("Player was not added to the Lobby");
@@ -39,15 +40,15 @@ public class Lobby {
      * addGame(CheckersBoard game)
      *
      * Adds game to list of games, given it's players are in the lobby.
-     * @param game
+     * @param p1, p2
      * @throws GameNotAddedException
      */
-    public void addNewGame(CheckersBoard game) throws GameNotAddedException{
-        Player player1 = game.getPlayer(1);
-        Player player2 = game.getPlayer(2);
+    public void addNewGame(String p1, String p2) throws GameNotAddedException{
+        String newId = generateID();
 
-        if(this.players.contains(player1) && this.players.contains(player2)){
-            this.games.put(game.getId(),game);
+        if(this.players.containsKey(p1) && this.players.containsKey(p1)){
+            Game game = new Game(this.players.get(p1),this.players.get(p2),newId);
+            this.games.put(newId,game);
         }
         else{
             throw new GameNotAddedException("The players trying to play are not in the lobby yet");
@@ -83,7 +84,7 @@ public class Lobby {
             players += (this.players.get(i).getName() + ", " );
         }
         System.out.println("\tUnique players: " + players);
-        System.out.println("\tNumber of unique games: " + this.games.size());
+        System.out.println("\tNumber of unique games: " + this.games.keySet().size());
     }
 
     /**
