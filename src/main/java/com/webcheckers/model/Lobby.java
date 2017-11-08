@@ -13,12 +13,26 @@ public class Lobby {
     private HashMap<String,Player> players;     //Maps Usernames to Player Objects
     private HashMap<String,Game> games;         //Maps IDs to Game Objects
 
-
+    //
+    //Constructor
+    //
     public Lobby(){
         this.games = new HashMap<String,Game>();
         this.players = new HashMap<String,Player>();
     }
 
+
+    //
+    //Getters
+    //
+    public Game getGame(String id){
+        return this.games.get(id);
+    }
+
+
+    //
+    //Public Methods
+    //
     /**
      * addPlayer(Player player)
      *
@@ -91,8 +105,8 @@ public class Lobby {
      * //TODO WRITE THIS WHOLE THING LOL
      * @return
      */
-    public String getPlayersJson(){
-
+    public String getPlayersAsString(){
+        //TODO WRITE CODE
         return null;
     }
 
@@ -101,10 +115,21 @@ public class Lobby {
      * Getter for games
      * @return ArrayList<CheckersBoard>
      */
-    public ArrayList<CheckersBoard> getGamesJson(){
+    public String getGamesAsString(){
         //Jon owes me $5 for wings
-
+        //TODO WRITE CODE
         return null;
+    }
+
+    public String getGamesAsString(String player){
+        String playerGames = "";
+        for(String id : this.players.get(player).getIds()){
+            playerGames.concat("{" + this.getGame(id).getSimpleGameAsString() + "},");
+        }
+        if(playerGames.length() > 0){
+            playerGames.substring(0,playerGames.length()-1);
+        }
+        return playerGames;
     }
 
     public static void main(String args[]){

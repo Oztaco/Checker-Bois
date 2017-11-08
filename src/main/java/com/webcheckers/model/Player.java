@@ -12,17 +12,30 @@ public class Player{
     private ArrayList<String> ids;
     private Session playerSession;      //TODO ADD PLAYERSESSION
 
+
+    //
+    //CONSTRUCTORS
+    //
     public Player(String name) {
         this.pieces = 12;
         this.kings = 0;
         this.name = name;
     }
 
-
+    //
+    //GETTERS
+    //
     public String getName(){
         return name;
     }
+    public ArrayList<String> getIds() {
+        return ids;
+    }
 
+
+    //
+    //PUBLIC METHODS
+    //
     /**
      * Kings a single piece
      */
@@ -44,6 +57,10 @@ public class Player{
         }
     }
 
+
+    //
+    //GENERIC METHODS
+    //
     public boolean equals(Player other){
         if(this.name.equals(other.name)){
             return true;
