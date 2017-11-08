@@ -70,6 +70,7 @@ br.clear {
     background: 0;
     width: 600px;
     margin: auto;
+    padding-top: 35px;
 }
 #boardContainer p {
     display: block;

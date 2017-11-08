@@ -24,15 +24,38 @@ renderBoard = function(canvasElm, checkerBoard) {
         }
     }
 
+    var pieceSize = squareSize * .75;
     for (var x = 0; x < 8; x++) {
         for (var y = 0; y < 8; y++) {
             if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1) {
-                ctx.fillStyle = "#f00";
-                ctx.fillRect(x * squareSize, y * squareSize, squareSize / 2, squareSize / 2);
+                ctx.fillStyle = "#d00";
+                ctx.strokeStyle = "#500";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(
+                    (x * squareSize) + (squareSize / 2),
+                    (y * squareSize) + (squareSize / 2),
+                    pieceSize / 2,
+                    0,
+                    2 * Math.PI
+                );
+                ctx.fill();
+                ctx.stroke();
             }
             else if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2) {
-                ctx.fillStyle = "#00f";
-                ctx.fillRect(x * squareSize, y * squareSize, squareSize / 2, squareSize / 2);
+                ctx.fillStyle = "#ddd";
+                ctx.strokeStyle = "#444";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(
+                    (x * squareSize) + (squareSize / 2),
+                    (y * squareSize) + (squareSize / 2),
+                    pieceSize / 2,
+                    0,
+                    2 * Math.PI
+                );
+                ctx.fill();
+                ctx.stroke();
             }
         }
     }
