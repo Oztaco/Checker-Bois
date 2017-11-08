@@ -16,14 +16,16 @@ public class CheckersBoard {
     private space[][] board;
     private Player player1;
     private Player player2;
+    private String id;
 
     /**
      * Constructor for a board.  Uses two players as input
      * @param username1
      * @param username2
      */
-    public CheckersBoard(Player username1, Player username2){
+    public CheckersBoard(Player username1, Player username2, String id){
         this.board = new space[8][8];
+        this.id = id;
         player1 = username1;
         player2 = username2;
     }
@@ -92,6 +94,10 @@ public class CheckersBoard {
         }
     }
 
+    public String getId(){
+        return this.id;
+    }
+
     /**
      * Prints the board for testing purposes
      */
@@ -158,17 +164,25 @@ public class CheckersBoard {
 
         //Set me and meKing to the current Player Enums
         if(player.equals(this.player1)){
-            me = space.PLAYER1;
-            meKing = space.PLAYER1KING;
+            if(this.board[y0][x0] == space.PLAYER1KING){
+                me = space.PLAYER1KING;
+            }
+            else{
+                me = space.PLAYER1;
+            }
         }
 
         else if(player.equals(this.player2)){
-            me = space.PLAYER2;
-            meKing = space.PLAYER2KING;
+            if(this.board[y0][x0] == space.PLAYER2KING){
+                me = space.PLAYER2KING;
+            }
+            else{
+                me = space.PLAYER2;
+            }
         }
 
         //Throw exception if a player tries to move the piece of the other player
-        if(!(board[y0][x0] == me || board[y0][x0] == meKing)){
+        if(!(board[y0][x0] == me)){
             throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
         }
 
@@ -260,7 +274,8 @@ public class CheckersBoard {
                             board[y1][x1] = space.PLAYER1;
                             board[y0 + 1][x0 - 1] = space.EMPTY;
                         }
-                    } else if (x1 > x0) { //piece is moving right on the board
+                    }
+                    else if (x1 > x0) { //piece is moving right on the board
                         if (board[y0 + 1][x0 + 1] == space.PLAYER2 || board[y0 + 1][x0 + 1] == space.PLAYER2KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER1;
@@ -269,10 +284,13 @@ public class CheckersBoard {
                     } else { //x1 == x0?
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
-                } else { //y1 >= y0
+                }
+                else { //y1 >= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
-            } else if (board[y0][x0] == space.PLAYER2 && player == player2) { //player 2 is trying to move their piece
+
+            }
+            else if (board[y0][x0] == space.PLAYER2 && player == player2) { //player 2 is trying to move their piece
                 if (y1 > y0) { //moving piece in the correct direction
                     if (x1 < x0) { //piece is moving left on the board
                         if (board[y0 - 1][x0 - 1] == space.PLAYER1 || board[y0 - 1][x0 - 1] == space.PLAYER1KING) { //jumped space is occupied by an enemy piece
@@ -280,16 +298,19 @@ public class CheckersBoard {
                             board[y1][x1] = space.PLAYER2;
                             board[y0 - 1][x0 - 1] = space.EMPTY;
                         }
-                    } else if (x1 > x0) { //piece is moving right on the board
+                    }
+                    else if (x1 > x0) { //piece is moving right on the board
                         if (board[y0 - 1][x0 + 1] == space.PLAYER1 || board[y0 - 1][x0 + 1] == space.PLAYER1KING) { //jumped space is occupied by an enemy piece
                             board[y0][x0] = space.EMPTY;
                             board[y1][x1] = space.PLAYER2;
                             board[y0 - 1][x0 + 1] = space.EMPTY;
                         }
-                    } else { //x1 == x0?
+                    }
+                    else { //x1 == x0?
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
-                } else { //y1 <= y0
+                }
+                else { //y1 <= y0
                     throw new InvalidMoveException("This piece cannot move in this direction");
                 }
             }
@@ -319,6 +340,26 @@ public class CheckersBoard {
         return null;
     }
 
+    /**
+     * Puts a piece directly on the board.
+     * For testing purposes only.
+     */
+    public void putPiece(int x, int y, space space){
+        board[x][y] = space;
+    }
+
+    /**
+     * Empties the entire board.
+     * For testing purposes only.
+     */
+    public void emptyBoard() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                board[y][x] = space.EMPTY;
+            }
+        }
+    }
+
     public static void main(String args[]) throws InvalidMoveException {
 
 
@@ -345,75 +386,70 @@ public class CheckersBoard {
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb1.initBoard();
         System.out.println("---------------------BOARD 1---------------------");
         System.out.println("Test 1.1: Player 1 makes a Valid Move");
         cb1.printBoard();
-        try{
-            cb1.move(1,2, 0,3, cb1.getPlayer(1));
+        try {
+            cb1.move(1, 2, 0, 3, cb1.getPlayer(1));
             System.out.println("STATUS: PASSED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: FAILED");
         }
 
 
         System.out.println("\nTest 1.2: Player 1 Moves Backwards");
         cb1.printBoard();
-        try{
-            cb1.move(0,3,1,2,cb1.getPlayer(1));
+        try {
+            cb1.move(0, 3, 1, 2, cb1.getPlayer(1));
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: PASSED");
         }
 
         //TESTS 2
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb2.initBoard();
         System.out.println("\n---------------------BOARD 2---------------------");
         System.out.println("Test 2: Throws Error when player != player at tile");
         cb2.printBoard();
-        try{
-            cb2.move(1,2, 0,3, cb2.player2);
+        try {
+            cb2.move(1, 2, 0, 3, cb2.player2);
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: PASSED");
         }
 
         //TESTS 3
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb3.initBoard();
         System.out.println("\n---------------------BOARD 3---------------------");
         System.out.println("Test 3: Throws Error when distance to next move > 1");
         cb3.printBoard();
-        try{
-            cb3.move(1,2, 1,4, cb3.player1);
+        try {
+            cb3.move(1, 2, 1, 4, cb3.player1);
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS:PASSED");
         }
 
         //TESTS 4
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb4.initBoard();
         System.out.println("\n---------------------BOARD 4---------------------");
         System.out.println("Test 4: Throws Error when space is occupied");
         cb4.printBoard();
-        try{
-            cb4.move(1,0, 0,1, cb4.player1);
+        try {
+            cb4.move(1, 0, 0, 1, cb4.player1);
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: PASSED");
         }
 
@@ -421,63 +457,58 @@ public class CheckersBoard {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb5.initBoard();
         System.out.println("\n---------------------BOARD 5---------------------");
         System.out.println("Test 5: Throws Error when space is invalid");
         cb5.printBoard();
-        try{
-            cb5.move(1,0, 1,1, cb5.player1);
+        try {
+            cb5.move(1, 0, 1, 1, cb5.player1);
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: PASSED");
         }
 
         //TESTS 6
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb6.initBoard();
         System.out.println("\n---------------------BOARD 6---------------------");
         System.out.println("Test 6.1: Player 2 Makes A Valid Move");
         cb6.printBoard();
-        try{
-            cb6.move(0,5, 1,4, cb6.getPlayer(2));
+        try {
+            cb6.move(0, 5, 1, 4, cb6.getPlayer(2));
             System.out.println("STATUS: PASSED");
-        }
-        catch(InvalidMoveException e) {
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: FAILED");
         }
 
         System.out.println("Test 6.2: Player 2 Moves Backwards");
         cb6.printBoard();
-        try{
-            cb6.move(1,4,0,5,cb1.getPlayer(2));
+        try {
+            cb6.move(1, 4, 0, 5, cb6.getPlayer(2));
             System.out.println("STATUS: FAILED");
-        }
-        catch(InvalidMoveException e){
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS: PASSED");
         }
 
         //TESTS 7
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"), "ABC");
         cb7.initBoard();
         System.out.println("\n---------------------BOARD 7---------------------");
         System.out.println("Test 7: Player 2 makes an invalid move");
         cb7.printBoard();
-        try{
-            cb7.move(0,5,0,4,cb7.getPlayer(2));
-        }
-        catch (InvalidMoveException e){
+        try {
+            cb7.move(0, 5, 0, 4, cb7.getPlayer(2));
+        } catch (InvalidMoveException e) {
             System.out.println(e.getMessage() + "\nSTATUS:PASSED");
         }
 
 
         //-------------------------------------------------------------------------------------------------------------
-
 
     }
 }

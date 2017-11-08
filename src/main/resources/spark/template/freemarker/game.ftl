@@ -3,7 +3,7 @@
     <head>
         <title></title>
         <link rel="stylesheet" href="/css/game.css">
-        <script type="text/javasctipt" src="/js/CheckersBoard.js"></script>
+        <script type="text/javascript" src="/js/CheckersBoard.js"></script>
         <script type="text/javascript" src="/js/Main.js"></script>
     </head>
     <body>
@@ -17,6 +17,7 @@
                 <li><a href="#">Efe</a></li>
                 <li><a href="#">Steven</a></li>
                 <li><a href="#">Ozai</a></li>
+                <li><a href="./">Sign Out</a></li>
             </ul>
         </div>
         <div id="content">
