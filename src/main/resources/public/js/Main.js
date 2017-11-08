@@ -9,8 +9,8 @@ PLAYER_2 = 2;
 BOARD_SPACE = {
     EMPTY: 0,
     INVALID: 1,
-    PLAYER_1_PIECE: 2, // Player's self
-    PLAYER_2_PIECE: 3, // Opponent
+    PLAYER_1: 2, // Player's self
+    PLAYER_2: 3, // Opponent
     PLAYER_1_KING: 4,
     PLAYER_2_KING: 5
 }
@@ -30,3 +30,14 @@ currentGame = {
     activePlayer: -1, // Whose turn is it?
     board: null // checkersBoard
 }
+
+DOM = {}
+checkersBoard = {};
+
+function init() {
+    DOM.canvas = document.getElementById("board");
+    checkersBoard = new CheckersBoard();
+    renderBoard(DOM.canvas, checkersBoard);
+}
+
+window.addEventListener("load", init);
