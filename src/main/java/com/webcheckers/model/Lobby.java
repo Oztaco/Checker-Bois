@@ -177,4 +177,20 @@ public class Lobby {
         return playerGames;
     }
 
+
+    //##################################################################################################################
+    //MAIN TESTING
+    //##################################################################################################################
+
+    public static void main(String args[]){
+        Lobby l = new Lobby();
+        try {
+            l.addPlayer("peepee");
+        }
+        catch(PlayerNotAddedException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 }
