@@ -163,7 +163,7 @@ public class WebServer {
     get(GAME_URL, new GetGamePageRoute(templateEngine));
 
     // Shows the Checkers game Sign In page.
-    get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+    get(SIGN_IN_URL, new PostSignInRoute(templateEngine));
 
     // The API call to get all the active games
     get(API_GET_ALL_GAMES_URL, new GetAllGamesRoute(templateEngine));
@@ -171,7 +171,7 @@ public class WebServer {
     // The API call to get a specific game's data
     get(API_GET_GAME_URL, new GetGameRoute(templateEngine));
 
-    //
+    // Log for debugging
     LOG.config("WebServer is initialized.");
   }
 
