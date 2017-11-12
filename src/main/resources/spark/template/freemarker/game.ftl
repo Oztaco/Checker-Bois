@@ -7,11 +7,16 @@
         <script type="text/javascript" src="/js/Render.js"></script>
         <script type="text/javascript" src="/js/Main.js"></script>
         <script type="text/javascript" src="/js/Network.js"></script>
+        <script type="text/javascript">
+            gameState = {
+                username: "${username}"
+            }
+        </script>
     </head>
     <body>
         <div id="sidebar">
             <ul>
-                <li class="user"><img src="" class="userPic" style="display: none" />Efe Ozturkoglu</li>
+                <li class="user"><img src="" class="userPic" style="display: none" />${username}</li>
                 <li><a href="./" style="color: #cc1b1b">Sign Out</a></li>
                 <li class="title">My Games</li>
                 <li><a href="#">Person</a></li>

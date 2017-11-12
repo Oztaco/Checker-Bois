@@ -9,12 +9,11 @@
   <div class="login modal">
     <h1 class="title">Web Checkers</h1>
     <form action="./signin" method="GET">
-      <input type="text" placeholder="Username" />
-      <#--<input type="password" placeholder="Password" /><br/>-->
-      <input type="submit" value="Login" /><br/>
-      <a href="#">Sign Up</a><br/>
+      <p class="label">Welcome to WebCheckers</p>
+      <p class="label">Please pick a username</p>
+      <input type="text" name="username" placeholder="Username" />
+      <input type="submit" value="Play" /><br/>
     </form>
-    
   </div>
 </body>
 </html>

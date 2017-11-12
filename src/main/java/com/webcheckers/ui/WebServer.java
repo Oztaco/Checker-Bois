@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.GameCenter;
 
 import spark.TemplateEngine;
 
@@ -80,6 +81,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
+  private final GameCenter gameCenter;
 
   //
   // Constructor
@@ -96,13 +98,14 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
-    //
+    // initialization
     this.templateEngine = templateEngine;
     this.gson = gson;
+    this.gameCenter = gameCenter;
   }
 
   //
@@ -160,10 +163,10 @@ public class WebServer {
     get(HOME_URL, new GetHomeRoute(templateEngine));
 
     // Shows the Checkers game Game page.
-    get(GAME_URL, new GetGamePageRoute(templateEngine));
+    get(GAME_URL, new GetGamePageRoute(templateEngine, gameCenter));
 
     // Shows the Checkers game Sign In page.
-    get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+    get(SIGN_IN_URL, new PostSignInRoute(templateEngine, gameCenter));
 
     // The API call to get all the active games
     get(API_GET_ALL_GAMES_URL, new GetAllGamesRoute(templateEngine));
@@ -171,7 +174,7 @@ public class WebServer {
     // The API call to get a specific game's data
     get(API_GET_GAME_URL, new GetGameRoute(templateEngine));
 
-    //
+    // Log for debugging
     LOG.config("WebServer is initialized.");
   }
 
