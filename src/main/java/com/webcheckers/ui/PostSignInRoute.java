@@ -58,7 +58,8 @@ public class  PostSignInRoute implements Route {
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer(" PostSignInRoute is invoked.");
-    gameCenter.addPlayer(request.session().id(), request.params("username"));
+    LOG.severe(request.queryParams("username"));
+    gameCenter.addPlayer(request.session().id(), request.queryParams("username"));
     
     response.redirect("/game");
     return null;

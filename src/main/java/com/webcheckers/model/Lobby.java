@@ -48,8 +48,8 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public void addPlayer(String sessionID, String username) {
-         Player newPlayer = new Player(username);
-        this.players.put(sessionID,newPlayer);
+        Player newPlayer = new Player(username);
+        this.players.put(sessionID, newPlayer);
     }
 
     /**
@@ -152,7 +152,7 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getPlayersAsString(){
-        return null;
+        return "TODO getPlayersAsString()";
     }
 
     /**

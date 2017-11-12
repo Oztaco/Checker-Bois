@@ -11,7 +11,7 @@
     <form action="./signin" method="GET">
       <p class="label">Welcome to WebCheckers</p>
       <p class="label">Please pick a username</p>
-      <input type="text" placeholder="Username" />
+      <input type="text" name="username" placeholder="Username" />
       <input type="submit" value="Play" /><br/>
     </form>
   </div>

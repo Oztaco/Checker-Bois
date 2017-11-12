@@ -19,7 +19,7 @@ import com.webcheckers.model.Lobby;
 import com.webcheckers.model.Player;
 
 public class GetGamePageRoute implements Route {
-    private static final Logger LOG = Logger.getLogger( PostSignInRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger( GetGamePageRoute.class.getName());
 
     static final String VIEW_NAME = "game.ftl";
     static final String VIEWMODE_ATTR = "viewMode";
@@ -48,12 +48,17 @@ public class GetGamePageRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         vm.put(VIEWMODE_ATTR, "Unknown");
 
-        LOG.finer("Lobby");
+        LOG.severe("=================================================================!!");
+        LOG.severe("DEBUG: game center:" + gameCenter);
+        LOG.severe("Lobby");
         Lobby lobby = gameCenter.getLobby();
-        LOG.finer("currentPlayer");
+        LOG.severe("Lobby = " + lobby);
+        LOG.severe("currentPlayer");
         Player currentPlayer = lobby.getPlayerBySessionID(request.session().id());
-        LOG.finer("username");        
+        LOG.severe("currentPlayer= " + currentPlayer); 
+        LOG.severe("username");        
         String username = currentPlayer.getName();
+        LOG.severe("username= " + username);         
         vm.put(USERNAME_ATTR, username);
 
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));

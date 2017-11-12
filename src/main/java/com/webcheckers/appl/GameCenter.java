@@ -2,6 +2,9 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.Exceptions.GameNotAddedException;
 import com.webcheckers.model.Exceptions.PlayerNotAddedException;
+
+import java.util.logging.Logger;
+
 import com.webcheckers.model.Lobby;
 
 /**
@@ -118,6 +121,9 @@ public class GameCenter {
     // Public Methods
     //##################################################################################################################
     public Lobby getLobby() {
+        Logger LOG = Logger.getLogger("DEBUG!!!!!!!!");
+
+        LOG.severe("Oh my PEPEE lobby=" + this.lobby);
         return this.lobby;
     }
 }
