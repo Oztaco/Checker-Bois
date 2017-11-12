@@ -391,7 +391,7 @@ public class CheckersBoard {
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb1 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb1 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb1.initBoard();
         System.out.println("---------------------BOARD 1---------------------");
         System.out.println("Test 1.1: Player 1 makes a Valid Move");
@@ -416,7 +416,7 @@ public class CheckersBoard {
         //TESTS 2
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb2 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb2 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb2.initBoard();
         System.out.println("\n---------------------BOARD 2---------------------");
         System.out.println("Test 2: Throws Error when player != player at tile");
@@ -431,7 +431,7 @@ public class CheckersBoard {
         //TESTS 3
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb3 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb3 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb3.initBoard();
         System.out.println("\n---------------------BOARD 3---------------------");
         System.out.println("Test 3: Throws Error when distance to next move > 1");
@@ -446,7 +446,7 @@ public class CheckersBoard {
         //TESTS 4
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb4 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb4 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb4.initBoard();
         System.out.println("\n---------------------BOARD 4---------------------");
         System.out.println("Test 4: Throws Error when space is occupied");
@@ -462,7 +462,7 @@ public class CheckersBoard {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        CheckersBoard cb5 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb5 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb5.initBoard();
         System.out.println("\n---------------------BOARD 5---------------------");
         System.out.println("Test 5: Throws Error when space is invalid");
@@ -477,7 +477,7 @@ public class CheckersBoard {
         //TESTS 6
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb6 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb6 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb6.initBoard();
         System.out.println("\n---------------------BOARD 6---------------------");
         System.out.println("Test 6.1: Player 2 Makes A Valid Move");
@@ -501,7 +501,7 @@ public class CheckersBoard {
         //TESTS 7
         //--------------------------------------------------------------------------------------------------------------
 
-        CheckersBoard cb7 = new CheckersBoard(new Player("Fluffy"), new Player("Fatty"));
+        CheckersBoard cb7 = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb7.initBoard();
         System.out.println("\n---------------------BOARD 7---------------------");
         System.out.println("Test 7: Player 2 makes an invalid move");

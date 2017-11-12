@@ -11,9 +11,9 @@ public class Game {
     private int playerTurn;
 
 
-    //#####################################################################################################
-    //CONSTRUCTOR
-    //#####################################################################################################
+/*  #######################################################################################################
+    Constructor
+    #######################################################################################################*/
     public Game(Player p1, Player p2, String id){
         this.player1 = p1;
         this.player2 = p2;
@@ -23,9 +23,9 @@ public class Game {
         this.playerTurn = 1;
     }
 
-    //#####################################################################################################
-    //GETTERS
-    //#####################################################################################################
+/*  #######################################################################################################
+    Getter Methods
+    #######################################################################################################*/
     public String getId(){
         return this.id;
     }
@@ -40,19 +40,19 @@ public class Game {
     }
 
 
-    //#####################################################################################################
-    //PUBLIC METHODS
-    //#####################################################################################################
+/*  #######################################################################################################
+    Public Methods
+    #######################################################################################################*/
     /**
      * -----------------------------------------------------------------------------------------------------
      * getGameBoardAsString(int playerNum)
      * 
      * Gets a JSON representation of the whole Game for sending to UI formatted to the perspective of
-     * the 
+     * a player represented by an int
      * @return String JSONFill
      * ----------------------------------------------------------------------------------------------------
      */
-    public String getGameBoardJSON(int playerNum){
+    public String getGameBoardAsString(int playerNum){
         String JSONFill = "";
         if(playerNum == 1){     //Player1 is requesting JSON
             //TODO FORMAT
@@ -65,7 +65,7 @@ public class Game {
 
     /**
      * ----------------------------------------------------------------------------------------------------
-     * 
+     * getSimpleGameAsString()
      * 
      * Returns String representation of the Game for the JSON file.
      * @return
@@ -73,13 +73,13 @@ public class Game {
      */
     public String getSimpleGameAsString(){
         //"id": "game1ewfqewfer","playerOneUsername": "Efe Ozturkoglu","playerTwoUsername": "Donald Knuth"
-        String game = "\"id\": \"" + this.id + "\",\"playerOneUsername\": " + this.player1.getName() + "\",\"playerTwoUsername\": " + this.player2.getName() + "\"";
+        String game = "\"id\": \"" + this.id + "\",\"playerOneUsername\": \"" + this.player1.getName() + "\",\"playerTwoUsername\": \"" + this.player2.getName() + "\"";
         return game;
     }
 
     public static void main(String args[]){
-        Player p1 = new Player("Peepee");
-        Player p2 = new Player("PooPoo");
+        Player p1 = new Player("123","Peepee");
+        Player p2 = new Player("123","PooPoo");
         Game g = new Game(p1, p2, "GAME_ID");
         System.out.print(g.getSimpleGameAsString());
     }

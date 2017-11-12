@@ -17,28 +17,17 @@ public class LobbyTest {
     @Test
     public void testAddPlayer(){
         Lobby l = new Lobby();
-        Player p = new Player("testy");
-        try{
-            l.addPlayer(p);
-        }
-        catch (PlayerNotAddedException e){
-            System.out.println("ERROR: Player was not added to lobby");
-        }
+        Player p = new Player("123","testy");
+        l.addPlayer("123","testy");
     }
 
     @Test
     public void testAddGame(){
         Lobby l = new Lobby();
-        Player p1 = new Player("testy");
-        Player p2 = new Player("testo");
-        CheckersBoard cb = new CheckersBoard(p1,p2,"test");
         try{
-            l.addPlayer(p1);
-            l.addPlayer(p2);
-            l.addNewGame(cb);
-        }
-        catch(PlayerNotAddedException e){
-            System.out.println("ERROR: Player was not added to lobby");
+            l.addPlayer("123","testo");
+            l.addPlayer("123","testo");
+            l.addNewGame("testy","testo");
         }
         catch(GameNotAddedException e){
             System.out.println("ERROR: Game was not added to lobby");
@@ -48,17 +37,10 @@ public class LobbyTest {
     @Test
     public void testInvalidAddGame(){
         Lobby l = new Lobby();
-        Player p1 = new Player("testy");
-        Player p2 = new Player("testo");
-        Player p3 = new Player("bad man");
-        CheckersBoard cb = new CheckersBoard(p1,p2,"test");
         try{
-            l.addPlayer(p1);
-            l.addPlayer(p3);
-            l.addNewGame(cb);
-        }
-        catch(PlayerNotAddedException e){
-            System.out.println("ERROR: Player was not added to lobby");
+            l.addPlayer("123", "testy");
+            l.addPlayer("123", "testy");
+            l.addNewGame("testy", "testo");
         }
         catch(GameNotAddedException e){
             System.out.println("Success: Lobby did not contain proper players to add game");

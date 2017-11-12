@@ -21,17 +21,17 @@ public class GameCenter {
     //ArrayList<PlayerSession> playerSessions = new ArrayList<PlayerSession>();
 
 
-    //##################################################################################################################
-    // Constructors
-    //##################################################################################################################
-     public GameCenter() {
+/*  #######################################################################################################
+    Constructor
+    #######################################################################################################*/
+    public GameCenter() {
          this.lobby = new Lobby();
      }
 
 
-    //##################################################################################################################
-    // Routing methods
-    //##################################################################################################################
+/*  #######################################################################################################
+    Adders
+    #######################################################################################################*/
     /**
      * -----------------------------------------------------------------------------------------------------------------
      * addPlayer(String username)
@@ -63,6 +63,10 @@ public class GameCenter {
         }
     }
 
+/*  #######################################################################################################
+    Private Methods
+    #######################################################################################################*/
+
     /**
      * -----------------------------------------------------------------------------------------------------------------
      * getPlayers()
@@ -79,12 +83,13 @@ public class GameCenter {
      * -----------------------------------------------------------------------------------------------------------------
      * getAllGames
      *
-     * Routes a request from the UI to get a JSON string of the Map of Games to the proper aspect of the lobby
+     * Routes a request from the UI to get a JSON string of the Map of Games to the proper aspect of the lobby excluding
+     * the one's that a player's in
      * @return allGames
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public String getAllGames(){
-        return lobby.getGamesAsString();
+    public String getAllGames(String sessionID){
+        return lobby.getGamesAsString(sessionID);
     }
 
     /**
@@ -93,12 +98,12 @@ public class GameCenter {
      *
      * Routes a request from the UI to get a string representation of the Games for a single player for use in a JSON
      * file to the proper aspect of the lobby
-     * @param username
+     * @param sessionID
      * @return gamesForPlayer
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public String getAllGamesForPlayer(String username){
-        return lobby.getGamesAsString(username);
+    public String getAllGamesForPlayer(String sessionID){
+        return lobby.getGamesAsStringForPlayer(sessionID);
     }
 
     /**
@@ -112,7 +117,7 @@ public class GameCenter {
      * -----------------------------------------------------------------------------------------------------------------
      */
     public String getGame(String id, int player){
-        return lobby.getGame(id).getGameBoardJSON(player);
+        return lobby.getGame(id).getGameBoardAsString(player);
     }
     //##################################################################################################################
     // Public Methods

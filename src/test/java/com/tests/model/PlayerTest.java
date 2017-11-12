@@ -7,12 +7,7 @@ public class PlayerTest {
 
     @Test
     public void testPlayerConstructor(){
-        new Player("test name");
+        new Player("123", "test name");
     }
 
-    @Test
-    public void testKingPiece(){
-        Player p1 = new Player("p1");
-        p1.kingPiece();
-    }
 }

@@ -3,22 +3,21 @@ package com.webcheckers.model;
 import com.webcheckers.model.Exceptions.GameNotAddedException;
 import com.webcheckers.model.Exceptions.PlayerNotAddedException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Lobby {
     private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
-    private HashMap<String,Player> players;     //Maps Usernames to Player Objects
+    private HashMap<String,Player> players;     //Maps Session ID's to Player Objects
     private HashMap<String,Game> games;         //Maps IDs to Game Objects
 
 /*  #######################################################################################################
     Private Methods
     #######################################################################################################*/
     public Lobby(){
-        this.games = new HashMap<String,Game>();
-        this.players = new HashMap<String,Player>();
+        this.games = new HashMap<>();
+        this.players = new HashMap<>();
     }
 
 
@@ -30,6 +29,14 @@ public class Lobby {
     }
     public Player getPlayerBySessionID(String sessionID) {
         return players.get(sessionID);
+    }
+    private Player getPlayer(String username){
+        try{
+            return this.players.get(username);
+        } catch(Exception e){
+            return null;
+        }
+
     }
 
 /*  #######################################################################################################
@@ -45,7 +52,7 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public void addPlayer(String sessionID, String username) {
-        Player newPlayer = new Player(username);
+        Player newPlayer = new Player(sessionID, username);
         this.players.put(sessionID, newPlayer);
     }
 
@@ -73,7 +80,6 @@ public class Lobby {
 /*  #######################################################################################################
     Private Methods
     #######################################################################################################*/
-
     /**
      * ----------------------------------------------------------------------------------------------------
      * generateID()
@@ -95,15 +101,6 @@ public class Lobby {
         }
 
         return randId;
-    }
-
-    private Player getPlayer(String username){
-        try{
-            return this.players.get(username);
-        } catch(Exception e){
-            return null;
-        }
-        
     }
 
 
@@ -148,38 +145,45 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getPlayersAsString(){
-        return null;
+        String playersAsString = "";
+        for(String current : this.players.keySet()){
+            
+        }
+
+        return playersAsString;
     }
 
     /**
      * ----------------------------------------------------------------------------------------------------
      * getGamesAsString()
      *
-     * Formats all games in a Lobby for use in JSON files
+     * Formats all games in a Lobby excluding a player for use in JSON files
      * TODO : METHOD STUBBED
      * @return ArrayList<CheckersBoard>
-     * -----------------------------------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------------------------------
      */
-    public String getGamesAsString(){
+    public String getGamesAsString(String playerID){
         return null;
     }
 
     /**
      * ----------------------------------------------------------------------------------------------------
-     * getGamesAsPlayer
+     * getGamesAsStringForPlayer
      *
      * Formats all games for a specific player as a string for use in a JSON file
      * @param player
      * @return playerGames
      * ----------------------------------------------------------------------------------------------------
      */
-    public String getGamesAsString(String player){
+    public String getGamesAsStringForPlayer(String player){
         String playerGames = "";
-        for(String id : this.players.get(player).getIds()){
-            playerGames.concat("{" + this.getGame(id).getSimpleGameAsString() + "},");
-        }
-        if(playerGames.length() > 0){
-            playerGames.substring(0,playerGames.length()-1);
+        if(this.players.get(player).getIds().size() > 0){
+            for(String id : this.players.get(player).getIds()){
+                playerGames.concat("{" + this.getGame(id).getSimpleGameAsString() + "},");
+            }
+            if(playerGames.length() > 0){
+                playerGames.substring(0,playerGames.length()-1);
+            }
         }
         return playerGames;
     }
