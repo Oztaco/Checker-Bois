@@ -56,7 +56,7 @@ public class GetGamePageRoute implements Route {
         LOG.severe("currentPlayer");
         Player currentPlayer = lobby.getPlayerBySessionID(request.session().id());
         LOG.severe("currentPlayer= " + currentPlayer); 
-        LOG.severe("username");        
+        LOG.severe("username");
         String username = currentPlayer.getName();
         LOG.severe("username= " + username);         
         vm.put(USERNAME_ATTR, username);

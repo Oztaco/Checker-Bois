@@ -7,6 +7,11 @@
         <script type="text/javascript" src="/js/Render.js"></script>
         <script type="text/javascript" src="/js/Main.js"></script>
         <script type="text/javascript" src="/js/Network.js"></script>
+        <script type="text/javascript">
+            gameState = {
+                username: "${username}"
+            }
+        </script>
     </head>
     <body>
         <div id="sidebar">
