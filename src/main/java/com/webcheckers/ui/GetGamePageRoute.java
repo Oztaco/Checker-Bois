@@ -12,6 +12,8 @@ import spark.Response;
 import spark.Session;
 import spark.TemplateEngine;
 
+import com.webcheckers.appl.GameCenter;
+
 public class GetGamePageRoute implements Route {
 
     static final String VIEW_NAME = "game.ftl";
@@ -25,16 +27,18 @@ public class GetGamePageRoute implements Route {
     static final String GAME_BOARD_ATTR = "gameBoard";
 
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
 
-    GetGamePageRoute(final TemplateEngine templateEngine) {
+    GetGamePageRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         this.templateEngine = templateEngine;
+        this.gameCenter = gameCenter;
     }
 
     public String handle(Request request, Response response) {
         final Session httpSession = request.session();
-//        final PlayerServices playerServices = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
-//        GuessGame game = playerServices.currentGame();
+        // final PlayerServices playerServices = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
+        // GuessGame game = playerServices.currentGame();
 
         com.webcheckers.model.Player ploop = new com.webcheckers.model.Player("blub");
         com.webcheckers.model.Player red = new com.webcheckers.model.Player("red");
@@ -42,12 +46,12 @@ public class GetGamePageRoute implements Route {
         com.webcheckers.model.CheckersBoard board = new com.webcheckers.model.CheckersBoard(red, blue);
 
         final Map<String, Object> vm = new HashMap<>();
-//        vm.put(GetHomeRoute.TITLE_ATTR, TITLE);//TODO
-//        vm.put(CURRENT_PLAYER_ATTR, ploop);
+        // vm.put(GetHomeRoute.TITLE_ATTR, TITLE);//TODO
+        // vm.put(CURRENT_PLAYER_ATTR, ploop);
         vm.put(VIEWMODE_ATTR, "Unknown");
-//        vm.put(RED_PLAYER_ATTR, red);
-//        vm.put(WHITE_PLAYER_ATTR, blue);
-//        vm.put(ACTIVE_COLOR_ATTR, "RED PLAYER GOES");
+        // vm.put(RED_PLAYER_ATTR, red);
+        // vm.put(WHITE_PLAYER_ATTR, blue);
+        // vm.put(ACTIVE_COLOR_ATTR, "RED PLAYER GOES");
         vm.put(GAME_BOARD_ATTR, board);
 
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));

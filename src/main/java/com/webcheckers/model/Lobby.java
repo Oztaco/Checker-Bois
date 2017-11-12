@@ -109,6 +109,12 @@ public class Lobby {
     //PUBLIC METHODS
     //#####################################################################################################
 
+    /**
+     * TODO add doc
+     */
+    public Player getPlayerBySessionID(String sessionID) {
+        return players.get(sessionID);
+    }
 
 
     //#####################################################################################################

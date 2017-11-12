@@ -41,13 +41,12 @@ public class GameCenter {
      * @param username
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public void addPlayer(String username){
-         try {
-             this.lobby.addPlayer(username);
-         }
-         catch(PlayerNotAddedException e){
+    public void addPlayer(String username) {
+        try {
+            this.lobby.addPlayer(username);
+        } catch (PlayerNotAddedException e) {
 
-         }
+        }
     }
 
     /**
