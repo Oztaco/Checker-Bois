@@ -27,6 +27,11 @@ p, a, h1, h2, h3, h4, h5, h6 {
   width: auto;
   margin-bottom: 25px;
 }
+.modal p.label {
+  color: #ececec;
+  text-align: center;
+  padding: 5px;
+}
 .modal a {
   display: block;
   color: #8e66a0;
@@ -59,8 +64,9 @@ input[type=submit]:hover {
 }
 
 .modal.login {
-  height: 290px;
+  height: 260px;
   width: 280px;
   border-radius: 6px;
   margin: 80px auto;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.3);
 }
