@@ -142,11 +142,13 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getPlayersAsString(){
-        String playersAsString = "{";
+        String playersAsString = "";
         for(String current : this.players.keySet()){
-
+            playersAsString += (this.players.get(current).getPlayerAsString() + ", ");
         }
-
+        if(playersAsString.length() > 1){
+            playersAsString = playersAsString.substring(0,playersAsString.length()-2);
+        }
         return playersAsString;
     }
 
@@ -210,14 +212,22 @@ public class Lobby {
         l.addPlayer("3", "Nerd");
         l.addNewGame("1","2");
 
+        //peepee has one game with his good friend gerard
+        System.out.println("All Players\n\t" + l.getPlayersAsString());
         System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
         System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
 
         l.addNewGame("1","3");
+
+        //peepee gets a second game with his sworn enemy nerd
+        System.out.println("All Players\n\t" + l.getPlayersAsString());
         System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
         System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
 
         l.addNewGame("2", "3");
+
+        //Woe is me!  Gerard and nerd are now in cahoots and playing a game WITHOUT PEEPEE
+        System.out.println("All Players\n\t" + l.getPlayersAsString());
         System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
         System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
 
