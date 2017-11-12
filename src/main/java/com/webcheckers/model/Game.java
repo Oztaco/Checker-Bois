@@ -1,9 +1,8 @@
 package com.webcheckers.model;
+import com.webcheckers.model.CheckersBoard;
+import com.webcheckers.model.Player;
 
-/**
- * This class is a representation of a Checkers Game.  It contains all of the data and logic for a game used in playing
- * a game of checkers.
- */
+
 public class Game {
     private CheckersBoard board;
     private Player player1;
@@ -12,9 +11,9 @@ public class Game {
     private int playerTurn;
 
 
-    //
+    //#####################################################################################################
     //CONSTRUCTOR
-    //
+    //#####################################################################################################
     public Game(Player p1, Player p2, String id){
         this.player1 = p1;
         this.player2 = p2;
@@ -24,9 +23,9 @@ public class Game {
         this.playerTurn = 1;
     }
 
-    //
+    //#####################################################################################################
     //GETTERS
-    //
+    //#####################################################################################################
     public String getId(){
         return this.id;
     }
@@ -41,12 +40,17 @@ public class Game {
     }
 
 
-    //
+    //#####################################################################################################
     //PUBLIC METHODS
-    //
+    //#####################################################################################################
     /**
-     * Gets a JSON representation of the whole Game for sending to UI
+     * -----------------------------------------------------------------------------------------------------
+     * getGameBoardAsString(int playerNum)
+     * 
+     * Gets a JSON representation of the whole Game for sending to UI formatted to the perspective of
+     * the 
      * @return String JSONFill
+     * ----------------------------------------------------------------------------------------------------
      */
     public String getGameBoardJSON(int playerNum){
         String JSONFill = "";
@@ -60,12 +64,23 @@ public class Game {
     }
 
     /**
+     * ----------------------------------------------------------------------------------------------------
+     * 
+     * 
      * Returns String representation of the Game for the JSON file.
      * @return
+     * ----------------------------------------------------------------------------------------------------
      */
     public String getSimpleGameAsString(){
         //"id": "game1ewfqewfer","playerOneUsername": "Efe Ozturkoglu","playerTwoUsername": "Donald Knuth"
         String game = "\"id\": \"" + this.id + "\",\"playerOneUsername\": " + this.player1.getName() + "\",\"playerTwoUsername\": " + this.player2.getName() + "\"";
         return game;
+    }
+
+    public static void main(String args[]){
+        Player p1 = new Player("Peepee");
+        Player p2 = new Player("PooPoo");
+        Game g = new Game(p1, p2, "GAME_ID");
+        System.out.print(g.getSimpleGameAsString());
     }
 }
