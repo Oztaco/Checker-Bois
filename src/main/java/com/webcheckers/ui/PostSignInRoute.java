@@ -25,7 +25,7 @@ public class  PostSignInRoute implements Route {
   private static final Logger LOG = Logger.getLogger( PostSignInRoute.class.getName());
 
   private final TemplateEngine templateEngine;
-  private final GameCenter gameCenter = new GameCenter();
+  private final GameCenter gameCenter;
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -34,13 +34,14 @@ public class  PostSignInRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public  PostSignInRoute(final TemplateEngine templateEngine) {
+  public  PostSignInRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
+    this.gameCenter = gameCenter;
     //
-    LOG.config(" PostSignInRoute is initialized.");
+    LOG.config("PostSignInRoute is initialized.");
   }
 
   /**
@@ -57,10 +58,10 @@ public class  PostSignInRoute implements Route {
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer(" PostSignInRoute is invoked.");
+    gameCenter.addPlayer(request.params("username"));
     
-    // gameCenter.addSession(request.attribute("username"), request.ip());  //TODO
-    Map<String, Object> vm = new HashMap<>();
-    return templateEngine.render(new ModelAndView(vm , "signin.ftl"));
+    response.redirect("/game");
+    return null;
   }
 
 }
