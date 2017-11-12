@@ -27,7 +27,7 @@ public class Player{
         return name;
     }
     public ArrayList<String> getIds() {
-        return ids;
+        return this.ids;
     }
 
     //##################################################################################################################

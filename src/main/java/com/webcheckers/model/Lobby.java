@@ -61,20 +61,17 @@ public class Lobby {
      * addGame(CheckersBoard game)
      *
      * Adds game to list of games, given it's players are in the lobby.
-     * @param p1, p2
+     * @param sessionID1
+     * @param sessionID2
      * @throws GameNotAddedException
      * ----------------------------------------------------------------------------------------------------
      */
-    public void addNewGame(String p1, String p2) throws GameNotAddedException{
+    public void addNewGame(String sessionID1, String sessionID2){
         String newId = generateID();
-
-        if(this.players.containsKey(p1) && this.players.containsKey(p1)){
-            Game game = new Game(this.players.get(p1),this.players.get(p2),newId);
-            this.games.put(newId,game);
-        }
-        else{
-            throw new GameNotAddedException("The players trying to play are not in the lobby yet");
-        }
+        Game game = new Game(this.players.get(sessionID1),this.players.get(sessionID2),newId);
+        this.games.put(newId,game);
+        this.players.get(sessionID1).addToGame(newId);
+        this.players.get(sessionID2).addToGame(newId);
     }
 
 /*  #######################################################################################################
@@ -145,9 +142,9 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getPlayersAsString(){
-        String playersAsString = "";
+        String playersAsString = "{";
         for(String current : this.players.keySet()){
-            
+
         }
 
         return playersAsString;
@@ -163,7 +160,20 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getGamesAsString(String playerID){
-        return null;
+        String notPlayerGames = "";
+
+        if(this.games.size() > 1) {
+            for (String game : this.games.keySet()) {
+                if (!this.players.get(playerID).getIds().contains(game)) {
+                    notPlayerGames += (this.games.get(game).getSimpleGameAsString() + ", ");
+                }
+            }
+        }
+        if(notPlayerGames.length() > 1){
+            notPlayerGames = notPlayerGames.substring(0,notPlayerGames.length()-2);
+        }
+
+        return notPlayerGames;
     }
 
     /**
@@ -178,11 +188,11 @@ public class Lobby {
     public String getGamesAsStringForPlayer(String player){
         String playerGames = "";
         if(this.players.get(player).getIds().size() > 0){
-            for(String id : this.players.get(player).getIds()){
-                playerGames.concat("{" + this.getGame(id).getSimpleGameAsString() + "},");
+            for(String id : this.players.get(player).getIds()){     //For each game the player is currently enrolled in
+                playerGames += (this.getGame(id).getSimpleGameAsString() + ", ");
             }
-            if(playerGames.length() > 0){
-                playerGames.substring(0,playerGames.length()-1);
+            if(playerGames.length() > 1){
+                playerGames = playerGames.substring(0,playerGames.length()-2);
             }
         }
         return playerGames;
@@ -197,7 +207,19 @@ public class Lobby {
         Lobby l = new Lobby();
         l.addPlayer("1","peepee");
         l.addPlayer("2", "Gerard");
-        
-        System.out.println("JSON OF GAMES FOR PEEPEE WILL BE FORMATTED AS:\n\n\t" + l.getGamesAsString("peepee"));
+        l.addPlayer("3", "Nerd");
+        l.addNewGame("1","2");
+
+        System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
+        System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
+
+        l.addNewGame("1","3");
+        System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
+        System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
+
+        l.addNewGame("2", "3");
+        System.out.println("Games for \"peepee\"\n\t" + l.getGamesAsStringForPlayer("1"));
+        System.out.println("Games \"peepee\" was not invited to\n\t" + l.getGamesAsString("1"));
+
     }
 }
