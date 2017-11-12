@@ -41,12 +41,8 @@ public class GameCenter {
      * @param username
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public void addPlayer(String username) {
-        try {
-            this.lobby.addPlayer(username);
-        } catch (PlayerNotAddedException e) {
-
-        }
+    public void addPlayer(String sessionID, String username) {
+        this.lobby.addPlayer(sessionID, username);
     }
 
     /**
@@ -117,5 +113,11 @@ public class GameCenter {
      */
     public String getGame(String id, int player){
         return lobby.getGame(id).getGameBoardJSON(player);
+    }
+    //##################################################################################################################
+    // Public Methods
+    //##################################################################################################################
+    public Lobby getLobby() {
+        return this.lobby;
     }
 }
