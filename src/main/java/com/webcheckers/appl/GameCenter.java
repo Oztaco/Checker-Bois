@@ -114,4 +114,10 @@ public class GameCenter {
     public String getGame(String id, int player){
         return lobby.getGame(id).getGameBoardJSON(player);
     }
+    //##################################################################################################################
+    // Public Methods
+    //##################################################################################################################
+    public Lobby getLobby() {
+        return this.lobby;
+    }
 }
