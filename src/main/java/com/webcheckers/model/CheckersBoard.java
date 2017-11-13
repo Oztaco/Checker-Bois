@@ -18,13 +18,17 @@ public class CheckersBoard {
     private Player player2;
 
 
-    //
-    //CONSTRUCTORS
-    //
+/*  #######################################################################################################
+    Constructor Methods
+    #######################################################################################################*/
     /**
+     * ------------------------------------------------------------------------------------------------------
+     * CheckersBoard()
+     *
      * Constructor for a board.  Uses two players as input
      * @param username1
      * @param username2
+     * ------------------------------------------------------------------------------------------------------
      */
     public CheckersBoard(Player username1, Player username2){
         this.board = new space[8][8];
@@ -33,8 +37,12 @@ public class CheckersBoard {
     }
 
     /**
-     * Initializes the board, filling it with enums
-     * corresponding to the contents of the spaces.
+     * ------------------------------------------------------------------------------------------------------
+     * initBoard()
+     *
+     * Initializes the board for a valid game of checkers, filling it with enums corresponding to the
+     * contents of the spaces.
+     * ------------------------------------------------------------------------------------------------------
      */
     public void initBoard(){
         for(int y = 0; y < 8; y++){
