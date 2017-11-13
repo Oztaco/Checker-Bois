@@ -109,13 +109,13 @@ public class GameCenter {
      * getGame
      *
      * Routes a request from the UI to get a JSON string of a Game to the proper aspect of the lobby
-     * @param id
-     * @param player
+     * @param gameId
+     * @param playerSessionID
      * @return game
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public String getGame(String id, int player){
-        return lobby.getGame(id).getGameBoardAsString(player);
+    public String getGame(String gameId, String playerSessionID){
+        return lobby.getGameBoardAsString(gameId, playerSessionID);
     }
 
 
