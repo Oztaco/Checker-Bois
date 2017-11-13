@@ -97,24 +97,38 @@ public class CheckersBoard {
     }
 
 
-    //
-    //GETTERS
-    //
+/*  #######################################################################################################
+    Getter Methods
+    #######################################################################################################*/
+
+    /**
+     * ------------------------------------------------------------------------------------------------------
+     * getPlayer(int player)
+     *
+     * @param player - int representation of player
+     * @return p - Player that corresponds to that Number player
+     * ------------------------------------------------------------------------------------------------------
+     */
     public Player getPlayer(int player){
+        Player p = null;
         if(player == 1){
-            return player1;
+            p = player1;
         }
         else if(player == 2){
-            return player2;
+            p = player2;
         }
-        return null;
+        return p;
     }
 
     /**
+     * ------------------------------------------------------------------------------------------------------
+     * getBoardArrayValues()
+     *
      * Creates a copy of the 2D array that stores the checkersboard and then
      * returns that new array.
      * The array is indexed by Array[y][x]
      * @return 2D array[y][x]
+     * ------------------------------------------------------------------------------------------------------
      */
     public space[][] getBoardArrayValues() {
         space[][] newArray = new space[this.board.length][];
@@ -125,9 +139,13 @@ public class CheckersBoard {
     }
 
     /**
+     * ------------------------------------------------------------------------------------------------------
+     * getXYBoardArrayValues()
+     *
      * Creates a copy of the 2D array that stores the checkboard, then flips it
      * so that you can access index it by Array[x][y]
      * @return 2D array[x][y]
+     * ------------------------------------------------------------------------------------------------------
      */
     public space[][] getXYBoardArrayValues() {
         space[][] newArray = new space[8][];
@@ -141,8 +159,12 @@ public class CheckersBoard {
     }
 
     /**
+     * ----------------------------------------------------------------------------------------------------
+     * getPlayer1Board()
+     *
      * Returns a 2D array indexed by [x][y] representing the board with Player 1
      * on the bottom of the array
+     * ----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer1Board() {
         space[][] player1Board = getXYBoardArrayValues();
@@ -157,21 +179,29 @@ public class CheckersBoard {
     }
 
     /**
+     * -----------------------------------------------------------------------------------------------------
+     * getPlayer2Board()
+     *
      * Returns a 2D array indexed by [x][y] representing the board with Player 2
      * on the bottom of the array
+     * -----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer2Board() {
         return getXYBoardArrayValues();
     }
 
 
-    //
-    //PUBLIC METHODS
-    //
+/*  #######################################################################################################
+    Public Methods
+    #######################################################################################################*/
     /**
+     * ------------------------------------------------------------------------------------------------------
+     * kingPiece()
+     *
      * Kings the piece at x,y if it is not already a king.  Does nothing otherwise.
      * @param x
      * @param y
+     * -------------------------------------------------------------------------------------------------------
      */
     public void kingPiece(int x, int y){
         if(this.board[y][x] == space.PLAYER1){
@@ -183,13 +213,21 @@ public class CheckersBoard {
     }
 
     /**
+     * --------------------------------------------------------------------------------------------------------
+     * movePiece(int x0, int y0, int x1, int y1, Player player)
+     *
      * Moves a piece for the player specified.
      *
      * Checks:
      *      Whether the piece moved belongs to the correct player
      *      Whether the piece moved
      *
-     * @param x0, y0, x1, y1, player
+     * @param x0 - initial x position
+     * @param y0 - initial y position
+     * @param x1 - new x position
+     * @param y1 - new y position
+     * @param player - player making the move
+     * ---------------------------------------------------------------------------------------------------------
      */
     public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
 
@@ -289,16 +327,19 @@ public class CheckersBoard {
     }
   
     /**
+     * -----------------------------------------------------------------------------------------------------
+     * attack(int x0, int y0, int x1, int y1, Player player)
+     *
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
      * removed from the board.
      *
-     * //TODO reverse indexing
      * @param x0 - initial x position
      * @param y0 - initial y position
      * @param x1 - final x position
      * @param y1 - final y position
      * @param player - player making the move
+     * ------------------------------------------------------------------------------------------------------
      */
     public void attack(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
         if (board[y1][x1] == space.EMPTY) { //desired space is empty
@@ -363,20 +404,28 @@ public class CheckersBoard {
     }
 
 
-    //
-    //TESTING METHODS BELOW
-    //
+/*  #######################################################################################################
+    Testing Methods
+    #######################################################################################################*/
     /**
+     * -----------------------------------------------------------------------------------------------------
+     * putPiece(int x, int y, space space)
+     *
      * Puts a piece directly on the board.
      * For testing purposes only.
+     * ------------------------------------------------------------------------------------------------------
      */
     public void putPiece(int x, int y, space space){
         board[x][y] = space;
     }
 
     /**
+     * -------------------------------------------------------------------------------------------------------
+     * emptyBoard()
+     *
      * Empties the entire board.
      * For testing purposes only.
+     * -------------------------------------------------------------------------------------------------------
      */
     public void emptyBoard() {
         for (int y = 0; y < 8; y++) {
@@ -387,7 +436,11 @@ public class CheckersBoard {
     }
 
     /**
+     * ----------------------------------------------------------------------------------------------------------
+     * printBoard()
+     *
      * Prints the board for testing purposes
+     * ----------------------------------------------------------------------------------------------------------
      */
     public void printBoard(){
         System.out.println("");
