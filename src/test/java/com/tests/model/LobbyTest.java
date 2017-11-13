@@ -24,26 +24,16 @@ public class LobbyTest {
     @Test
     public void testAddGame(){
         Lobby l = new Lobby();
-        try{
-            l.addPlayer("123","testo");
-            l.addPlayer("123","testo");
-            l.addNewGame("testy","testo");
-        }
-        catch(GameNotAddedException e){
-            System.out.println("ERROR: Game was not added to lobby");
-        }
+        l.addPlayer("123","testo");
+        l.addPlayer("123","testo");
+        l.addNewGame("testy","testo");
     }
 
     @Test
     public void testInvalidAddGame(){
         Lobby l = new Lobby();
-        try{
-            l.addPlayer("123", "testy");
-            l.addPlayer("123", "testy");
-            l.addNewGame("testy", "testo");
-        }
-        catch(GameNotAddedException e){
-            System.out.println("Success: Lobby did not contain proper players to add game");
-        }
+        l.addPlayer("123", "testy");
+        l.addPlayer("123", "testy");
+        l.addNewGame("testy", "testo");
     }
 }

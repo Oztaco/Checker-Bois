@@ -58,12 +58,7 @@ public class GameCenter {
      * -----------------------------------------------------------------------------------------------------------------
      */
     public void addNewGame(String p1, String p2){
-        try{
-            this.lobby.addNewGame(p1,p2);
-        }
-        catch(GameNotAddedException e){
-            //TODO WHAT DO WE DO
-        }
+        this.lobby.addNewGame(p1,p2);
     }
 
 /*  #######################################################################################################
@@ -122,6 +117,8 @@ public class GameCenter {
     public String getGame(String id, int player){
         return lobby.getGame(id).getGameBoardAsString(player);
     }
+
+
     //##################################################################################################################
     // Public Methods
     //##################################################################################################################
