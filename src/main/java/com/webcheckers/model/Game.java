@@ -52,9 +52,9 @@ public class Game {
      * @return String JSONFill
      * ----------------------------------------------------------------------------------------------------
      */
-    public String getGameBoardAsString(int playerNum){
+    public String getGameBoardAsString(Player player){
         String JSONFill = "";
-        if(playerNum == 1){     //Player1 is requesting JSON
+        if(player == player1){     //Player1 is requesting JSON
             //TODO FORMAT
         }
         else{                   //Player2 is requesting JSON
