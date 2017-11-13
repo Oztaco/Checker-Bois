@@ -54,12 +54,33 @@ public class Game {
      */
     public String getGameBoardAsString(Player player){
         String JSONFill = "";
-        if(player == player1){     //Player1 is requesting JSON
-            //TODO FORMAT
+        if(player == player1){     // Player1 is requesting JSON
+            CheckersBoard.space[][] boardArray = board.getPlayer1Board();
+            JSONFill = get2DArrayAsJSON(boardArray);
         }
-        else{                   //Player2 is requesting JSON
-            //TODO FORMAT
+        else{                   // Player2 is requesting JSON
+            CheckersBoard.space[][] boardArray = board.getPlayer2Board();
+            JSONFill = get2DArrayAsJSON(boardArray);
         }
+        return JSONFill;
+    }
+
+    private static String get2DArrayAsJSON(CheckersBoard.space[][] array) {
+        String JSONFill = "[";
+        for (int y = 0; y < 8; y++) {
+            JSONFill += "[";
+            for (int x = 0; x < 8; x++) {
+                JSONFill += array[x][y];
+                if (x < 8 - 1) {
+                    JSONFill += ",";
+                }
+            }
+            JSONFill += "]";
+            if (y < 8 - 1) {
+                JSONFill += ",";
+            }
+        }
+        JSONFill = JSONFill + "]";
         return JSONFill;
     }
 

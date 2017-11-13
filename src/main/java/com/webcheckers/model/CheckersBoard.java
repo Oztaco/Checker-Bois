@@ -110,6 +110,60 @@ public class CheckersBoard {
         return null;
     }
 
+    /**
+     * Creates a copy of the 2D array that stores the checkersboard and then
+     * returns that new array.
+     * The array is indexed by Array[y][x]
+     * @return 2D array[y][x]
+     */
+    public space[][] getBoardArrayValues() {
+        space[][] newArray = new space[this.board.length][];
+        for (int i = 0; i < this.board.length; i++) {
+            newArray[i] = this.board[i].clone();
+        }
+        return newArray;
+    }
+
+    /**
+     * Creates a copy of the 2D array that stores the checkboard, then flips it
+     * so that you can access index it by Array[x][y]
+     * @return 2D array[x][y]
+     */
+    public space[][] getXYBoardArrayValues() {
+        space[][] newArray = new space[8][];
+        for (int x = 0; x < 8; x++) {
+            newArray[x] = new space[8];
+            for (int y = 0; y < 8; y++) {
+                newArray[x][y] = this.board[y][x];
+            }
+        }
+        return newArray;
+    }
+
+    /**
+     * Returns a 2D array indexed by [x][y] representing the board with Player 1
+     * on the bottom of the array
+     */
+    public space[][] getPlayer1Board() {
+        space[][] player1Board = getXYBoardArrayValues();
+        for (int x = 0; x < 8 / 2; x++) {
+            for (int y = 0; y < 8; y++) {
+                space val = player1Board[x][y];
+                player1Board[x][y] = player1Board[8 - 1 - x][y];
+                player1Board[8 - 1 - x][y] = val;
+            }
+        }
+        return player1Board;
+    }
+
+    /**
+     * Returns a 2D array indexed by [x][y] representing the board with Player 2
+     * on the bottom of the array
+     */
+    public space[][] getPlayer2Board() {
+        return getXYBoardArrayValues();
+    }
+
 
     //
     //PUBLIC METHODS
