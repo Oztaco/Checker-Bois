@@ -201,6 +201,12 @@ public class Lobby {
     }
 
 
+    public String getGameBoardAsString(String id, String playerSessionID){
+        Player theOneWhoKnocks = this.players.get(playerSessionID);
+        return this.games.get(id).getGameBoardAsString(theOneWhoKnocks);
+    }
+
+
 /*  #######################################################################################################
     Main Testing
     #######################################################################################################*/
