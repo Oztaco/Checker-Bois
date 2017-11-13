@@ -39,3 +39,13 @@ getAllBoards = function(callback) {
         }
     )
 }
+getLobby = function(callback) {
+    var request = new ajaxRequest(
+        "GET",
+        "api/get_lobby",
+        {},
+        function(response) {
+            this.callback(response);
+        }
+    )
+}
