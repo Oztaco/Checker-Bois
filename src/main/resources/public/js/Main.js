@@ -36,6 +36,8 @@ checkersBoard = {};
 
 function init() {
     DOM.canvas = document.getElementById("board");
+    DOM.mainSidebar = document.getElementById("mainSidebar");
+    DOM.playerLobby = document.getElementById("playerLobby");
     checkersBoard = new CheckersBoard();
     initBoard();
 }
