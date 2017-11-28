@@ -16,6 +16,7 @@ CheckersBoard = function () {
     this.player2_ID = "-1";
     this.player1_Name = "Loading";
     this.player2_Name = "Loading";
+    this.moves = [];
     for (var col = 0; col < 8; col++) {
         var newCol = [];
         for (var row = 0; row < 8; row++) {
