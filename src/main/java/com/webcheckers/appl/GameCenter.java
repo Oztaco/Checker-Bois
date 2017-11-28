@@ -57,8 +57,8 @@ public class GameCenter {
      * @param p2
      * -----------------------------------------------------------------------------------------------------------------
      */
-    public void addNewGame(String p1, String p2){
-        this.lobby.addNewGame(p1,p2);
+    public String addNewGame(String p1, String p2){
+        return this.lobby.addNewGame(p1,p2);
     }
 
 /*  #######################################################################################################

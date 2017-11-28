@@ -1,11 +1,13 @@
 <!doctype html>
 <html>
     <head>
-        <title>WeebCheckers RAWR XD</title>
+        <title>WebCheckers</title>
         <link rel="stylesheet" href="/css/game.css">
+        <script type="text/javascript" src="/js/efe.js"></script>
         <script type="text/javascript" src="/js/CheckersBoard.js"></script>
         <script type="text/javascript" src="/js/Render.js"></script>
         <script type="text/javascript" src="/js/Main.js"></script>
+        <script type="text/javascript" src="/js/Game.js"></script>
         <script type="text/javascript" src="/js/Network.js"></script>
         <script type="text/javascript" src="/js/UI.js"></script>
         <script type="text/javascript">
@@ -32,12 +34,7 @@
         <div class="sidebar" id="playerLobby">
             <ul>
                 <li class="title top">PLAYER LOBBY</li>
-                <li><a href="#">Bill Gates</a></li>
-                <li><a href="#">Stephen Rippy</a></li>
-                <li><a href="#">Dennis Ritchie</a></li>
-                <li><a href="#">Efe</a></li>
-                <li><a href="#">Steven</a></li>
-                <li><a href="#">Ozai</a></li>
+                <li><a href="#">Loading</a></li>
             </ul>
         </div>
         <div id="content">

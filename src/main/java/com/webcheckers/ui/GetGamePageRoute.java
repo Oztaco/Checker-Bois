@@ -55,6 +55,12 @@ public class GetGamePageRoute implements Route {
         LOG.severe("Lobby = " + lobby);
         LOG.severe("currentPlayer");
         Player currentPlayer = lobby.getPlayerBySessionID(request.session().id());
+
+        if (currentPlayer == null) {
+            LOG.fine("Player not logged in. Redirect to signin");
+            response.redirect("/");
+        }
+
         LOG.severe("currentPlayer= " + currentPlayer); 
         LOG.severe("username");
         String username = currentPlayer.getName();
