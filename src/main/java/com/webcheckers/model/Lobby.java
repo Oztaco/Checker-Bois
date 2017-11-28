@@ -66,12 +66,13 @@ public class Lobby {
      * @throws GameNotAddedException
      * ----------------------------------------------------------------------------------------------------
      */
-    public void addNewGame(String sessionID1, String sessionID2){
+    public String addNewGame(String sessionID1, String sessionID2){
         String newId = generateID();
         Game game = new Game(this.players.get(sessionID1),this.players.get(sessionID2),newId);
         this.games.put(newId,game);
         this.players.get(sessionID1).addToGame(newId);
         this.players.get(sessionID2).addToGame(newId);
+        return newId;
     }
 
 /*  #######################################################################################################
