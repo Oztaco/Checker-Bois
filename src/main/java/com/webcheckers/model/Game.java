@@ -8,7 +8,8 @@ public class Game {
     private Player player1;
     private Player player2;
     private String id;
-    private int playerTurn;
+    private int boardVersion;
+    private Player playerTurn;
 
 
 /*  #######################################################################################################
@@ -20,7 +21,8 @@ public class Game {
         this.id = id;
         this.board = new CheckersBoard(p1,p2);
         this.board.initBoard();
-        this.playerTurn = 1;
+        this.boardVersion = 0;
+        this.playerTurn = null;
     }
 
 /*  #######################################################################################################
@@ -42,6 +44,11 @@ public class Game {
 
 /*  #######################################################################################################
     Public Methods
+    #######################################################################################################*/
+
+
+/*  #######################################################################################################
+    Communication Methods
     #######################################################################################################*/
     /**
      * -----------------------------------------------------------------------------------------------------
@@ -65,6 +72,15 @@ public class Game {
         return JSONFill;
     }
 
+    /**
+     * -----------------------------------------------------------------------------------------------------
+     * get2DArrayAsJSON
+     *
+     * gets a JSON representation of a 2D array as a String
+     * @param array
+     * @return String JSONFILL
+     * -----------------------------------------------------------------------------------------------------
+     */
     private static String get2DArrayAsJSON(CheckersBoard.space[][] array) {
         String JSONFill = "[";
         for (int y = 0; y < 8; y++) {
