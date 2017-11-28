@@ -60,14 +60,16 @@ public class GetGamePageRoute implements Route {
             LOG.fine("Player not logged in. Redirect to signin");
             response.redirect("/");
         }
+        else {
+            LOG.severe("currentPlayer= " + currentPlayer); 
+            LOG.severe("username");
+            String username = currentPlayer.getName();
+            LOG.severe("username= " + username);         
+            vm.put(USERNAME_ATTR, username);
 
-        LOG.severe("currentPlayer= " + currentPlayer); 
-        LOG.severe("username");
-        String username = currentPlayer.getName();
-        LOG.severe("username= " + username);         
-        vm.put(USERNAME_ATTR, username);
-
-        return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+            return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+        }
+        return "";
     }
 
 
