@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 import com.webcheckers.model.CheckersBoard;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.Player;
 
 
@@ -10,6 +11,10 @@ public class Game {
     private String id;
     private int boardVersion;
     private Player playerTurn;
+
+    private enum moveType{
+
+    }
 
 
 /*  #######################################################################################################
@@ -47,7 +52,21 @@ public class Game {
     #######################################################################################################*/
 
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1){
+        try{
+            this.board.move(x0, y0, x1, y1, currPlayer);
+            if(currPlayer.equals(this.player1)){
+                this.playerTurn = this.player2;
+            }
+            else if(currPlayer.equals(this.player2)){
+                this.playerTurn = this.player1;
+            }
 
+
+        }
+        catch(InvalidMoveException e) {
+            //Do nothing, game is not edited
+            //Prolly have some Error message eventually
+        }
     }
 
 /*  #######################################################################################################
