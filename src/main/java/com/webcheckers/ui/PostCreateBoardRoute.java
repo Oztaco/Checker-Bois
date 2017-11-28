@@ -68,8 +68,8 @@ public class PostCreateBoardRoute implements Route {
     // access gameCenter from here
 
     //THE FOLLOWING VARIABLES ARE PLACEHOLDERS FOR THE ID'S OF PLAYERS TRYING TO PLAY
-    String p1 = ""; //PLAYER1ID
-    String p2 = ""; //PLAYER2ID
+    String p1 = request.session().id();
+    String p2 = request.queryParams("opponent_player_id");
     String gameID = gameCenter.addNewGame(p1,p2);
     gameCenter.getAllGames(gameID);
     return null;
