@@ -1,6 +1,8 @@
 package com.webcheckers.model;
 import com.webcheckers.model.CheckersBoard;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.Player;
+import java.util.Stack;
 
 
 public class Game {
@@ -10,6 +12,7 @@ public class Game {
     private String id;
     private int boardVersion;
     private Player playerTurn;
+    private Stack<PastMove> pastMoves;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
 
 
 /*  #######################################################################################################
@@ -46,6 +49,59 @@ public class Game {
     Public Methods
     #######################################################################################################*/
 
+    /**
+     * ------------------------------------------------------------------------------------------------------
+     * playTurn
+     *
+     * Plays a single turn in the game of checkers based on the player who wishes to move, the four numbers
+     * of the coordinates of their move, and the type of move they wish to make.  It then saves the moves on
+     * the stack
+     * @param currPlayer
+     * @param x0
+     * @param y0
+     * @param x1
+     * @param y1
+     * @param type
+     * ------------------------------------------------------------------------------------------------------
+     */
+    public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type){
+        if(type == MoveType.ATTACK){
+            try{
+                this.board.attack(x0, y0, x1, y1, currPlayer);
+                if(currPlayer.equals(this.player1)){
+                    this.playerTurn = this.player2;
+                }
+                else if(currPlayer.equals(this.player2)){
+                    this.playerTurn = this.player1;
+                }
+
+
+            }
+        catch(InvalidMoveException e) {
+                //Do nothing, game is not edited
+                //Prolly have some Error message eventually
+            }
+        }
+
+
+        else if(type == MoveType.MOVE){
+            try{
+                this.board.move(x0, y0, x1, y1, currPlayer);
+                if(currPlayer.equals(this.player1)){
+                    this.playerTurn = this.player2;
+                }
+                else if(currPlayer.equals(this.player2)){
+                    this.playerTurn = this.player1;
+                }
+
+
+            }
+        catch(InvalidMoveException e) {
+                //Do nothing, game is not edited
+                //Prolly have some Error message eventually
+            }
+        }
+    }
 
 /*  #######################################################################################################
     Communication Methods
