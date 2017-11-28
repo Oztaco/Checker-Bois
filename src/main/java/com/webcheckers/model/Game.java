@@ -9,6 +9,8 @@ public class Game {
     private CheckersBoard board;
     private Player player1;
     private Player player2;
+    private int player1Pieces;              //TODO LINK ALL UP BB
+    private int player2Pieces;              //TODO LINK ALL UP BB
     private String id;
     private int boardVersion;
     private Player playerTurn;
@@ -25,7 +27,8 @@ public class Game {
         this.board = new CheckersBoard(p1,p2);
         this.board.initBoard();
         this.boardVersion = 0;
-        this.playerTurn = null;
+        this.playerTurn = player1;
+        this.pastMoves = new Stack<>();
     }
 
 /*  #######################################################################################################
@@ -48,6 +51,16 @@ public class Game {
 /*  #######################################################################################################
     Public Methods
     #######################################################################################################*/
+
+    public Player playerWon(){
+        if(this.player1Pieces == 0){
+            return this.player2;
+        }
+        else if(this.player2Pieces == 0){
+            return this.player1;
+        }
+        return null;
+    }
 
     /**
      * ------------------------------------------------------------------------------------------------------
@@ -100,6 +113,12 @@ public class Game {
                 //Do nothing, game is not edited
                 //Prolly have some Error message eventually
             }
+        }
+    }
+
+    public void playGame(){
+        while(playerWon() == null){
+
         }
     }
 
