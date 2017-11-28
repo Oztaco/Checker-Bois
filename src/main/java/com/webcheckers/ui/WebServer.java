@@ -80,6 +80,11 @@ public class WebServer {
    */
   public static final String API_GET_LOBBY_URL = "/api/get_lobby";
 
+  /**
+   * The URL pattern to access the postCreateBoard API call
+   */
+  public static final String API_POST_CREATE_BOARD_URL = "/api/create_board";
+
   //
   // Attributes
   //
@@ -181,6 +186,9 @@ public class WebServer {
 
     // The API call to get a specific game's data
     get(API_GET_LOBBY_URL, new GetLobbyRoute(templateEngine, gameCenter));
+
+    // The API call to create a game
+    get(API_POST_CREATE_BOARD_URL, new PostCreateBoardRoute(templateEngine, gameCenter));
 
     // Log for debugging
     LOG.config("WebServer is initialized.");
