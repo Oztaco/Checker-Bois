@@ -2,7 +2,11 @@
  * This file handles the game states and animations
  */
 
-// The scene that runs when the user has not selected any games yet
+
+/**
+ * The scene that runs when a game is not currently being displayed to the
+ * player
+ */
 scene("intro", {
 	init: function() {
         
@@ -18,6 +22,10 @@ scene("intro", {
 	}
 });
 
+/**
+ * The scene that runs when it is the current player's turn, *before* the user
+ * selects a piece to move
+ */
 scene("currentPlayerTurn", {
 	init: function() {
         
@@ -33,6 +41,10 @@ scene("currentPlayerTurn", {
 	}
 });
 
+/**
+ * The scene that runs when it is the opponent's turn. Should keep pinging the
+ * server every 5 second to check for a move.
+ */
 scene("opponentTurn", {
 	init: function() {
         
@@ -48,6 +60,10 @@ scene("opponentTurn", {
 	}
 });
 
+/**
+ * The scene that runs when it is the current player's turn and the player has
+ * selected a specific piece to move. Should highlight possible moves
+ */
 scene("playerInput", {
 	init: function() {
         
@@ -63,6 +79,9 @@ scene("playerInput", {
 	}
 });
 
+/**
+ * The scene that runs when a move is being animated from one space to another
+ */
 scene("animatingPiece", {
 	init: function() {
         
@@ -78,6 +97,9 @@ scene("animatingPiece", {
 	}
 });
 
+/**
+ * TO DO: might remove later
+ */
 scene("pingingServer", {
 	init: function() {
         
