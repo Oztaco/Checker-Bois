@@ -70,7 +70,8 @@ function populatePlayerLobby(allPlayers) {
             var username = allPlayers.list[i].username;
             var playerID = allPlayers.list[i].id;
             lobbyElmChild.innerHTML +=
-            "\n<li><a href='#' onclick='startGameWith(\"" + playerID + "\")'>" + username +"</a></li>";
+            "\n<li><a href='#' onclick='startGameWith(\"" + playerID +
+                "\")'>" + username +"</a></li>";
         }
 
         domLastUpdated.playerLobby = allPlayers.lastUpdated;
@@ -114,9 +115,13 @@ function clearSidebarLobby() {
     // Keeps track of where we are in the sidebar so that we don't delete
     // elements we're not supposed to
     var sectionCounter = 0;
-    for (var i = lobbyListItems.length; (i > 0 && sectionCounter < 2); i--) {
-        if (!lobbyListItems[i].classList.contains("title")) {
+    for (var i = lobbyListItems.length - 1; (i > 0 && sectionCounter < 2); i--) {
+        if (lobbyListItems[i].classList.contains("title")) {
             sectionCounter++;
+            continue;
+        }
+        if (sectionCounter < 2 &&
+            !lobbyListItems[i].classList.contains("title")) {
             lobbyElmChild.removeChild(lobbyListItems[i]);
         }
     }
@@ -132,10 +137,23 @@ function populateSidebarGames(sectionNum, gamesObject) {
         if (lobbyListItems[i].classList.contains("title")) {
             sectionCounter++;
             if (sectionCounter == sectionNum) {
-                var listNode = stringToDOMNode(
-                    "" // TO DO add html text for list items here
-                );
-                insertAfter(lobbyListItems[i], )
+                if (gamesObject.list.length > 0) {
+                    for (var j = 0; j < gamesObject.list.length; j++) {
+                        var username = gamesObject.list[j].username;
+                        var id = gamesObject.list[j].id;
+                        var listNode = stringToDOMNode(
+                            "<li><a href=\"#\" onclick=\"loadGame(\"" + id +"\")\">"
+                                + username +"</a></li>"
+                        );
+                        insertAfter(lobbyListItems[i + j], listNode);
+                    }
+                }
+                else {
+                    var listNode = stringToDOMNode(
+                        "<li><a href=\"javascript:void\" class=\"noGames\">No Games</a></li>"
+                    );
+                    insertAfter(lobbyListItems[i], listNode);
+                }
             }
         }
     }
@@ -152,5 +170,7 @@ function insertAfter(referenceNode, newNode) {
 function stringToDOMNode(htmlString) {
     parser = new DOMParser();
     node = parser.parseFromString(htmlString, "text/xml");
+    if (node.nodeName.toLowerCase() == "#document")
+        return node.children[0];
     return node;
 }
