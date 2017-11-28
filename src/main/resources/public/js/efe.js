@@ -646,46 +646,6 @@ scene("_loader", {
 		//processSprites();
 	}
 });
-
-scene("intro", {
-	init: function() {
-		canvas.dockToViewport();
-		centerViewport();
-		var cube = new model();
-		createCube(cube, 100, 0, 0, 0);
-		models.push(cube);
-	},
-	update: function() {
-		if (keys.up) 
-			models[0].rotate(0.05, 0, 0);
-		else if (keys.down)
-			models[0].rotate(-0.05, 0, 0);
-		if (keys.right)
-			models[0].rotate(0, 0.05, 0);
-		else if (keys.left)
-			models[0].rotate(0, -0.05, 0);
-		if (keys.a)
-			models[0].rotate(0, 0, 0.05);
-		else if (keys.z)
-			models[0].rotate(0, 0, -0.05);
-		models[0].applyRotation();
-	},
-	draw: function() {
-		ctx.fillStyle = "#fff";
-
-
-		ctx.fillRect(-window.actualWidth() / 2, -window.actualHeight() / 2, window.actualWidth(), window.actualHeight());
-		drawModels();
-
-
-		keyholder = document.getElementById("keyholder");
-		var newText = "FPS: " + dbg_calcFps() + "<br/>Keys: ";
-		for (var k in keys) {
-			if (keys[k]) newText += k;
-		}
-		if (keyholder.innerHTML != newText) keyholder.innerHTML = newText;
-	}
-});
 function init() {
 	startEngine(pipeline, "scene");
 	requestAnimationFrame(pipeline);
