@@ -5,8 +5,12 @@ import com.webcheckers.model.Exceptions.PlayerNotAddedException;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class Lobby {
+    private static final Logger LOG = Logger.getLogger(Lobby.class.getName());
+    
+
     private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
     private HashMap<String,Player> players;     //Maps Session ID's to Player Objects
@@ -67,6 +71,9 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String addNewGame(String sessionID1, String sessionID2){
+        LOG.severe("Lobby -> addNewGame invoked");
+        LOG.severe("SessionID1: " + sessionID1);
+        LOG.severe("SessionID2: " + sessionID2);
         String newId = generateID();
         Game game = new Game(this.players.get(sessionID1),this.players.get(sessionID2),newId);
         this.games.put(newId,game);

@@ -34,6 +34,10 @@ public class GetLobbyRoute implements Route {
   static final String ALL_GAMES_ATTR = "allGames";
   static final String ALL_PLAYERS_ATTR = "allPlayers";
 
+  static final String LAST_UPDATED_ALL_PLAYERS_ATTR = "lastUpdated_allPlayers";
+  static final String LAST_UPDATED_ALL_GAMES_ATTR = "lastUpdated_allGames";
+  static final String LAST_UPDATED_CURRENT_GAMES_ATTR = "lastUpdated_currentGames";
+
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
 
@@ -73,13 +77,20 @@ public class GetLobbyRoute implements Route {
     vm.put("title", "Welcome!");
     String sessionID = request.session().id();
 
+    String allPlayers = this.gameCenter.getPlayers();
     String playerGames = this.gameCenter.getAllGamesForPlayer(sessionID);
     String otherGames = this.gameCenter.getAllGames(sessionID);
-    String allPlayers = this.gameCenter.getPlayers();
 
+    // TO DO: update timestamp to be based on when the board was actually
+    // last updated
+    long timestamp = (long) (System.currentTimeMillis() / 1000L);
+    vm.put(LAST_UPDATED_ALL_PLAYERS_ATTR, "" + timestamp);
+    vm.put(LAST_UPDATED_ALL_GAMES_ATTR, "" + timestamp);
+    vm.put(LAST_UPDATED_CURRENT_GAMES_ATTR, "" + timestamp);
+
+    vm.put(ALL_PLAYERS_ATTR, allPlayers);
     vm.put(PLAYER_GAMES_ATTR, playerGames);
     vm.put(ALL_GAMES_ATTR, otherGames);
-    vm.put(ALL_PLAYERS_ATTR, allPlayers);
 
     return templateEngine.render(new ModelAndView(vm , "api/getLobby.ftl"));
   }
