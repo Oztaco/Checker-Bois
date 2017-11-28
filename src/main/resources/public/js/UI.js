@@ -2,14 +2,21 @@
  * Handles DOM manipulations and any UI code
  */
 
+// The width of the player lobby menu
 PLAYER_LOBBY_WIDTH = "200px";
 
+// Keeps track of when the UI was updated to avoid unnecessary updates
 domLastUpdated = {
     playerLobby: 0, // UNIX timestamps
     currentPlayerGames: 0,
     allGames: 0
 }
 
+
+/**
+ * Closes or opens the UI that menu that shows a list of all the players who are
+ * currently in the game
+ */
 function togglePlayerLobby() {
     var isVisible = DOM.playerLobby.style.width.trim().toLowerCase() == PLAYER_LOBBY_WIDTH ? true : false;
     if (isVisible) {
@@ -19,20 +26,37 @@ function togglePlayerLobby() {
         showPlayerLobby();
     }
 }
+
+/**
+ * Hides the player lobby menu
+ */
 function hidePlayerLobby() {
     DOM.playerLobby.style.width = "0";
 }
+
+/**
+ * Shows the player lobby menu and updates its UI by calling updatePlayerLobby()
+ */
 function showPlayerLobby() {
     DOM.playerLobby.style.width = PLAYER_LOBBY_WIDTH;
     updatePlayerLobby();
 }
 
+/**
+ * Gets the updated player lobby configuration and updates the player lobby UI
+ * accordingly
+ */
 function updatePlayerLobby() {
     getLobby(function (response) {
         populatePlayerLobby(JSON.parse(response).allPlayers);
     });
 }
 
+/**
+ * Updates the lobby UI with UI elements representing the players who are currently
+ * in the lobby.
+ * @param {} lobby - the lobby JSON object from an HTTP request
+ */
 function populatePlayerLobby(lobby) {
     if (lobby.lastUpdated > domLastUpdated.playerLobby) {
         var lobbyElmChild = document.querySelector("#playerLobby > ul");
