@@ -93,7 +93,9 @@ public class Game {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getSimpleGameAsString(){
-        String game = "{\"id\": \"" + this.id + "\", \"playerOneUsername\": \"" + this.player1.getName() + "\", \"playerTwoUsername\": \"" + this.player2.getName() + "\"}";
+        String game = "{\"id\": \"" + this.id +
+        "\", \"playerOneUsername\": \"" + this.player1.getName() +
+        "\", \"playerTwoUsername\": \"" + this.player2.getName() + "\"}";
         return game;
     }
 

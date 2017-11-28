@@ -1,45 +1,20 @@
 {
     "allPlayers": {
-        "lastUpdated": 13,
+        "lastUpdated": ${lastUpdated_allPlayers},
         "list": [
-            {
-                "username": "Efe Ozturkoglu",
-                "id": "sessionID"
-            },
-            {
-                "username": "Donald Knuth",
-                "id": "dfhkwer"
-            }
+            ${allPlayers}
         ]
     },
     "currentPlayerGames": {
-        "lastUpdated": 234,
+        "lastUpdated": ${lastUpdated_currentGames},
         "list": [
-            {
-                "id": "game1ewfqewfer",
-                "playerOneUsername": "Efe Ozturkoglu",
-                "playerTwoUsername": "Donald Knuth"
-            },
-            {
-                "id": "ewfrw",
-                "playerOneUsername": "Dennis Ritchie",
-                "playerTwoUsername": "Efe"
-            }
+            ${currentPlayerGames}
         ]
     },
     "allGames": {
-        "lastUpdated": 321,
+        "lastUpdated": ${lastUpdated_allGames},
         "list": [
-            {
-                "id": "somegameidsaf",
-                "playerOneUsername": "Cam",
-                "playerTwoUsername": "Jon"
-            },
-            {
-                "id": "asdferrq",
-                "playerOneUsername": "Drew",
-                "playerTwoUsername": "Bill Gates"
-            }
+            ${allGames}
         ]
     }
 }
