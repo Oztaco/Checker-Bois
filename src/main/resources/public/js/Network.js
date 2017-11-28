@@ -7,7 +7,7 @@ ajaxRequest = function(method, path, headers, callback) {
     this.method = method;
     this.path = path;
     this.headers = headers;
-    this.callback = callback;
+    this.callback = partial(callback);
     this.self = this;
 }
 
@@ -45,7 +45,16 @@ getLobby = function(callback) {
         "api/get_lobby",
         {},
         function(response) {
-            this.callback(response);
+            callback(response);
         }
     )
+    request.send();
+}
+
+function partial(func /*, 0..n args */) {
+    var args = Array.prototype.slice.call(arguments).splice(1);
+    return function () {
+        var allArguments = args.concat(Array.prototype.slice.call(arguments));
+        return func.apply(this, allArguments);
+    };
 }

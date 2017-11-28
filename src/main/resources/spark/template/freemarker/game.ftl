@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>WeebCheckers RAWR XD</title>
+        <title>WebCheckers</title>
         <link rel="stylesheet" href="/css/game.css">
         <script type="text/javascript" src="/js/efe.js"></script>
         <script type="text/javascript" src="/js/CheckersBoard.js"></script>

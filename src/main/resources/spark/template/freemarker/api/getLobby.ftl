@@ -1,7 +1,6 @@
 {
-    // List of all the players who are still signed in
     "allPlayers": {
-        "lastUpdated": "UNIX time",
+        "lastUpdated": 13,
         "list": [
             {
                 "username": "Efe Ozturko",
@@ -13,10 +12,8 @@
             }
         ]
     },
-    
-    // Games I am in right now ====================================
     "currentPlayerGames": {
-        "lastUpdated": "38234321",
+        "lastUpdated": 234,
         "list": [
             {
                 "id": "game1ewfqewfer",
@@ -30,10 +27,8 @@
             }
         ]
     },
-
-    // Games other players are playing ===========================
     "allGames": {
-        "lastUpdated": "38234321",
+        "lastUpdated": 321,
         "list": [
             {
                 "id": "somegameidsaf",
