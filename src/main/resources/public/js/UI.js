@@ -57,8 +57,8 @@ function updatePlayerLobby() {
  * in the lobby.
  * @param {} lobby - the lobby JSON object from an HTTP request
  */
-function populatePlayerLobby(lobby) {
-    if (lobby.lastUpdated > domLastUpdated.playerLobby) {
+function populatePlayerLobby(allPlayers) {
+    if (allPlayers.lastUpdated > domLastUpdated.playerLobby) {
         var lobbyElmChild = document.querySelector("#playerLobby > ul");
         var lobbyPlayers = lobbyElmChild.children;
         // Clear the current lobby
@@ -66,13 +66,41 @@ function populatePlayerLobby(lobby) {
             lobbyElmChild.removeChild(lobbyPlayers[i]);
         }
         // Add all the users to the lobby
-        for (var i = 0; i < lobby.list.length; i++) {
-            var username = lobby.list[i].username;
-            var playerID = lobby.list[i].id;
+        for (var i = 0; i < allPlayers.list.length; i++) {
+            var username = allPlayers.list[i].username;
+            var playerID = allPlayers.list[i].id;
             lobbyElmChild.innerHTML +=
             "\n<li><a href='#' onclick='startGameWith(\"" + playerID + "\")'>" + username +"</a></li>";
         }
 
-        domLastUpdated.playerLobby = lobby.lastUpdated;
+        domLastUpdated.playerLobby = allPlayers.lastUpdated;
     }
+}
+
+/**
+ * Refreshes the entire sidebar UI with both the current games and all other
+ * games
+ * @param {Object} fullLobby - the entire JSON object recieved from the Network
+ *  GET request
+ */
+function populateFullGamesLobby(fullLobby) {
+    populateCurrentGames(fullLobby.currentPlayerGames);
+    populateAllGames(fullLobby.allGames);
+}
+
+/**
+ * Updates the part of the sidebar that holds just the current player's games
+ * @param {Object} currentPlayerGames - JSON object
+ */
+function populateCurrentGames(currentPlayerGames) {
+
+}
+
+/**
+ * Updates the part of the sidebar that holds just the games the current player
+ * is not playing
+ * @param {Object} allGames - JSON object
+ */
+function populateAllGames(allGames) {
+
 }

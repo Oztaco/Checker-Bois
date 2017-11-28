@@ -43,25 +43,38 @@ ajaxRequest.prototype.send = function() {
     xhttp.send();
 }
 
-/**
- * Gets a JSON object of all the boards, and sends it to the callback.
- * TO DO: does it return string or object?
- */
-getAllBoards = function(callback) {
-    var request = new ajaxRequest(
-        "GET",
-        "api/get_all_boards",
-        {},
-        function(response) {
-            callback(response);
-        }
-    )
-}
+// /**
+//  * Gets a JSON object of all the boards, and sends it to the callback.
+//  * TO DO: DELETE???
+//  */
+// getAllBoards = function(callback) {
+//     var request = new ajaxRequest(
+//         "GET",
+//         "api/get_all_boards",
+//         {},
+//         function(response) {
+//             callback(response);
+//         }
+//     )
+// }
 getLobby = function(callback) {
     var request = new ajaxRequest(
         "GET",
         "api/get_lobby",
         {},
+        function(response) {
+            callback(response);
+        }
+    )
+    request.send();
+}
+getGame = function(callback, gameID) {
+    var request = new ajaxRequest(
+        "GET",
+        "api/get_game",
+        {
+            "gameID": gameID
+        },
         function(response) {
             callback(response);
         }
@@ -82,7 +95,7 @@ postCreateBoard = function(callback, playerID) {
     request.send();
 }
 
-function startGameWith(player) {
+function startGameWith(playerID) {
     postCreateBoard(function (response) {
         // TO DO switch to this board
     }, player);
