@@ -9,6 +9,7 @@
 */
 CheckersBoard = function () {
     this.data = [];
+    this.
     for (var col = 0; col < 8; col++) {
         var newCol = [];
         for (var row = 0; row < 8; row++) {
