@@ -52,14 +52,3 @@ function populatePlayerLobby(lobby) {
         domLastUpdated.playerLobby = lobby.lastUpdated;
     }
 }
-{/* <div class="sidebar" id="playerLobby">
-    <ul>
-        <li class="title top">PLAYER LOBBY</li>
-        <li><a href="#">Bill Gates</a></li>
-        <li><a href="#">Stephen Rippy</a></li>
-        <li><a href="#">Dennis Ritchie</a></li>
-        <li><a href="#">Efe</a></li>
-        <li><a href="#">Steven</a></li>
-        <li><a href="#">Ozai</a></li>
-    </ul>
-</div> */}
