@@ -62,17 +62,11 @@ public class PostCreateBoardRoute implements Route {
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer(" PostCreateBoardRoute is invoked.");
-    LOG.severe(request.queryParams("username")); // NOTE TO CAM: this is how you
-                                                  // access parameters for 'opponent_player_id'
-    // Remove the line below. It's just an example of how to
-    // access gameCenter from here
+    LOG.severe("!opponent id:" + request.headers("opponent_player_id"));
 
-    //THE FOLLOWING VARIABLES ARE PLACEHOLDERS FOR THE ID'S OF PLAYERS TRYING TO PLAY
     String p1 = request.session().id();
-    String p2 = request.queryParams("opponent_player_id");
-    String gameID = gameCenter.addNewGame(p1,p2);
-    gameCenter.getAllGames(gameID);
-    return null;
+    String p2 = request.headers("opponent_player_id");
+    String gameID = gameCenter.addNewGame(p1, p2);
+    return gameID;
   }
-
 }
