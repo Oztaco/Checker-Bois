@@ -75,6 +75,11 @@ public class WebServer {
    */
   public static final String API_GET_GAME_URL = "/api/get_game";
 
+  /**
+   * The URL pattern to access the getLobby API call
+   */
+  public static final String API_GET_LOBBY_URL = "/api/get_lobby";
+
   //
   // Attributes
   //
@@ -173,6 +178,9 @@ public class WebServer {
 
     // The API call to get a specific game's data
     get(API_GET_GAME_URL, new GetGameRoute(templateEngine));
+
+    // The API call to get a specific game's data
+    get(API_GET_LOBBY_URL, new GetLobbyRoute(templateEngine, gameCenter));
 
     // Log for debugging
     LOG.config("WebServer is initialized.");

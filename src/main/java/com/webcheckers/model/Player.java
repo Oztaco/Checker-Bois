@@ -8,7 +8,7 @@ public class Player{
     private String name;
 
     private ArrayList<String> ids;
-    private String playerSessionId;      //TODO ADD PLAYERSESSION
+    private String playerSessionId;
 
 
     //##################################################################################################################
@@ -27,7 +27,7 @@ public class Player{
         return name;
     }
     public ArrayList<String> getIds() {
-        return ids;
+        return this.ids;
     }
 
     //##################################################################################################################
@@ -54,7 +54,8 @@ public class Player{
      * @return
      */
     public String getPlayerAsString(){
-        return "";
+        //{"username": "Efe Ozturko","id": "sessionID"}
+        return "{\"username\": \"" + this.name + "\", \"id\": \"" + this.playerSessionId + "\"}";
     }
 
     //##################################################################################################################
