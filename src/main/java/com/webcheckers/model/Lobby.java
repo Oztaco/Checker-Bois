@@ -60,6 +60,10 @@ public class Lobby {
         this.players.put(sessionID, newPlayer);
     }
 
+    public void removePlayer(String sessionID){
+        this.players.remove(sessionID);
+    }
+
     /**
      * ----------------------------------------------------------------------------------------------------
      * addGame(CheckersBoard game)

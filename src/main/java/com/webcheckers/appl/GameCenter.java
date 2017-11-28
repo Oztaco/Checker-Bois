@@ -67,7 +67,7 @@ public class GameCenter {
 
     /**
      * -----------------------------------------------------------------------------------------------------------------
-     * getPlayers()
+     * getPlayers
      *
      * Routes a request from the UI to get a JSON string of the Players list to the proper aspect of the Lobby
      * @return allPlayers
@@ -116,6 +116,18 @@ public class GameCenter {
      */
     public String getGame(String gameId, String playerSessionID){
         return lobby.getGameBoardAsString(gameId, playerSessionID);
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * removePlayer
+     *
+     * Removes the player with the specified ID from the lobby
+     * @param sessionID
+     * -----------------------------------------------------------------------------------------------------------------
+     */
+    public void removePlayer(String sessionID){
+        this.lobby.removePlayer(sessionID);
     }
 
 
