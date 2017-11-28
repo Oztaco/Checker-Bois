@@ -55,7 +55,7 @@ function updatePlayerLobby() {
 /**
  * Updates the lobby UI with UI elements representing the players who are currently
  * in the lobby.
- * @param {} lobby - the lobby JSON object from an HTTP request
+ * @param {Object} lobby - the lobby JSON object from an HTTP request
  */
 function populatePlayerLobby(allPlayers) {
     if (allPlayers.lastUpdated > domLastUpdated.playerLobby) {
@@ -84,8 +84,9 @@ function populatePlayerLobby(allPlayers) {
  *  GET request
  */
 function populateFullGamesLobby(fullLobby) {
-    populateCurrentGames(fullLobby.currentPlayerGames);
-    populateAllGames(fullLobby.allGames);
+    clearSidebarLobby();
+    populateSidebarGames(1, fullLobby.currentPlayerGames);
+    populateSidebarGames(2, fullLobby.allGames);
 }
 
 /**
@@ -93,7 +94,9 @@ function populateFullGamesLobby(fullLobby) {
  * @param {Object} currentPlayerGames - JSON object
  */
 function populateCurrentGames(currentPlayerGames) {
-
+    if (currentPlayerGames.lastUpdated > domLastUpdated.currentPlayerGames) {
+        populateGamesHelper(currentPlayerGames);
+    }
 }
 
 /**
@@ -102,5 +105,52 @@ function populateCurrentGames(currentPlayerGames) {
  * @param {Object} allGames - JSON object
  */
 function populateAllGames(allGames) {
+    
+}
 
+function clearSidebarLobby() {
+    var lobbyElmChild = document.querySelector("#mainSidebar > ul");
+    var lobbyListItems = lobbyElmChild.children;
+    // Keeps track of where we are in the sidebar so that we don't delete
+    // elements we're not supposed to
+    var sectionCounter = 0;
+    for (var i = lobbyListItems.length; (i > 0 && sectionCounter < 2); i--) {
+        if (!lobbyListItems[i].classList.contains("title")) {
+            sectionCounter++;
+            lobbyElmChild.removeChild(lobbyListItems[i]);
+        }
+    }
+}
+
+function populateSidebarGames(sectionNum, gamesObject) {
+    var lobbyElmChild = document.querySelector("#mainSidebar > ul");
+    var lobbyListItems = lobbyElmChild.children;
+    // Keeps track of where we are in the sidebar so we know where to add the
+    // given list items
+    var sectionCounter = 0;
+    for (var i = 0; i < lobbyListItems.length; i++) {
+        if (lobbyListItems[i].classList.contains("title")) {
+            sectionCounter++;
+            if (sectionCounter == sectionNum) {
+                var listNode = stringToDOMNode(
+                    "" // TO DO add html text for list items here
+                );
+                insertAfter(lobbyListItems[i], )
+            }
+        }
+    }
+}
+
+function populateGamesHelper(gamesObject) {
+    
+
+}
+
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+function stringToDOMNode(htmlString) {
+    parser = new DOMParser();
+    node = parser.parseFromString(htmlString, "text/xml");
+    return node;
 }
