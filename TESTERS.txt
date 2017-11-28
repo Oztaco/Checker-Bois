@@ -1,0 +1,8 @@
+Tester Instructions
+	1. If not already extracted, extract files into a directory.
+	2. From within the directory folder, open a shell, cmd prompt, or even a Git Bash.
+	3. Input the commmand mvn compile exec:java
+	4. Wait for files to finish downloading and compiling
+	5. Once all files are done downloading a compiling, open an internet browser.
+	6. In the address bar, type in localhost:4567 (or whatever is specified in the shell)
+	7. You should now be on the homepage
