@@ -46,7 +46,7 @@ function populatePlayerLobby(lobby) {
             var username = lobby.list[i].username;
             var playerID = lobby.list[i].id;
             lobbyElmChild.innerHTML +=
-            "\n<li><a href='#' onclick='startGameWith(" + username + ")'>" + playerID +"</a></li>";
+            "\n<li><a href='#' onclick='startGameWith(\"" + playerID + "\")'>" + username +"</a></li>";
         }
 
         domLastUpdated.playerLobby = lobby.lastUpdated;
