@@ -188,7 +188,7 @@ public class WebServer {
     get(API_GET_LOBBY_URL, new GetLobbyRoute(templateEngine, gameCenter));
 
     // The API call to create a game
-    get(API_POST_CREATE_BOARD_URL, new PostCreateBoardRoute(templateEngine, gameCenter));
+    post(API_POST_CREATE_BOARD_URL, new PostCreateBoardRoute(templateEngine, gameCenter));
 
     // Log for debugging
     LOG.config("WebServer is initialized.");
