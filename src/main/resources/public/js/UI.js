@@ -34,20 +34,22 @@ function updatePlayerLobby() {
 }
 
 function populatePlayerLobby(lobby) {
-    if (lobby.lastUpdated > domLastUpdated) {
-        var lobbyElmChild = document.queryElement("#playerLobby > ul");
+    if (lobby.lastUpdated > domLastUpdated.playerLobby) {
+        var lobbyElmChild = document.querySelector("#playerLobby > ul");
         var lobbyPlayers = lobbyElmChild.children;
         // Clear the current lobby
         for (var i = lobbyPlayers.length - 1; i > 0; i--) {
-            lobbyPlayers.removeChild(lobbyPlayers[i]);
+            lobbyElmChild.removeChild(lobbyPlayers[i]);
         }
         // Add all the users to the lobby
         for (var i = 0; i < lobby.list.length; i++) {
             var username = lobby.list[i].username;
             var playerID = lobby.list[i].id;
             lobbyElmChild.innerHTML +=
-                "\n<li><a href='#' onclick='startGameWith(" + username + ")'>" + playerID +"</a></li>";
+            "\n<li><a href='#' onclick='startGameWith(" + username + ")'>" + playerID +"</a></li>";
         }
+
+        domLastUpdated.playerLobby = lobby.lastUpdated;
     }
 }
 {/* <div class="sidebar" id="playerLobby">
