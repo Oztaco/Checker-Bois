@@ -12,10 +12,6 @@ public class Game {
     private int boardVersion;
     private Player playerTurn;
 
-    private enum moveType{
-
-    }
-
 
 /*  #######################################################################################################
     Constructor
