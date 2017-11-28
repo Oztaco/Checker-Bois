@@ -2,8 +2,10 @@
     "activePlayer": 1, 
     "spectating": false,
     "gameID": "aGkuYo",
-    "player1Name": "Efe Ozturkoglu", 
-    "player2Name": "Donald Knuth", 
+    "player1_ID": "dferwgreg", 
+    "player2_ID": "gterecfre", 
+    "player1_Name": "Efe Ozturkoglu", 
+    "player2_Name": "Donald Knuth", 
     "board": 
         [  [3, 0, 3, 0, 0, 0, 2, 0],
            [0, 3, 0, 0, 0, 2, 0, 2],

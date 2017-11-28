@@ -61,7 +61,7 @@ function initBoard() {
         function(r) {
             console.log("Lets do stuff");
             game = JSON.parse(r);
-            checkersBoard.data = game.board;
+            checkersBoard.board = game.board;
             renderBoard(DOM.canvas, checkersBoard);
         }
     );

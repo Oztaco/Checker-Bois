@@ -8,14 +8,20 @@
 *   @return {Array} checker board 2D array
 */
 CheckersBoard = function () {
-    this.data = [];
-    this.
+    this.board = [];
+    this.activePlayer = -1;
+    this.spectating = true;
+    this.gameID = "-1";
+    this.player1_ID = "-1";
+    this.player2_ID = "-1";
+    this.player1_Name = "Loading";
+    this.player2_Name = "Loading";
     for (var col = 0; col < 8; col++) {
         var newCol = [];
         for (var row = 0; row < 8; row++) {
             newCol.push(BOARD_SPACE.INVALID);
         }
-        this.data.push(newCol);
+        this.board.push(newCol);
     }
 }
 
@@ -28,7 +34,7 @@ CheckersBoard = function () {
 *   @return {Number} enum value from BOARD_SPACE
 */
 CheckersBoard.prototype.getPieceAt = function (x, y) {
-    return this.data[x][y];
+    return this.board[x][y];
 }
 
 
@@ -42,7 +48,7 @@ CheckersBoard.prototype.setPieceAt = function (x, y, piece) {
     if (x >= 0 && x < 8 // Checks range of inputs
         && y >= 0 && y < 8
         && piece >= -1 && piece < 5) {
-        this.data[x][y] = piece;
+        this.board[x][y] = piece;
     }
     else {
         console.log("CheckersBoard setPieceAt error: Incorrect inputs.");
