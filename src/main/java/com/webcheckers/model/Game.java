@@ -12,7 +12,7 @@ public class Game {
     private int player2Pieces;                  //TODO LINK ALL UP BB
     private String id;
     private long lastUpdateTime;
-    private ArrayList<PastMove> MoveHistory;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
+    private ArrayList<PastMove> moveHistory;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
 
     //STATE FIELDS
     private Player playerWon;
@@ -29,7 +29,7 @@ public class Game {
         this.board = new CheckersBoard(p1,p2);
         this.board.initBoard();
         this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);      //Gets the current Unix Time
-        this.MoveHistory = new ArrayList<>();
+        this.moveHistory = new ArrayList<>();
 
         this.playerTurn = player1;
     }
@@ -127,7 +127,7 @@ public class Game {
         }
         this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);              //Update Last Update Time
         this.playerWon = playerWon();
-        this.MoveHistory.add(new PastMove(x0,y0,x1,y1,MoveType.MOVE,currPlayer));       //Add Move to Move History
+        this.moveHistory.add(new PastMove(x0,y0,x1,y1,MoveType.MOVE,currPlayer));       //Add Move to Move History
     }
 
     /**
@@ -136,7 +136,7 @@ public class Game {
      * reverts the last move in the game stored in the Move History
      */
     public void revertLastMove(){
-        PastMove lastMove = this.MoveHistory.remove(this.MoveHistory.size()-1);   //Removes last move from array
+        PastMove lastMove = this.moveHistory.remove(this.moveHistory.size()-1);   //Removes last move from array
         //X0/X1/Y0/Y1 reversed so move is made backwards
         int x0 = lastMove.getX1();
         int y0 = lastMove.getY1();
@@ -149,6 +149,46 @@ public class Game {
 /*  #######################################################################################################
     Communication Methods
     #######################################################################################################*/
+
+    public String getGameAsString(Player player){
+        String JSONfill = "";
+
+        //ActivePlayer
+        String activePlayer = "";
+        if(playerTurn == player1){
+            activePlayer = "1";
+        }
+        else{
+            activePlayer = "2";
+        }
+
+        //Player 1 ID/Name
+        String player1ID = this.player1.getPlayerSessionId();
+        String player1Name = this.player1.getName();
+
+        //Player 2 ID/Name
+        String player2ID = this.player2.getPlayerSessionId();
+        String player2Name = this.player2.getName();
+
+        //Game Board
+        String board = this.getGameBoardAsString(player);
+
+        //Past Moves
+        String pastMoves = this.getMoveHistoryAsString();
+
+        JSONfill = "{ "
+                    + "\"activePlayer\": " + activePlayer + ", "
+                    + "\"gameID\": " + this.getId() + ", "
+                    + "\"player1_ID\": " + player1ID + ", "
+                    + "\"player2_ID\": " + player2ID + ", "
+                    + "\"player1_Name\": " + player1Name + ", "
+                    + "\"player2_Name\": " + player2Name + ", "
+                    + "\"board\": " + board + ", "
+                    + "\"moves\": " + pastMoves + " }";
+
+        return JSONfill;
+    }
+
     /**
      * -----------------------------------------------------------------------------------------------------
      * getGameBoardAsString(int playerNum)
@@ -169,6 +209,19 @@ public class Game {
             JSONFill = get2DArrayAsJSON(boardArray);
         }
         return JSONFill;
+    }
+
+
+    public String getMoveHistoryAsString(){
+        String JSONfill = "[ ";
+
+        for(PastMove p : moveHistory){
+            JSONfill.concat(p.getPastMoveAsString());
+        }
+
+        JSONfill.concat(" ]");
+
+        return JSONfill;
     }
 
     /**

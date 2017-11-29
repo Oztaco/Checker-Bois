@@ -116,7 +116,7 @@ public class GameCenter {
      * -----------------------------------------------------------------------------------------------------------------
      */
     public String getGame(String gameId, String playerSessionID){
-        return lobby.getGameBoardAsString(gameId, playerSessionID);
+        return lobby.getGameAsString(gameId, playerSessionID);
     }
 
     /**

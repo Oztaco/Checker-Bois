@@ -173,6 +173,10 @@ public class Lobby {
         return playersAsString;
     }
 
+    public String getGameAsString(String gameID, String sessionID){
+        return this.games.get(gameID).getGameAsString(this.players.get(sessionID));
+    }
+
     /**
      * ----------------------------------------------------------------------------------------------------
      * getGamesAsString()
