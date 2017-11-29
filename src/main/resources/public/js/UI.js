@@ -172,8 +172,8 @@ function insertAfter(referenceNode, newNode) {
 function stringToDOMNode(htmlString) {
     parser = new DOMParser();
     node = parser.parseFromString(htmlString, "text/html");
-    console.log("Parsed node:");
-    console.log(node);
+    // console.log("Parsed node:");
+    // console.log(node);
     if (node.nodeName.toLowerCase() == "#document")
         return node.children[0];
     return node;
