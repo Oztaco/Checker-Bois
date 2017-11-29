@@ -58,12 +58,22 @@ CheckersBoard.prototype.setPieceAt = function (x, y, piece) {
 
 
 /*
-*   Downloads the board configuration JSON for the given
-*   gameID
+*   Downloads the board configuration JSON for the given gameID, and sets the
+*   existing board configuration equal to it
 *   @param {String} gameID
 */
-CheckersBoard.prototype.downloadBoard = function (gameID) {
-    // TODO
+CheckersBoard.prototype.downloadBoard = function () {
+    getGame(function(response) {
+        var responseJSON = JSON.parse(response);
+        checkersBoard.activePlayer = responseJSON.activePlayer;
+        checkersBoard.spectating = responseJSON.spectating;
+        checkersBoard.player1_ID = responseJSON.player1_ID;
+        checkersBoard.player2_ID = responseJSON.player2_ID;
+        checkersBoard.player1_Name = responseJSON.player1_Name;
+        checkersBoard.player2_Name = responseJSON.player2_Name;
+        checkersBoard.board = responseJSON.board;
+        checkersBoard.moves = responseJSON.moves;
+    }, this.gameID);
 }
 
 

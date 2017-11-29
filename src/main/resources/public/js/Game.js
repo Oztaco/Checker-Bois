@@ -15,7 +15,7 @@ scene("intro", {
 		
 	},
 	draw: function() {
-		
+		renderBoard(DOM.canvas, checkersBoard);
 	},
 	cleanUp: function() {
 		
