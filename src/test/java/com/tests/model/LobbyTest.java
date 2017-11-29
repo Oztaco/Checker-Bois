@@ -23,7 +23,6 @@ public class LobbyTest {
     @Test
     public void testAddPlayer(){
         Lobby l = new Lobby();
-        Player p = new Player("123","testy");
         l.addPlayer("123","testy");
     }
 
@@ -31,15 +30,7 @@ public class LobbyTest {
     public void testAddGame(){
         Lobby l = new Lobby();
         l.addPlayer("123","testo");
-        l.addPlayer("123","testo");
-        l.addNewGame("testy","testo");
-    }
-
-    @Test
-    public void testInvalidAddGame(){
-        Lobby l = new Lobby();
-        l.addPlayer("123", "testy");
-        l.addPlayer("123", "testy");
-        l.addNewGame("testy", "testo");
+        l.addPlayer("456","testy");
+        l.addNewGame("123","456");
     }
 }

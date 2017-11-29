@@ -1,5 +1,10 @@
 package com.tests.model;
 
+import com.webcheckers.model.MoveType;
+import com.webcheckers.model.PastMove;
+import com.webcheckers.model.Player;
+import org.junit.Test;
+
 /**
  * Unit tests for the PastMove class.
  *
@@ -7,4 +12,9 @@ package com.tests.model;
  */
 
 public class PastMoveTest {
+    @Test
+    public void testPastMoveConstructor(){
+        Player p = new Player("test","johnny");
+        new PastMove(0,0,1,1, MoveType.ATTACK,p);
+    }
 }
