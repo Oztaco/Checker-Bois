@@ -14,7 +14,6 @@ import org.junit.Test;
  */
 
 public class LobbyTest {
-
     @Test
     public void testLobbyConstructor(){
         Lobby l = new Lobby();

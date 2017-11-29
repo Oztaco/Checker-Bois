@@ -7,6 +7,8 @@ import org.junit.Test;
 
 /**
  * Unit tests for the Game class.
+ * Primarily tests that all four combinations of player and
+ * move type are processed correctly by Game.
  *
  * @author <a href='mailto:jrh4099@rit.edu'>Jonathan Hubbard</a>
  */

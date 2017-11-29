@@ -2,8 +2,6 @@ package com.tests.appl;
 import com.webcheckers.appl.GameCenter;
 import org.junit.Test;
 
-import com.webcheckers.appl.GameCenter;
-import org.junit.Test;
 
 /**
  * Unit tests for the GameCenter class.

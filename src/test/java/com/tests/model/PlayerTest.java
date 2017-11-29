@@ -10,7 +10,6 @@ import org.junit.Test;
  */
 
 public class PlayerTest {
-
     @Test
     public void testPlayerConstructor(){
         new Player("123", "test name");
