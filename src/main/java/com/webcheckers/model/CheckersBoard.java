@@ -256,7 +256,7 @@ public class CheckersBoard {
      * @param player - player making the move
      * ---------------------------------------------------------------------------------------------------------
      */
-    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+    public void worsemove(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
 
         //Setup changInX and changeInY for determining validity later
         int changeInX = x1-x0;
@@ -355,7 +355,7 @@ public class CheckersBoard {
         }
     }
 
-    public void betterMove(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
 
         //Setup changInX and changeInY for determining validity later
         int changeInX = x1-x0;
@@ -383,7 +383,7 @@ public class CheckersBoard {
         }
 
         //Throw exception if a player tries to move the piece of the other player
-        if(!(board[y0][x0] == me)){
+        if(!(getCoords(x0,y0) == me)){
             throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
         }
 
@@ -394,30 +394,31 @@ public class CheckersBoard {
 
         else {
             if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
-                if (board[y1][x1] == space.EMPTY) {     //if space is not occupied, exception otherwise
-                    space tempSpace = this.board[y0][x0];
-                    this.board[y0][x0] = space.EMPTY;
-                    this.board[y1][x1] = tempSpace;
+                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = getCoords(x0,y0);
+                    setCoords(x0,y0,space.EMPTY);
+                    setCoords(x1,y1,tempSpace);
                 }
                 else {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                 }
             }
             else if(me == space.PLAYER2KING){           //If space has a Player 2 King on tile, register move
-                if (board[y1][x1] == space.EMPTY) {     //if space is not occupied, exception otherwise
-                    space tempSpace = this.board[y0][x0];
-                    this.board[y0][x0] = space.EMPTY;
-                    this.board[y1][x1] = tempSpace;
-                } else {
+                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = getCoords(x0,y0);
+                    setCoords(x0,y0,space.EMPTY);
+                    setCoords(x1,y1,tempSpace);
+                }
+                else {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                 }
             }
             else if(me == space.PLAYER1){               //If space has a Player 1 on tile, register move
                 if(changeInY > 0){                      //if player is moving in the appropriate direction
-                    if (board[y1][x1] == space.EMPTY) { //and if space if not occupied
-                        space tempSpace = this.board[y0][x0];
-                        this.board[y0][x0] = space.EMPTY;
-                        this.board[y1][x1] = tempSpace;
+                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = getCoords(x0,y0);
+                        setCoords(x0,y0,space.EMPTY);
+                        setCoords(x1,y1,tempSpace);
                     }
                     else {
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
@@ -429,11 +430,12 @@ public class CheckersBoard {
             }
             else if(me == space.PLAYER2){               //If space has a Player 2 on tile, register move
                 if(changeInY < 0){                      //if player is moving in the appropriate direction
-                    if (board[y1][x1] == space.EMPTY) { //and if space if not occupied
-                        space tempSpace = this.board[y0][x0];
-                        this.board[y0][x0] = space.EMPTY;
-                        this.board[y1][x1] = tempSpace;
-                    } else {
+                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = getCoords(x0,y0);
+                        setCoords(x0,y0,space.EMPTY);
+                        setCoords(x1,y1,tempSpace);
+                    }
+                    else {
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
                 }
@@ -445,10 +447,10 @@ public class CheckersBoard {
 
         //Check if any players should be kinged after a move
         for(int x = 0; x < 8; x++){
-            if(this.board[0][x] == space.PLAYER2){
+            if(getCoords(x,0) == space.PLAYER2){
                 kingPiece(x,0);     //King piece located at
             }
-            else if(this.board[7][x] == space.PLAYER1){
+            else if(getCoords(x,7) == space.PLAYER1){
                 kingPiece(x,7);     //King piece located at
             }
         }
@@ -647,7 +649,7 @@ public class CheckersBoard {
          *              Move that kings Player 2
          */
 
-        /*
+
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
 
@@ -774,6 +776,6 @@ public class CheckersBoard {
 
 
         //-------------------------------------------------------------------------------------------------------------
-        */
+
     }
 }
