@@ -45,11 +45,19 @@ scene("currentPlayerTurn", {
 		mouseAlreadyPressed = false;
 	},
 	update: function () {
+		if (keys.m)
+			moveType = 1;
+		else if (keys.a)
+			moveType = 0;
 		if (mouse.leftButton) {
 			mouseAlreadyPressed = true;
 			var mousepos = getMouseBoardCoords();
 			x0 = mousepos.x;
 			y0 = mousepos.y;
+			if (x0 < 0 || x1 > 7)
+				mouseAlreadyPressed = false;
+			if (y0 < 0 || y1 > 7)
+				mouseAlreadyPressed = false;
 		}
 		else if (mouseAlreadyPressed && !mouse.leftButton) {
 			setScene("playerInput");
