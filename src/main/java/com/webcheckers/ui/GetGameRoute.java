@@ -61,7 +61,6 @@ public class GetGameRoute implements Route {
     LOG.finer("GetGameRoute is invoked.");
     //
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
 
 
     return templateEngine.render(new ModelAndView(vm , "api/getGame.ftl"));
