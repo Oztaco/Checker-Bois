@@ -123,7 +123,10 @@ public class Lobby {
     Public Methods
     #######################################################################################################*/
 
-
+    public void makeMove(String gameID, int x0, int x1, int y0, int y1, MoveType m){
+        Player currPlayer = this.games.get(gameID).getPlayerTurn();
+        this.games.get(gameID).playTurn(currPlayer, x0,y0,x1,y1,m);
+    }
 
 
 /*  #######################################################################################################

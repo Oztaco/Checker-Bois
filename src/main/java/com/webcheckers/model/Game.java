@@ -49,6 +49,9 @@ public class Game {
         }
         return null;
     }
+    public Player getPlayerTurn() {
+        return playerTurn;
+    }
 
 
 /*  #######################################################################################################
