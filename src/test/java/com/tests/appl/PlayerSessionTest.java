@@ -14,4 +14,16 @@ public class PlayerSessionTest {
     public void testPlayerSessionConstructor(){
         new PlayerSession("username","1234");
     }
+
+    @Test
+    public void testGetUsername(){
+        PlayerSession ps = new PlayerSession("username","1234");
+        ps.getUsername();
+    }
+
+    @Test
+    public void testGetIp(){
+        PlayerSession ps = new PlayerSession("username","1234");
+        ps.getIp();
+    }
 }
