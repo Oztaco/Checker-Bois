@@ -45,59 +45,59 @@ public class CheckersBoard {
      * ------------------------------------------------------------------------------------------------------
      */
     public void initBoard(){
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
+        for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
                 //player 1 side
                 if(y == 0 || y == 2){
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x, y, space.INVALID);
                     }
                     else{
-                        board[y][x] = space.PLAYER1;
+                        setCoords(x, y, space.PLAYER1);
                     }
                 }
                 else if(y == 1){
                     if(x % 2 == 0){
-                        board[y][x] = space.PLAYER1;
+                        setCoords(x,y,space.PLAYER1);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
 
                 //middle area
                 else if(y == 3){
                     if(x % 2 == 0){
-                        board[y][x] = space.EMPTY;
+                        setCoords(x,y,space.EMPTY);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
                 else if(y == 4){
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                     else{
-                        board[y][x] = space.EMPTY;
+                        setCoords(x,y,space.EMPTY);
                     }
                 }
 
                 //player 2 side
                 if(y == 5 || y == 7){
                     if(x % 2 == 0){
-                        board[y][x] = space.PLAYER2;
+                        setCoords(x,y,space.PLAYER2);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
                 else if (y==6){   //y == 6
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                     else{
-                        board[y][x] = space.PLAYER2;
+                        setCoords(x,y,space.PLAYER2);
                     }
                 }
             }
@@ -156,11 +156,10 @@ public class CheckersBoard {
      * ------------------------------------------------------------------------------------------------------
      */
     public space[][] getXYBoardArrayValues() {
-        space[][] newArray = new space[8][];
+        space[][] newArray = new space[8][8];
         for (int x = 0; x < 8; x++) {
-            newArray[x] = new space[8];
             for (int y = 0; y < 8; y++) {
-                newArray[x][y] = this.board[8 - y - 1][x];
+                newArray[x][y] = this.getCoords(x,y);
             }
         }
         return newArray;
@@ -175,15 +174,15 @@ public class CheckersBoard {
      * ----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer1Board() {
-        space[][] player1Board = getXYBoardArrayValues();
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 8; y++) {
-                space val = player1Board[x][y];
-                player1Board[x][y] = player1Board[x][y];
-                player1Board[x][y] = val;
+        space[][] newArray = getBoardArrayValues();
+        for (int x = 0; x < 8 ; x++) {
+            for (int y = 0; y < 8 / 2; y++) {
+                space val = this.getCoords(x,y);
+                newArray[x][y] = newArray[x][7 - y];
+                newArray[x][7 - y] = val;
             }
         }
-        return player1Board;
+        return newArray;
     }
 
     /**
@@ -195,7 +194,30 @@ public class CheckersBoard {
      * -----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer2Board() {
-        return getXYBoardArrayValues();
+        return getBoardArrayValues();
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------
+     * setCoords
+     *
+     * sets the coordinates to a certain type (Nice!)
+     * @param x
+     * @param y
+     * @param newSpace
+     * -----------------------------------------------------------------------------------------------------
+     */
+    public void setCoords(int x, int y, space newSpace){
+        this.board[x][y] = newSpace;
+    }
+
+
+    public space getCoords(int x, int y){
+        return this.board[x][y];
+    }
+
+    public space getCoords(space[][] board2, int x, int y){
+        return board2[x][y];
     }
 
 
@@ -237,7 +259,7 @@ public class CheckersBoard {
      * @param player - player making the move
      * ---------------------------------------------------------------------------------------------------------
      */
-    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+    public void worsemove(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
 
         //Setup changInX and changeInY for determining validity later
         int changeInX = x1-x0;
@@ -336,6 +358,107 @@ public class CheckersBoard {
         }
     }
 
+    public void move(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+
+        //Setup changInX and changeInY for determining validity later
+        int changeInX = x1-x0;
+        int changeInY = y1-y0;
+        space me = null;
+        space meKing = null;
+
+        //Set me and meKing to the current Player Enums
+        if(player.equals(this.player1)){
+            if(getCoords(x0,y0) == space.PLAYER1KING){
+                me = space.PLAYER1KING;
+            }
+            else{
+                me = space.PLAYER1;
+            }
+        }
+
+        else if(player.equals(this.player2)){
+            if(getCoords(x0,y0) == space.PLAYER2KING){
+                me = space.PLAYER2KING;
+            }
+            else{
+                me = space.PLAYER2;
+            }
+        }
+
+        //Throw exception if a player tries to move the piece of the other player
+        if(!(getCoords(x0,y0) == me)){
+            throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
+        }
+
+        //Throw exception if Moves have a distance of 1 from the original space
+        if(Math.abs(changeInX) != 1 || Math.abs(changeInY) != 1) {
+            throw new InvalidMoveException("Moves must be a distance of 1 from the piece");
+        }
+
+        else {
+            if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
+                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = getCoords(x0,y0);
+                    setCoords(x0,y0,space.EMPTY);
+                    setCoords(x1,y1,tempSpace);
+                }
+                else {
+                    throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                }
+            }
+            else if(me == space.PLAYER2KING){           //If space has a Player 2 King on tile, register move
+                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = getCoords(x0,y0);
+                    setCoords(x0,y0,space.EMPTY);
+                    setCoords(x1,y1,tempSpace);
+                }
+                else {
+                    throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                }
+            }
+            else if(me == space.PLAYER1){               //If space has a Player 1 on tile, register move
+                if(changeInY > 0){                      //if player is moving in the appropriate direction
+                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = getCoords(x0,y0);
+                        setCoords(x0,y0,space.EMPTY);
+                        setCoords(x1,y1,tempSpace);
+                    }
+                    else {
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                    }
+                }
+                else {
+                    throw new InvalidMoveException("Only kings can move backwards");
+                }
+            }
+            else if(me == space.PLAYER2){               //If space has a Player 2 on tile, register move
+                if(changeInY < 0){                      //if player is moving in the appropriate direction
+                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = getCoords(x0,y0);
+                        setCoords(x0,y0,space.EMPTY);
+                        setCoords(x1,y1,tempSpace);
+                    }
+                    else {
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                    }
+                }
+                else {
+                    throw new InvalidMoveException("Only kings can move backwards");
+                }
+            }
+        }
+
+        //Check if any players should be kinged after a move
+        for(int x = 0; x < 8; x++){
+            if(getCoords(x,0) == space.PLAYER2){
+                kingPiece(x,0);     //King piece located at
+            }
+            else if(getCoords(x,7) == space.PLAYER1){
+                kingPiece(x,7);     //King piece located at
+            }
+        }
+    }
+
     /**
      * uncheckedMove
      *
@@ -361,6 +484,8 @@ public class CheckersBoard {
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
      * removed from the board.
+     *
+     * //TODO REDO FOR NEW STYLE
      *
      * @param x0 - initial x position
      * @param y0 - initial y position
@@ -476,22 +601,54 @@ public class CheckersBoard {
 
         for(int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if(board[y][x] == space.INVALID){
+                val = "U";
+                if(getCoords(x,y) == space.INVALID){
                     val = ".";
                 }
-                else if(board[y][x] == space.EMPTY){
+                else if(getCoords(x,y) == space.EMPTY){
                     val = " ";
                 }
-                else if(board[y][x] == space.PLAYER1){
+                else if(getCoords(x,y) == space.PLAYER1){
                     val = "1";
                 }
-                else if(board[y][x] == space.PLAYER2){
+                else if(getCoords(x,y) == space.PLAYER2){
                     val = "2";
                 }
-                else if(board[y][x] == space.PLAYER1KING){
+                else if(getCoords(x,y) == space.PLAYER1KING){
                     val = "A";
                 }
-                else{
+                else if(getCoords(x,y) == space.PLAYER2KING){
+                    val = "B";
+                }
+                System.out.print("[" + val + "]");
+            }
+            System.out.println("");
+        }
+    }
+
+    public void printArray(space[][] board){
+        System.out.println("");
+        String val;
+
+        for(int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                val = "U";
+                if(getCoords(board,x,y) == space.INVALID){
+                    val = ".";
+                }
+                else if(getCoords(board,x,y) == space.EMPTY){
+                    val = " ";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER1){
+                    val = "1";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER2){
+                    val = "2";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER1KING){
+                    val = "A";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER2KING){
                     val = "B";
                 }
                 System.out.print("[" + val + "]");
@@ -502,6 +659,13 @@ public class CheckersBoard {
 
     public static void main(String args[]) throws InvalidMoveException {
 
+        CheckersBoard c = new CheckersBoard(new Player("123","Frank"), new Player("456","Dan"));
+        c.initBoard();
+        c.printBoard();
+        System.out.println("(0,1) contains: " + c.getCoords(0,1));
+        System.out.println("(0,3) contains: " + c.getCoords(0,3));
+        c.printArray(c.getPlayer2Board());
+        c.printArray(c.getPlayer1Board());
 
         //-------------------------------------------------------------------------------------------------------------
         /**
@@ -522,6 +686,7 @@ public class CheckersBoard {
          *              Move that kings Player 1
          *              Move that kings Player 2
          */
+
 
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
@@ -649,6 +814,5 @@ public class CheckersBoard {
 
 
         //-------------------------------------------------------------------------------------------------------------
-
     }
 }
