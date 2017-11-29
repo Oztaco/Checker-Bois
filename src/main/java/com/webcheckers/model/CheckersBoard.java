@@ -45,8 +45,8 @@ public class CheckersBoard {
      * ------------------------------------------------------------------------------------------------------
      */
     public void initBoard(){
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
+        for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
                 //player 1 side
                 if(y == 0 || y == 2){
                     if(x % 2 == 0){
@@ -196,6 +196,20 @@ public class CheckersBoard {
      */
     public space[][] getPlayer2Board() {
         return getXYBoardArrayValues();
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------
+     * setCoords
+     *
+     * sets the coordinates to a certain type (Nice!)
+     * @param x
+     * @param y
+     * @param newSpace
+     * -----------------------------------------------------------------------------------------------------
+     */
+    public void setCoords(int x, int y, space newSpace){
+        this.board[x][y] = newSpace;
     }
 
 
@@ -502,6 +516,9 @@ public class CheckersBoard {
 
     public static void main(String args[]) throws InvalidMoveException {
 
+        CheckersBoard c = new CheckersBoard(new Player("123","Frank"), new Player("456","Dan"));
+        c.initBoard();
+        c.printBoard();
 
         //-------------------------------------------------------------------------------------------------------------
         /**
@@ -523,6 +540,7 @@ public class CheckersBoard {
          *              Move that kings Player 2
          */
 
+        /*
         //TESTS 1
         //-------------------------------------------------------------------------------------------------------------
 
@@ -649,6 +667,6 @@ public class CheckersBoard {
 
 
         //-------------------------------------------------------------------------------------------------------------
-
+        */
     }
 }
