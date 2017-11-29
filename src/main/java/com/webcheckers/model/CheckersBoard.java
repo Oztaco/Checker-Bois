@@ -156,11 +156,10 @@ public class CheckersBoard {
      * ------------------------------------------------------------------------------------------------------
      */
     public space[][] getXYBoardArrayValues() {
-        space[][] newArray = new space[8][];
+        space[][] newArray = new space[8][8];
         for (int x = 0; x < 8; x++) {
-            newArray[x] = new space[8];
             for (int y = 0; y < 8; y++) {
-                newArray[x][y] = this.board[y][x];
+                newArray[x][y] = this.getCoords(x,y);
             }
         }
         return newArray;
@@ -175,15 +174,15 @@ public class CheckersBoard {
      * ----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer1Board() {
-        space[][] player1Board = getXYBoardArrayValues();
+        space[][] newArray = getBoardArrayValues();
         for (int x = 0; x < 8 / 2; x++) {
             for (int y = 0; y < 8; y++) {
-                space val = player1Board[x][y];
-                player1Board[x][y] = player1Board[8 - 1 - x][y];
-                player1Board[8 - 1 - x][y] = val;
+                space val = this.getCoords(x,y);
+                newArray[x][y] = newArray[x][7 - y];
+                newArray[x][7 - y] = val;
             }
         }
-        return player1Board;
+        return newArray;
     }
 
     /**
@@ -195,7 +194,7 @@ public class CheckersBoard {
      * -----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer2Board() {
-        return getXYBoardArrayValues();
+        return getBoardArrayValues();
     }
 
     /**
@@ -215,6 +214,10 @@ public class CheckersBoard {
 
     public space getCoords(int x, int y){
         return this.board[x][y];
+    }
+
+    public space getCoords(space[][] board2, int x, int y){
+        return board2[x][y];
     }
 
 
@@ -482,6 +485,8 @@ public class CheckersBoard {
      * piece leaps over an enemy piece, which is then
      * removed from the board.
      *
+     * //TODO REDO FOR NEW STYLE
+     *
      * @param x0 - initial x position
      * @param y0 - initial y position
      * @param x1 - final x position
@@ -621,6 +626,37 @@ public class CheckersBoard {
         }
     }
 
+    public void printArray(space[][] board){
+        System.out.println("");
+        String val;
+
+        for(int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                val = "U";
+                if(getCoords(board,x,y) == space.INVALID){
+                    val = ".";
+                }
+                else if(getCoords(board,x,y) == space.EMPTY){
+                    val = " ";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER1){
+                    val = "1";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER2){
+                    val = "2";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER1KING){
+                    val = "A";
+                }
+                else if(getCoords(board,x,y) == space.PLAYER2KING){
+                    val = "B";
+                }
+                System.out.print("[" + val + "]");
+            }
+            System.out.println("");
+        }
+    }
+
     public static void main(String args[]) throws InvalidMoveException {
 
         CheckersBoard c = new CheckersBoard(new Player("123","Frank"), new Player("456","Dan"));
@@ -628,6 +664,8 @@ public class CheckersBoard {
         c.printBoard();
         System.out.println("(0,1) contains: " + c.getCoords(0,1));
         System.out.println("(0,3) contains: " + c.getCoords(0,3));
+        c.printArray(c.getPlayer2Board());
+        c.printArray(c.getPlayer1Board());
 
         //-------------------------------------------------------------------------------------------------------------
         /**
@@ -776,6 +814,5 @@ public class CheckersBoard {
 
 
         //-------------------------------------------------------------------------------------------------------------
-
     }
 }
