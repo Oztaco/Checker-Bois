@@ -182,7 +182,7 @@ public class WebServer {
     get(API_GET_ALL_GAMES_URL, new GetAllGamesRoute(templateEngine));
 
     // The API call to get a specific game's data
-    get(API_GET_GAME_URL, new GetGameRoute(templateEngine));
+    get(API_GET_GAME_URL, new GetGameRoute(templateEngine, gameCenter));
 
     // The API call to get a specific game's data
     get(API_GET_LOBBY_URL, new GetLobbyRoute(templateEngine, gameCenter));
