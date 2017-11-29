@@ -1,5 +1,6 @@
 package com.tests.model;
 
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.MoveType;
 import com.webcheckers.model.Player;
@@ -51,7 +52,12 @@ public class GameTest {
         Player p1 = new Player("123","testy");
         Player p2 = new Player("456","testo");
         Game g = new Game(p1,p2,"1");
-        g.playTurn(p1,1,2,0,3, MoveType.MOVE);
+        try {
+            g.playTurn(p1,1,2,0,3, MoveType.MOVE);
+        }
+        catch (InvalidMoveException e){
+            System.out.println("STATUS: FAILED");
+        }
     }
 
     @Test
@@ -59,7 +65,12 @@ public class GameTest {
         Player p1 = new Player("123","testy");
         Player p2 = new Player("456","testo");
         Game g = new Game(p1,p2,"1");
-        g.playTurn(p2,0,5,1,4, MoveType.MOVE);
+        try{
+            g.playTurn(p2,0,5,1,4, MoveType.MOVE);
+        }
+        catch (InvalidMoveException e){
+            System.out.println("STATUS: FAILED");
+        }
     }
 
     @Test
@@ -67,7 +78,12 @@ public class GameTest {
         Player p1 = new Player("123","testy");
         Player p2 = new Player("456","testo");
         Game g = new Game(p1,p2,"1");
-        g.playTurn(p1,3,4,5,6, MoveType.ATTACK);
+        try {
+            g.playTurn(p1,3,4,5,6, MoveType.ATTACK);
+        }
+        catch (InvalidMoveException e){
+            System.out.println("STATUS: FAILED");
+        }
     }
 
     @Test
@@ -75,7 +91,12 @@ public class GameTest {
         Player p1 = new Player("123","testy");
         Player p2 = new Player("456","testo");
         Game g = new Game(p1,p2,"1");
-        g.playTurn(p1,4,5,2,3, MoveType.ATTACK);
+        try {
+            g.playTurn(p1,4,5,2,3, MoveType.ATTACK);
+        }
+        catch (InvalidMoveException e){
+            System.out.println("STATUS: FAILED");
+        }
     }
     */
 }
