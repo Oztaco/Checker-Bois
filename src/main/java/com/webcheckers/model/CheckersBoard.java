@@ -160,7 +160,7 @@ public class CheckersBoard {
         for (int x = 0; x < 8; x++) {
             newArray[x] = new space[8];
             for (int y = 0; y < 8; y++) {
-                newArray[x][y] = this.board[y][x];
+                newArray[x][y] = this.board[8 - y - 1][x];
             }
         }
         return newArray;
@@ -176,11 +176,11 @@ public class CheckersBoard {
      */
     public space[][] getPlayer1Board() {
         space[][] player1Board = getXYBoardArrayValues();
-        for (int x = 0; x < 8 / 2; x++) {
+        for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 8; y++) {
                 space val = player1Board[x][y];
-                player1Board[x][y] = player1Board[8 - 1 - x][y];
-                player1Board[8 - 1 - x][y] = val;
+                player1Board[x][y] = player1Board[x][y];
+                player1Board[x][y] = val;
             }
         }
         return player1Board;

@@ -12,7 +12,12 @@ scene("intro", {
         
 	},
 	update: function() {
-		
+		// Check for spectating
+		if (checkersBoard.player1_ID != gameState.id &&
+			checkersBoard.player2_ID != gameState.id) {
+			console.log("Spectating game");
+			setScene("spectating");
+		}
 	},
 	draw: function() {
 		renderBoard(DOM.canvas, checkersBoard);
@@ -113,4 +118,19 @@ scene("pingingServer", {
 	cleanUp: function() {
 		
 	}
+});
+
+scene("spectating", {
+   init: function() {
+	   
+   },
+   update: function() {
+	   
+   },
+   draw: function() {
+	   
+   },
+   cleanUp: function() {
+	   
+   }
 });

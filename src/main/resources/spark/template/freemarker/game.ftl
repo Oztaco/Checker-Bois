@@ -12,7 +12,8 @@
         <script type="text/javascript" src="/js/UI.js"></script>
         <script type="text/javascript">
             gameState = {
-                username: "${username}"
+                username: "${username}",
+                id: "${id}"
             }
         </script>
     </head>
@@ -20,7 +21,7 @@
         <div class="sidebar" id="mainSidebar">
             <ul>
                 <li class="user"><img src="" class="userPic" style="display: none" />${username}</li>
-                <li><a href="./" style="color: #cc1b1b">Sign Out</a></li>
+                <li><a href="./sign_out" style="color: #cc1b1b">Sign Out</a></li>
                 <li><a href="#" onclick="togglePlayerLobby()">Start Game</a></li>
                 <li class="title">My Games</li>
                 <li><a href="#">Person</a></li>
