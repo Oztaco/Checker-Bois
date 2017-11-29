@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 
 public class Lobby {
     private static final Logger LOG = Logger.getLogger(Lobby.class.getName());
-    
 
     private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-
     private HashMap<String,Player> players;     //Maps Session ID's to Player Objects
     private HashMap<String,Game> games;         //Maps IDs to Game Objects
 
@@ -58,6 +56,18 @@ public class Lobby {
     public void addPlayer(String sessionID, String username) {
         Player newPlayer = new Player(sessionID, username);
         this.players.put(sessionID, newPlayer);
+    }
+
+    /**
+     * ----------------------------------------------------------------------------------------------------
+     * removePlayer
+     *
+     * Removes a player from the lobby based on a sessionID
+     * @param sessionID
+     * ----------------------------------------------------------------------------------------------------
+     */
+    public void removePlayer(String sessionID){
+        this.players.remove(sessionID);
     }
 
     /**
@@ -113,7 +123,10 @@ public class Lobby {
     Public Methods
     #######################################################################################################*/
 
-
+    public void makeMove(String gameID, int x0, int x1, int y0, int y1, MoveType m){
+        Player currPlayer = this.games.get(gameID).getPlayerTurn();
+        this.games.get(gameID).playTurn(currPlayer, x0,y0,x1,y1,m);
+    }
 
 
 /*  #######################################################################################################
@@ -158,6 +171,10 @@ public class Lobby {
             playersAsString = playersAsString.substring(0,playersAsString.length()-2);
         }
         return playersAsString;
+    }
+
+    public String getGameAsString(String gameID, String sessionID){
+        return this.games.get(gameID).getGameAsString(this.players.get(sessionID));
     }
 
     /**
