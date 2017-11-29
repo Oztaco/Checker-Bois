@@ -141,6 +141,10 @@ public class GameCenter {
         this.lobby.makeMove(gameID, x0,y0,x1,y1,m);
     }
 
+    public void playerResigned(String gameID, String sessionID){
+        this.lobby.playerResigned(gameID, sessionID);
+    }
+
 
     //##################################################################################################################
     // Public Methods

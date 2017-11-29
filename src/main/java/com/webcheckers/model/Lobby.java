@@ -129,6 +129,11 @@ public class Lobby {
         this.games.get(gameID).playTurn(currPlayer, x0,y0,x1,y1,m);
     }
 
+    public void playerResigned(String playerSessionID, String gameID){
+        Player p = this.players.get(playerSessionID);
+        this.games.get(gameID).playerResigned(p);
+    }
+
 
 /*  #######################################################################################################
     Testing Methods
