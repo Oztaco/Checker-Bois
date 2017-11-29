@@ -217,7 +217,10 @@ public class Game {
 
         for(PastMove p : moveHistory){
             JSONfill = JSONfill.concat(p.getPastMoveAsString());
+            JSONfill = JSONfill.concat(",");
         }
+        if (JSONfill.length() > 4)
+            JSONfill = JSONfill.substring(0, JSONfill.length() - 1);
 
         JSONfill = JSONfill.concat(" ]");
 
