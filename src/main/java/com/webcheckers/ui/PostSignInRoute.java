@@ -59,10 +59,23 @@ public class  PostSignInRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer(" PostSignInRoute is invoked.");
     LOG.severe(request.queryParams("username"));
-    gameCenter.addPlayer(request.session().id(), request.queryParams("username"));
-    
-    response.redirect("/game");
-    return null;
+
+    if (request.queryParams("username").contains("\"")) {
+      //response.redirect("/signin");
+
+      Map<String, Object> vm = new HashMap<>();
+      vm.put("title", "Welcome!");
+      vm.put("error", true);
+      vm.put("error_message", "Usernames cannot contain \"");
+      return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+    }
+
+    else {
+      gameCenter.addPlayer(request.session().id(), request.queryParams("username"));
+
+      response.redirect("/game");
+      return null;
+    }
   }
 
 }

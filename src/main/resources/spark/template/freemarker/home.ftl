@@ -6,14 +6,19 @@
     <link rel="stylesheet" type="text/css" href="css\style.css">
 </head>
 <body>
-  <div class="login modal">
+<div class="login modal">
     <h1 class="title">Web Checkers</h1>
     <form action="./signin" method="GET">
-      <p class="label">Welcome to WebCheckers</p>
-      <p class="label">Please pick a username</p>
-      <input type="text" name="username" placeholder="Username" maxlength="15" />
-      <input type="submit" value="Play" /><br/>
+        <p class="label">Welcome to WebCheckers</p>
+        <p class="label">Please pick a username</p>
+        <input type="text" name="username" placeholder="Username" />
+    <#if error??>
+        <div>
+        ${error_message}
+        </div>
+    </#if>
+        <input type="submit" value="Play" /><br/>
     </form>
-  </div>
+</div>
 </body>
 </html>
