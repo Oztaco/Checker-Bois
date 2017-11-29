@@ -16,55 +16,50 @@ import spark.TemplateEngine;
 import com.webcheckers.appl.GameCenter;
 
 /**
- * The API route to get information on a game, given a GameID
+ * The UI Controller to expose the sign-in functionality
+ * and redirect to the game page.
  *
  * @author <a href='mailto:exo3392@rit.edu'>Efe Ozturkoglu</a>
  */
-public class GetGameRoute implements Route {
-  private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
-
-  static final String TITLE_ATTR = "title";
+public class  PostSignOutRoute implements Route {
+  private static final Logger LOG = Logger.getLogger( PostSignOutRoute.class.getName());
 
   private final TemplateEngine templateEngine;
-  private final GameCenter gameCenter;  
+  private final GameCenter gameCenter;
 
   /**
    * Create the Spark Route (UI controller) for the
-   * {@code GET /} HTTP request.
+   * {@code POST /} HTTP request.
    *
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetGameRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
+  public  PostSignOutRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
     //
-    LOG.config("GetGameRoute is initialized.");
+    LOG.config("PostSignOutRoute is initialized.");
   }
 
   /**
-   * Render the JSON response to get all games
+   * Sign out the player
    *
    * @param request
    *   the HTTP request
    * @param response
    *   the HTTP response
-   *
-   * @return
-   *   the rendered HTML for the Home page
    */
   @Override
   public Object handle(Request request, Response response) {
-    LOG.finer("GetGameRoute is invoked.");
-    //
-    Map<String, Object> vm = new HashMap<>();
-    return gameCenter.getGame(request.headers("gameID"), request.session().id());
+    LOG.finer(" PostSignOutRoute is invoked.");
+    LOG.severe(request.queryParams("username"));
+    gameCenter.removePlayer(request.session().id());
     
-
-    //return templateEngine.render(new ModelAndView(vm , "api/getGame.ftl"));
+    response.redirect("/");
+    return "";
   }
 
 }
