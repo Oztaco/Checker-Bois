@@ -33,6 +33,9 @@ currentGame = {
 
 DOM = {}
 checkersBoard = {};
+timers = {
+    lobbyRefresh: null
+}
 
 function init() {
     DOM.canvas = document.getElementById("board");
@@ -40,6 +43,12 @@ function init() {
     DOM.playerLobby = document.getElementById("playerLobby");
     checkersBoard = new CheckersBoard();
     initBoard();
+    timers.lobbyRefresh = setInterval(function() {
+        getLobby(function(response) {
+            var responseJSON = JSON.parse(response)
+            populateFullGamesLobby(responseJSON);
+        });
+    }, 5000);
 }
 
 function updateAllBoards() {
