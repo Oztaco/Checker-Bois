@@ -131,7 +131,10 @@ scene("opponentTurn", {
 		console.log("Current scene: opponentTurn");
 	},
 	update: function () {
-
+		if (Date.now() - lastBoardUpdate > 3000) {
+			checkersBoard.downloadBoard();
+			lastBoardUpdate = Date.now();
+		}
 	},
 	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
@@ -167,7 +170,10 @@ scene("pingingServer", {
 
 	},
 	update: function () {
-
+		if (Date.now() - lastBoardUpdate > 3000) {
+			checkersBoard.downloadBoard();
+			lastBoardUpdate = Date.now();
+		}
 	},
 	draw: function () {
 
@@ -182,7 +188,10 @@ scene("spectating", {
 
 	},
 	update: function () {
-
+		if (Date.now() - lastBoardUpdate > 3000) {
+			checkersBoard.downloadBoard();
+			lastBoardUpdate = Date.now();
+		}
 	},
 	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
@@ -205,3 +214,5 @@ function getMouseBoardCoords() {
 		y: my
 	};
 }
+
+lastBoardUpdate = 0;
