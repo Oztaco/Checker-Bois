@@ -7,6 +7,15 @@ import org.junit.Test;
 
 //import static org.junit.jupiter.api.Assertions.*; //TODO
 
+/**
+ * Unit tests for the CheckerBoard class.
+ * Primarily tests Move and Attack, as they are the most
+ * complex methods, and have a lot of aspects that require
+ * thorough testing.
+ *
+ * @author <a href='mailto:jrh4099@rit.edu'>Jonathan Hubbard</a>
+ */
+
 //<<<<<<< Updated upstream //TODO
 public class CheckersBoardTest {
     @Test

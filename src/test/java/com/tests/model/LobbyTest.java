@@ -7,6 +7,12 @@ import com.webcheckers.model.Lobby;
 import com.webcheckers.model.Player;
 import org.junit.Test;
 
+/**
+ * Unit tests for the Lobby class.
+ *
+ * @author <a href='mailto:jrh4099@rit.edu'>Jonathan Hubbard</a>
+ */
+
 public class LobbyTest {
 
     @Test
