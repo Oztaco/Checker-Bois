@@ -3,6 +3,16 @@
  */
 
 
+/**
+ * Creates an ajaxRequest object which can be used to make any kind of HTTP
+ * request to the server to get data.
+ * @param {String} method - "GET" or "POST"
+ * @param {String} path - The URL of the request
+ * @param {Dictionary} headers - A dictionary where the keys are header
+ *  parameters and the values are header values
+ * @param {function} callback - A callback function that will utilize the
+ *  response of the request
+ */
 ajaxRequest = function(method, path, headers, callback) {
     this.method = method;
     this.path = path;
@@ -11,6 +21,10 @@ ajaxRequest = function(method, path, headers, callback) {
     this.self = this;
 }
 
+/**
+ * Sends the created ajaxRequest, using the parameters specified by the
+ * constructor
+ */
 ajaxRequest.prototype.send = function() {
     var xhttp = new XMLHttpRequest();
     xhttp.ajaxRequest = this; // reference to ajax request object
@@ -29,21 +43,38 @@ ajaxRequest.prototype.send = function() {
     xhttp.send();
 }
 
-getAllBoards = function(callback) {
-    var request = new ajaxRequest(
-        "GET",
-        "api/get_all_boards",
-        {},
-        function(response) {
-            callback(response);
-        }
-    )
-}
+// /**
+//  * Gets a JSON object of all the boards, and sends it to the callback.
+//  * TO DO: DELETE???
+//  */
+// getAllBoards = function(callback) {
+//     var request = new ajaxRequest(
+//         "GET",
+//         "api/get_all_boards",
+//         {},
+//         function(response) {
+//             callback(response);
+//         }
+//     )
+// }
 getLobby = function(callback) {
     var request = new ajaxRequest(
         "GET",
         "api/get_lobby",
         {},
+        function(response) {
+            callback(response);
+        }
+    )
+    request.send();
+}
+getGame = function(callback, gameID) {
+    var request = new ajaxRequest(
+        "GET",
+        "api/get_game",
+        {
+            "gameID": gameID
+        },
         function(response) {
             callback(response);
         }
@@ -64,15 +95,29 @@ postCreateBoard = function(callback, playerID) {
     request.send();
 }
 
-function startGameWith(player) {
+function startGameWith(playerID) {
+    hidePlayerLobby();
     postCreateBoard(function (response) {
-        // TO DO switch to this board
-    }, player);
+        loadGame(response);
+    }, playerID);
+}
+
+function loadGame(gameID) {
+    checkersBoard.gameID = gameID;
+    checkersBoard.downloadBoard();
+    setScene("intro");
 }
 
 
 
-// Helper function to allow using anonymous functions as delegates
+/**
+ * Helper function to allow using anonymous functions as delegates. To use, just
+ * do:
+ * var func = partial(f);
+ * or
+ * var func = partial(f, 1, 2, ...);
+ * @param {*} func - the function name to callback
+ */
 function partial(func /*, 0..n args */) {
     var args = Array.prototype.slice.call(arguments).splice(1);
     return function () {

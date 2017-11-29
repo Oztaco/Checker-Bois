@@ -32,7 +32,10 @@ currentGame = {
 }
 
 DOM = {}
-checkersBoard = {};
+checkersBoard = {}; // The board that is being rendered
+timers = {
+    lobbyRefresh: null
+}
 
 function init() {
     DOM.canvas = document.getElementById("board");
@@ -40,6 +43,17 @@ function init() {
     DOM.playerLobby = document.getElementById("playerLobby");
     checkersBoard = new CheckersBoard();
     initBoard();
+
+    // efe.js functions to start the state manager
+    startEngine(pipeline, "board");
+    requestAnimationFrame(pipeline);
+    
+    timers.lobbyRefresh = setInterval(function() {
+        getLobby(function(response) {
+            var responseJSON = JSON.parse(response);
+            populateFullGamesLobby(responseJSON);
+        });
+    }, 5000);
 }
 
 function updateAllBoards() {
@@ -54,6 +68,7 @@ function updateAllBoards() {
 }
 
 function initBoard() {
+    return;
     req = new ajaxRequest(
         "GET",
         "api/get_game",
@@ -61,7 +76,7 @@ function initBoard() {
         function(r) {
             console.log("Lets do stuff");
             game = JSON.parse(r);
-            checkersBoard.data = game.board;
+            checkersBoard.board = game.board;
             renderBoard(DOM.canvas, checkersBoard);
         }
     );
