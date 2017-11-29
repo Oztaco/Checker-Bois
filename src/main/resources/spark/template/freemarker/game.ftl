@@ -12,7 +12,8 @@
         <script type="text/javascript" src="/js/UI.js"></script>
         <script type="text/javascript">
             gameState = {
-                username: "${username}"
+                username: "${username}",
+                id: "${id}"
             }
         </script>
     </head>
