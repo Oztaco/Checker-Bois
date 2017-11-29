@@ -32,4 +32,31 @@ public class LobbyTest {
         l.addPlayer("456","testy");
         l.addNewGame("123","456");
     }
+
+    @Test
+    public void testGetGame(){
+        Lobby l = new Lobby();
+        l.addPlayer("123","testo");
+        l.addPlayer("456","testy");
+        l.addNewGame("123","456");
+        l.getGame("1");
+    }
+
+    @Test
+    public void testGetPlayerBySessionID(){
+        Lobby l = new Lobby();
+        l.addPlayer("123","testo");
+        l.addPlayer("456","testy");
+        l.addNewGame("123","456");
+        l.getPlayerBySessionID("123");
+    }
+
+//    @Test
+//    public void testGetPlayer(){
+//        Lobby l = new Lobby();
+//        l.addPlayer("123","testo");
+//        l.addPlayer("456","testy");
+//        l.addNewGame("123","456");
+//        l.getPlayer("testy");
+//    }
 }

@@ -28,4 +28,13 @@ public class GameCenterTest {
         gc.getLobby().addPlayer("456","testo");
         gc.getLobby().addNewGame("123","456");
     }
+
+    @Test
+    public void testGetLobby(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+        gc.getLobby().addPlayer("456","testo");
+        gc.getLobby().addNewGame("123","456");
+        gc.getLobby();
+    }
 }
