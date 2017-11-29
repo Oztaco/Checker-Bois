@@ -13,6 +13,8 @@ import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 
+import com.webcheckers.appl.GameCenter;
+
 /**
  * The API route to get information on a game, given a GameID
  *
@@ -24,6 +26,7 @@ public class GetGameRoute implements Route {
   static final String TITLE_ATTR = "title";
 
   private final TemplateEngine templateEngine;
+  private final GameCenter gameCenter;  
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -32,11 +35,12 @@ public class GetGameRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetGameRoute(final TemplateEngine templateEngine) {
+  public GetGameRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
+    this.gameCenter = gameCenter;
     //
     LOG.config("GetGameRoute is initialized.");
   }
@@ -57,7 +61,8 @@ public class GetGameRoute implements Route {
     LOG.finer("GetGameRoute is invoked.");
     //
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+
+
     return templateEngine.render(new ModelAndView(vm , "api/getGame.ftl"));
   }
 

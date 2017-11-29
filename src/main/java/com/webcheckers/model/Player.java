@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Player{
     private String name;
-
     private ArrayList<String> ids;
     private String playerSessionId;
 
@@ -25,6 +24,9 @@ public class Player{
     //##################################################################################################################
     public String getName(){
         return name;
+    }
+    public String getPlayerSessionId(){
+        return this.playerSessionId;
     }
     public ArrayList<String> getIds() {
         return this.ids;

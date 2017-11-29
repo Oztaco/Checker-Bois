@@ -6,6 +6,7 @@ import com.webcheckers.model.Exceptions.PlayerNotAddedException;
 import java.util.logging.Logger;
 
 import com.webcheckers.model.Lobby;
+import com.webcheckers.model.MoveType;
 
 /**
  * The class that centralizes communication within the server,
@@ -67,7 +68,7 @@ public class GameCenter {
 
     /**
      * -----------------------------------------------------------------------------------------------------------------
-     * getPlayers()
+     * getPlayers
      *
      * Routes a request from the UI to get a JSON string of the Players list to the proper aspect of the Lobby
      * @return allPlayers
@@ -115,7 +116,28 @@ public class GameCenter {
      * -----------------------------------------------------------------------------------------------------------------
      */
     public String getGame(String gameId, String playerSessionID){
-        return lobby.getGameBoardAsString(gameId, playerSessionID);
+        return lobby.getGameAsString(gameId, playerSessionID);
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * removePlayer
+     *
+     * Removes the player with the specified ID from the lobby
+     * @param sessionID
+     * -----------------------------------------------------------------------------------------------------------------
+     */
+    public void removePlayer(String sessionID){
+        this.lobby.removePlayer(sessionID);
+    }
+
+    /**
+     * makeMove
+     *
+     * makes a Move based on the given information
+     */
+    public void makeMove(String gameID, int x0, int x1, int y0, int y1, MoveType m){
+        this.lobby.makeMove(gameID, x0,y0,x1,y1,m);
     }
 
 

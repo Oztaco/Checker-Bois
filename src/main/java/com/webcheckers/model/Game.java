@@ -1,18 +1,22 @@
 package com.webcheckers.model;
-import com.webcheckers.model.CheckersBoard;
 import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.Player;
-import java.util.Stack;
 
+import java.util.ArrayList;
 
 public class Game {
+    //DATA FIELDS
     private CheckersBoard board;
     private Player player1;
     private Player player2;
+    private int player1Pieces;                  //TODO LINK ALL UP BB
+    private int player2Pieces;                  //TODO LINK ALL UP BB
     private String id;
-    private int boardVersion;
+    private long lastUpdateTime;
+    private ArrayList<PastMove> moveHistory;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
+
+    //STATE FIELDS
+    private Player playerWon;
     private Player playerTurn;
-    private Stack<PastMove> pastMoves;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
 
 
 /*  #######################################################################################################
@@ -24,8 +28,10 @@ public class Game {
         this.id = id;
         this.board = new CheckersBoard(p1,p2);
         this.board.initBoard();
-        this.boardVersion = 0;
-        this.playerTurn = null;
+        this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);      //Gets the current Unix Time
+        this.moveHistory = new ArrayList<>();
+
+        this.playerTurn = player1;
     }
 
 /*  #######################################################################################################
@@ -43,11 +49,32 @@ public class Game {
         }
         return null;
     }
+    public Player getPlayerTurn() {
+        return playerTurn;
+    }
 
 
 /*  #######################################################################################################
     Public Methods
     #######################################################################################################*/
+
+    /**
+     * ------------------------------------------------------------------------------------------------------
+     * playerWon
+     *
+     * Checks if a player has won and returns the player if they have, null otherwise
+     * @return WinningPlayer/Null
+     * ------------------------------------------------------------------------------------------------------
+     */
+    public Player playerWon(){
+        if(this.player1Pieces == 0){
+            return this.player2;
+        }
+        else if(this.player2Pieces == 0){
+            return this.player1;
+        }
+        return null;
+    }
 
     /**
      * ------------------------------------------------------------------------------------------------------
@@ -65,7 +92,9 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type){
-        if(type == MoveType.ATTACK){
+
+        //TODO MAKE ATTACK WORK
+/*      if(type == MoveType.ATTACK){
             try{
                 this.board.attack(x0, y0, x1, y1, currPlayer);
                 if(currPlayer.equals(this.player1)){
@@ -74,17 +103,14 @@ public class Game {
                 else if(currPlayer.equals(this.player2)){
                     this.playerTurn = this.player1;
                 }
-
-
             }
-        catch(InvalidMoveException e) {
+            catch(InvalidMoveException e) {
                 //Do nothing, game is not edited
                 //Prolly have some Error message eventually
             }
-        }
+        }                                                   */
 
-
-        else if(type == MoveType.MOVE){
+        if(type == MoveType.MOVE){
             try{
                 this.board.move(x0, y0, x1, y1, currPlayer);
                 if(currPlayer.equals(this.player1)){
@@ -93,19 +119,76 @@ public class Game {
                 else if(currPlayer.equals(this.player2)){
                     this.playerTurn = this.player1;
                 }
-
-
             }
-        catch(InvalidMoveException e) {
+            catch(InvalidMoveException e) {
                 //Do nothing, game is not edited
                 //Prolly have some Error message eventually
             }
         }
+        this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);              //Update Last Update Time
+        this.playerWon = playerWon();
+        this.moveHistory.add(new PastMove(x0,y0,x1,y1,MoveType.MOVE,currPlayer));       //Add Move to Move History
+    }
+
+    /**
+     * revertLastMove
+     *
+     * reverts the last move in the game stored in the Move History
+     */
+    public void revertLastMove(){
+        PastMove lastMove = this.moveHistory.remove(this.moveHistory.size()-1);   //Removes last move from array
+        //X0/X1/Y0/Y1 reversed so move is made backwards
+        int x0 = lastMove.getX1();
+        int y0 = lastMove.getY1();
+        int x1 = lastMove.getX0();
+        int y1 = lastMove.getY0();
+        Player p = lastMove.getPlayerPastMove();
+        this.board.uncheckedMove(x0,y0,x1,y1,p);
     }
 
 /*  #######################################################################################################
     Communication Methods
     #######################################################################################################*/
+
+    public String getGameAsString(Player player){
+        String JSONfill = "";
+
+        //ActivePlayer
+        String activePlayer = "";
+        if(playerTurn == player1){
+            activePlayer = "1";
+        }
+        else{
+            activePlayer = "2";
+        }
+
+        //Player 1 ID/Name
+        String player1ID = this.player1.getPlayerSessionId();
+        String player1Name = this.player1.getName();
+
+        //Player 2 ID/Name
+        String player2ID = this.player2.getPlayerSessionId();
+        String player2Name = this.player2.getName();
+
+        //Game Board
+        String board = this.getGameBoardAsString(player);
+
+        //Past Moves
+        String pastMoves = this.getMoveHistoryAsString();
+
+        JSONfill = "{ "
+                    + "\"activePlayer\": " + activePlayer + ", "
+                    + "\"gameID\": " + this.getId() + ", "
+                    + "\"player1_ID\": " + player1ID + ", "
+                    + "\"player2_ID\": " + player2ID + ", "
+                    + "\"player1_Name\": " + player1Name + ", "
+                    + "\"player2_Name\": " + player2Name + ", "
+                    + "\"board\": " + board + ", "
+                    + "\"moves\": " + pastMoves + " }";
+
+        return JSONfill;
+    }
+
     /**
      * -----------------------------------------------------------------------------------------------------
      * getGameBoardAsString(int playerNum)
@@ -126,6 +209,19 @@ public class Game {
             JSONFill = get2DArrayAsJSON(boardArray);
         }
         return JSONFill;
+    }
+
+
+    public String getMoveHistoryAsString(){
+        String JSONfill = "[ ";
+
+        for(PastMove p : moveHistory){
+            JSONfill.concat(p.getPastMoveAsString());
+        }
+
+        JSONfill.concat(" ]");
+
+        return JSONfill;
     }
 
     /**
