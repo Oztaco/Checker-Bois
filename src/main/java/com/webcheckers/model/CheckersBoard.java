@@ -355,6 +355,105 @@ public class CheckersBoard {
         }
     }
 
+    public void betterMove(int x0, int y0, int x1, int y1, Player player) throws InvalidMoveException {
+
+        //Setup changInX and changeInY for determining validity later
+        int changeInX = x1-x0;
+        int changeInY = y1-y0;
+        space me = null;
+        space meKing = null;
+
+        //Set me and meKing to the current Player Enums
+        if(player.equals(this.player1)){
+            if(getCoords(x0,y0) == space.PLAYER1KING){
+                me = space.PLAYER1KING;
+            }
+            else{
+                me = space.PLAYER1;
+            }
+        }
+
+        else if(player.equals(this.player2)){
+            if(getCoords(x0,y0) == space.PLAYER2KING){
+                me = space.PLAYER2KING;
+            }
+            else{
+                me = space.PLAYER2;
+            }
+        }
+
+        //Throw exception if a player tries to move the piece of the other player
+        if(!(board[y0][x0] == me)){
+            throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
+        }
+
+        //Throw exception if Moves have a distance of 1 from the original space
+        if(Math.abs(changeInX) != 1 || Math.abs(changeInY) != 1) {
+            throw new InvalidMoveException("Moves must be a distance of 1 from the piece");
+        }
+
+        else {
+            if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
+                if (board[y1][x1] == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = this.board[y0][x0];
+                    this.board[y0][x0] = space.EMPTY;
+                    this.board[y1][x1] = tempSpace;
+                }
+                else {
+                    throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                }
+            }
+            else if(me == space.PLAYER2KING){           //If space has a Player 2 King on tile, register move
+                if (board[y1][x1] == space.EMPTY) {     //if space is not occupied, exception otherwise
+                    space tempSpace = this.board[y0][x0];
+                    this.board[y0][x0] = space.EMPTY;
+                    this.board[y1][x1] = tempSpace;
+                } else {
+                    throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                }
+            }
+            else if(me == space.PLAYER1){               //If space has a Player 1 on tile, register move
+                if(changeInY > 0){                      //if player is moving in the appropriate direction
+                    if (board[y1][x1] == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = this.board[y0][x0];
+                        this.board[y0][x0] = space.EMPTY;
+                        this.board[y1][x1] = tempSpace;
+                    }
+                    else {
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                    }
+                }
+                else {
+                    throw new InvalidMoveException("Only kings can move backwards");
+                }
+            }
+            else if(me == space.PLAYER2){               //If space has a Player 2 on tile, register move
+                if(changeInY < 0){                      //if player is moving in the appropriate direction
+                    if (board[y1][x1] == space.EMPTY) { //and if space if not occupied
+                        space tempSpace = this.board[y0][x0];
+                        this.board[y0][x0] = space.EMPTY;
+                        this.board[y1][x1] = tempSpace;
+                    } else {
+                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+                    }
+                }
+                else {
+                    throw new InvalidMoveException("Only kings can move backwards");
+                }
+            }
+        }
+
+        //Check if any players should be kinged after a move
+        for(int x = 0; x < 8; x++){
+            if(this.board[0][x] == space.PLAYER2){
+                kingPiece(x,0);     //King piece located at
+            }
+            else if(this.board[7][x] == space.PLAYER1){
+                kingPiece(x,7);     //King piece located at
+            }
+        }
+    }
+
     /**
      * uncheckedMove
      *
@@ -526,6 +625,7 @@ public class CheckersBoard {
         c.initBoard();
         c.printBoard();
         System.out.println("(0,1) contains: " + c.getCoords(0,1));
+        System.out.println("(0,3) contains: " + c.getCoords(0,3));
 
         //-------------------------------------------------------------------------------------------------------------
         /**
