@@ -280,7 +280,8 @@ public class CheckersBoard {
                     space tempSpace = this.board[y0][x0];
                     this.board[y0][x0] = space.EMPTY;
                     this.board[y1][x1] = tempSpace;
-                } else {
+                }
+                else {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                 }
             }
@@ -299,7 +300,8 @@ public class CheckersBoard {
                         space tempSpace = this.board[y0][x0];
                         this.board[y0][x0] = space.EMPTY;
                         this.board[y1][x1] = tempSpace;
-                    } else {
+                    }
+                    else {
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                     }
                 }
@@ -334,11 +336,23 @@ public class CheckersBoard {
         }
     }
 
+    /**
+     * uncheckedMove
+     *
+     * Moves a piece without checking validity, used for reverting moves and testing
+     * @param x0
+     * @param y0
+     * @param x1
+     * @param y1
+     * @param player
+     */
     public void uncheckedMove(int x0, int y0, int x1, int y1, Player player){
         space tempSpace = this.board[y0][x0];
         this.board[y0][x0] = space.EMPTY;
         this.board[y1][x1] = tempSpace;
     }
+
+
   
     /**
      * -----------------------------------------------------------------------------------------------------
