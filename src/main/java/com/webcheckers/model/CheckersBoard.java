@@ -50,10 +50,10 @@ public class CheckersBoard {
                 //player 1 side
                 if(y == 0 || y == 2){
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x, y, space.INVALID);
                     }
                     else{
-                        board[y][x] = space.PLAYER1;
+                        setCoords(x, y, space.PLAYER1);
                     }
                 }
                 else if(y == 1){
