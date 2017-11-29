@@ -58,46 +58,46 @@ public class CheckersBoard {
                 }
                 else if(y == 1){
                     if(x % 2 == 0){
-                        board[y][x] = space.PLAYER1;
+                        setCoords(x,y,space.PLAYER1);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
 
                 //middle area
                 else if(y == 3){
                     if(x % 2 == 0){
-                        board[y][x] = space.EMPTY;
+                        setCoords(x,y,space.EMPTY);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
                 else if(y == 4){
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                     else{
-                        board[y][x] = space.EMPTY;
+                        setCoords(x,y,space.EMPTY);
                     }
                 }
 
                 //player 2 side
                 if(y == 5 || y == 7){
                     if(x % 2 == 0){
-                        board[y][x] = space.PLAYER2;
+                        setCoords(x,y,space.PLAYER2);
                     }
                     else{
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                 }
                 else if (y==6){   //y == 6
                     if(x % 2 == 0){
-                        board[y][x] = space.INVALID;
+                        setCoords(x,y,space.INVALID);
                     }
                     else{
-                        board[y][x] = space.PLAYER2;
+                        setCoords(x,y,space.PLAYER2);
                     }
                 }
             }
@@ -210,6 +210,11 @@ public class CheckersBoard {
      */
     public void setCoords(int x, int y, space newSpace){
         this.board[x][y] = newSpace;
+    }
+
+
+    public space getCoords(int x, int y){
+        return this.board[x][y];
     }
 
 
@@ -490,22 +495,23 @@ public class CheckersBoard {
 
         for(int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if(board[y][x] == space.INVALID){
+                val = "U";
+                if(getCoords(x,y) == space.INVALID){
                     val = ".";
                 }
-                else if(board[y][x] == space.EMPTY){
+                else if(getCoords(x,y) == space.EMPTY){
                     val = " ";
                 }
-                else if(board[y][x] == space.PLAYER1){
+                else if(getCoords(x,y) == space.PLAYER1){
                     val = "1";
                 }
-                else if(board[y][x] == space.PLAYER2){
+                else if(getCoords(x,y) == space.PLAYER2){
                     val = "2";
                 }
-                else if(board[y][x] == space.PLAYER1KING){
+                else if(getCoords(x,y) == space.PLAYER1KING){
                     val = "A";
                 }
-                else{
+                else if(getCoords(x,y) == space.PLAYER2KING){
                     val = "B";
                 }
                 System.out.print("[" + val + "]");
@@ -519,6 +525,7 @@ public class CheckersBoard {
         CheckersBoard c = new CheckersBoard(new Player("123","Frank"), new Player("456","Dan"));
         c.initBoard();
         c.printBoard();
+        System.out.println("(0,1) contains: " + c.getCoords(0,1));
 
         //-------------------------------------------------------------------------------------------------------------
         /**
