@@ -73,6 +73,9 @@ CheckersBoard.prototype.downloadBoard = function () {
         checkersBoard.player2_Name = responseJSON.player2_Name;
         checkersBoard.board = responseJSON.board;
         checkersBoard.moves = responseJSON.moves;
+
+        DOM.playerOneName.innerHTML = checkersBoard.player1_Name;
+        DOM.playerTwoName.innerHTML = checkersBoard.player2_Name;
     }, this.gameID);
 }
 
