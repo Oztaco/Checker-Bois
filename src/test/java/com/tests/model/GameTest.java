@@ -46,6 +46,7 @@ public class GameTest {
         g.getPlayer(2);
     }
 
+    /*
     @Test
     public void testPlayTurnMove1(){
         Player p1 = new Player("123","testy");
@@ -97,4 +98,5 @@ public class GameTest {
             System.out.println("STATUS: FAILED");
         }
     }
+    */
 }

@@ -93,22 +93,16 @@ public class Game {
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
 
-        //TODO MAKE ATTACK WORK
-/*      if(type == MoveType.ATTACK){
-            try{
-                this.board.attack(x0, y0, x1, y1, currPlayer);
-                if(currPlayer.equals(this.player1)){
-                    this.playerTurn = this.player2;
-                }
-                else if(currPlayer.equals(this.player2)){
-                    this.playerTurn = this.player1;
-                }
+        //TODO DOUBLE JUMPS
+      if(type == MoveType.ATTACK){
+            this.board.attack(x0, y0, x1, y1, currPlayer);
+            if(currPlayer.equals(this.player1)){
+                this.playerTurn = this.player2;
             }
-            catch(InvalidMoveException e) {
-                //Do nothing, game is not edited
-                //Prolly have some Error message eventually
+            else if(currPlayer.equals(this.player2)){
+                this.playerTurn = this.player1;
             }
-        }                                                   */
+        }
 
         if(type == MoveType.MOVE){
             this.board.move(x0, y0, x1, y1, currPlayer);
@@ -211,7 +205,10 @@ public class Game {
 
         for(PastMove p : moveHistory){
             JSONfill = JSONfill.concat(p.getPastMoveAsString());
+            JSONfill = JSONfill.concat(",");
         }
+        if (JSONfill.length() > 4)
+            JSONfill = JSONfill.substring(0, JSONfill.length() - 1);
 
         JSONfill = JSONfill.concat(" ]");
 

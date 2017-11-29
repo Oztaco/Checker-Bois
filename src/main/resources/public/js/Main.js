@@ -45,6 +45,10 @@ function init() {
     DOM.playerTwoName = document.getElementById("playerTwoName");
     checkersBoard = new CheckersBoard();
     initBoard();
+    getLobby(function(response) {
+        var responseJSON = JSON.parse(response);
+        populateFullGamesLobby(responseJSON);
+    });
 
     // efe.js functions to start the state manager
     startEngine(pipeline, "board");
