@@ -25,6 +25,7 @@ public class GetGamePageRoute implements Route {
     static final String VIEWMODE_ATTR = "viewMode";
     static final String TITLE = "Web Checkers";
     static final String USERNAME_ATTR = "username";
+    static final String ID_ATTR = "id";
 
     private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
@@ -66,6 +67,7 @@ public class GetGamePageRoute implements Route {
             String username = currentPlayer.getName();
             LOG.severe("username= " + username);         
             vm.put(USERNAME_ATTR, username);
+            vm.put(ID_ATTR, request.session().id());
 
             return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }

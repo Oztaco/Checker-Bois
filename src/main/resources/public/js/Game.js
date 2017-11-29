@@ -8,22 +8,24 @@
  * player
  */
 scene("intro", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
+	update: function () {
 		// Check for spectating
 		if (checkersBoard.player1_ID != gameState.id &&
 			checkersBoard.player2_ID != gameState.id) {
 			console.log("Spectating game");
 			setScene("spectating");
 		}
+		// Check if it's my turn
+		//else if ()
 	},
-	draw: function() {
+	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
@@ -32,17 +34,17 @@ scene("intro", {
  * selects a piece to move
  */
 scene("currentPlayerTurn", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
-		
+	update: function () {
+
 	},
-	draw: function() {
-		
+	draw: function () {
+
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
@@ -51,17 +53,17 @@ scene("currentPlayerTurn", {
  * server every 5 second to check for a move.
  */
 scene("opponentTurn", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
-		
+	update: function () {
+
 	},
-	draw: function() {
-		
+	draw: function () {
+
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
@@ -70,17 +72,17 @@ scene("opponentTurn", {
  * selected a specific piece to move. Should highlight possible moves
  */
 scene("playerInput", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
-		
+	update: function () {
+
 	},
-	draw: function() {
-		
+	draw: function () {
+
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
@@ -88,17 +90,17 @@ scene("playerInput", {
  * The scene that runs when a move is being animated from one space to another
  */
 scene("animatingPiece", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
-		
+	update: function () {
+
 	},
-	draw: function() {
-		
+	draw: function () {
+
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
@@ -106,31 +108,31 @@ scene("animatingPiece", {
  * TO DO: might remove later
  */
 scene("pingingServer", {
-	init: function() {
-        
+	init: function () {
+
 	},
-	update: function() {
-		
+	update: function () {
+
 	},
-	draw: function() {
-		
+	draw: function () {
+
 	},
-	cleanUp: function() {
-		
+	cleanUp: function () {
+
 	}
 });
 
 scene("spectating", {
-   init: function() {
-	   
-   },
-   update: function() {
-	   
-   },
-   draw: function() {
-	   
-   },
-   cleanUp: function() {
-	   
-   }
+	init: function () {
+
+	},
+	update: function () {
+
+	},
+	draw: function () {
+		renderBoard(DOM.canvas, checkersBoard);
+	},
+	cleanUp: function () {
+
+	}
 });
