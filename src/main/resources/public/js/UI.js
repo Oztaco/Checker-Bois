@@ -139,13 +139,15 @@ function populateSidebarGames(sectionNum, gamesObject) {
             if (sectionCounter == sectionNum) {
                 if (gamesObject.list.length > 0) {
                     for (var j = 0; j < gamesObject.list.length; j++) {
-                        var username = gamesObject.list[j].username;
+                        var username1 = gamesObject.list[j].playerOneUsername;
+                        var username2 = gamesObject.list[j].playerTwoUsername;
                         var id = gamesObject.list[j].id;
                         var listNode = stringToDOMNode(
-                            "<li><a href=\"#\" onclick=\"loadGame(\"" + id +"\")\">"
-                                + username +"</a></li>"
+                            "<li><a href=\"#\" onclick=\"loadGame('" + id + "')\">"
+                                + username1 + "<br>" + username2 + "</a></li>"
                         );
-                        insertAfter(lobbyListItems[i + j], listNode);
+                        if (lobbyListItems[i + j])
+                            insertAfter(lobbyListItems[i + j], listNode);
                     }
                 }
                 else {
@@ -169,7 +171,9 @@ function insertAfter(referenceNode, newNode) {
 }
 function stringToDOMNode(htmlString) {
     parser = new DOMParser();
-    node = parser.parseFromString(htmlString, "text/xml");
+    node = parser.parseFromString(htmlString, "text/html");
+    console.log("Parsed node:");
+    console.log(node);
     if (node.nodeName.toLowerCase() == "#document")
         return node.children[0];
     return node;
