@@ -333,6 +333,12 @@ public class CheckersBoard {
             }
         }
     }
+
+    public void uncheckedMove(int x0, int y0, int x1, int y1, Player player){
+        space tempSpace = this.board[y0][x0];
+        this.board[y0][x0] = space.EMPTY;
+        this.board[y1][x1] = tempSpace;
+    }
   
     /**
      * -----------------------------------------------------------------------------------------------------

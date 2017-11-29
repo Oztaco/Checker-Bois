@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 
 public class Lobby {
     private static final Logger LOG = Logger.getLogger(Lobby.class.getName());
-    
 
     private final String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-
     private HashMap<String,Player> players;     //Maps Session ID's to Player Objects
     private HashMap<String,Game> games;         //Maps IDs to Game Objects
 
@@ -60,6 +58,14 @@ public class Lobby {
         this.players.put(sessionID, newPlayer);
     }
 
+    /**
+     * ----------------------------------------------------------------------------------------------------
+     * removePlayer
+     *
+     * Removes a player from the lobby based on a sessionID
+     * @param sessionID
+     * ----------------------------------------------------------------------------------------------------
+     */
     public void removePlayer(String sessionID){
         this.players.remove(sessionID);
     }
