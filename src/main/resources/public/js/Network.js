@@ -96,9 +96,16 @@ postCreateBoard = function(callback, playerID) {
 }
 
 function startGameWith(playerID) {
+    hidePlayerLobby();
     postCreateBoard(function (response) {
-        // TO DO switch to this board
-    }, player);
+        loadGame(response);
+    }, playerID);
+}
+
+function loadGame(gameID) {
+    checkersBoard.gameID = gameID;
+    checkersBoard.downloadBoard();
+    setScene("intro");
 }
 
 
