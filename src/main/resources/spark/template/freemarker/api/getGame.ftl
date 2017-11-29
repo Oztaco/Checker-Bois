@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "activePlayer": 1,
+=======
+    "activePlayer": 1, 
+>>>>>>> 177a686beea41b076cca51ce5e5fc3b7ce3aa133
     "gameID": "aGkuYo",
     "player1_ID": "dferwgreg", 
     "player2_ID": "gterecfre", 
