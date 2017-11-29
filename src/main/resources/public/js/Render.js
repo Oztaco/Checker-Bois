@@ -3,7 +3,7 @@
  */
 
 
-renderBoard = function(canvasElm, checkerBoard) {
+renderBoard = function(canvasElm, checkerBoard, highlights) {
     ctx = canvasElm.getContext('2d');
     height = canvasElm.height;
     width = canvasElm.width;
@@ -16,11 +16,18 @@ renderBoard = function(canvasElm, checkerBoard) {
     for (var x = 0; x < 8; x++) {
         for (var y = 0; y < 8; y++) {
             if (
-                (x % 2 == 0 && y % 2 == 1) ||
-                (x % 2 == 1 && y % 2 == 0))
+                !(x % 2 == 1 && y % 2 == 0) &&
+                !(x % 2 == 0 && y % 2 == 1))
             {
                 ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
             }
+        }
+    }
+
+    if (highlights) {
+        for (var i = 0; i < highlights.length; i++) {
+            ctx.fillStyle = themes[currentTheme].highlightColor;
+            ctx.fillRect(highlights[i].x * squareSize, highlights[i].y * squareSize, squareSize, squareSize);
         }
     }
 
@@ -66,6 +73,7 @@ currentTheme = 0;
 themes = [
     {
         primaryColor: "#fdfdfd",
-        secondaryColor: "#222"
+        secondaryColor: "#222",
+        highlightColor: "#444"
     }
 ]

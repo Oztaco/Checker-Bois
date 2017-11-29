@@ -19,7 +19,12 @@ scene("intro", {
 			setScene("spectating");
 		}
 		// Check if it's my turn
-		//else if ()
+		else if (checkersBoard.isItPlayersTurn(gameState.id)) {
+			setScene("currentPlayerTurn");
+		}
+		else {
+			setScene("opponentTurn");
+		}
 	},
 	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
@@ -29,19 +34,80 @@ scene("intro", {
 	}
 });
 
+
 /**
  * The scene that runs when it is the current player's turn, *before* the user
  * selects a piece to move
  */
 scene("currentPlayerTurn", {
 	init: function () {
-
+		console.log("Current scene: currentPlayerTurn");
+		mouseAlreadyPressed = false;
 	},
 	update: function () {
-
+		if (mouse.leftButton) {
+			mouseAlreadyPressed = true;
+			var mousepos = getMouseBoardCoords();
+			x0 = mousepos.x;
+			y0 = mousepos.y;
+		}
+		else if (mouseAlreadyPressed && !mouse.leftButton) {
+			setScene("playerInput");
+		}
 	},
 	draw: function () {
+		renderBoard(DOM.canvas, checkersBoard);
+	},
+	cleanUp: function () {
 
+	}
+});
+
+
+x0 = -1;
+y0 = -1;
+x1 = -1;
+y1 = -1;
+moveType = 0; // 0 = attack, 1 = move
+/**
+ * The scene that runs when it is the current player's turn and the player has
+ * selected a specific piece to move. Should highlight possible moves
+ */
+scene("playerInput", {
+	init: function () {
+		console.log("Current scene: playerInput");		
+		x1 = -1;
+		y1 = -1;
+		mouseAlreadyPressed = false;
+	},
+	update: function () {
+		if (keys.m)
+			moveType = 1;
+		else if (keys.a)
+			moveType = 0;
+		if (mouse.leftButton && !mouseAlreadyPressed) {
+			var mousepos = getMouseBoardCoords();
+			x1 = mousepos.x;
+			y1 = mousepos.y;
+			if (x0 == x1) {
+				x1 = -1;
+			}
+			else {
+				mouseAlreadyPressed = true;
+				postMove(function(response) {
+					console.log("Make move returned: " + response);
+					setScene("pingingServer");				
+				}, checkersBoard.gameID, moveType, x0, y0, x1, y1);
+			}
+		}
+	},
+	draw: function () {
+		var highlights = [
+			{x: x0, y: y0}
+		];
+		if (x1 != -1)
+		highlights.push({x: x1, y: y1});
+		renderBoard(DOM.canvas, checkersBoard, highlights);
 	},
 	cleanUp: function () {
 
@@ -54,32 +120,13 @@ scene("currentPlayerTurn", {
  */
 scene("opponentTurn", {
 	init: function () {
-
+		console.log("Current scene: opponentTurn");
 	},
 	update: function () {
 
 	},
 	draw: function () {
-
-	},
-	cleanUp: function () {
-
-	}
-});
-
-/**
- * The scene that runs when it is the current player's turn and the player has
- * selected a specific piece to move. Should highlight possible moves
- */
-scene("playerInput", {
-	init: function () {
-
-	},
-	update: function () {
-
-	},
-	draw: function () {
-
+		renderBoard(DOM.canvas, checkersBoard);
 	},
 	cleanUp: function () {
 
@@ -136,3 +183,17 @@ scene("spectating", {
 
 	}
 });
+
+
+function getMouseBoardCoords() {
+	var mx = mouse.x - (DOM.canvas.getBoundingClientRect().left + 6 + document.documentElement.scrollLeft);
+	mx /= (DOM.canvas.width / 8);
+	mx = Math.floor(mx);
+	var my = mouse.y - (DOM.canvas.getBoundingClientRect().top + 6 + document.documentElement.scrollTop);
+	my /= (DOM.canvas.height / 8);
+	my = Math.floor(my);
+	return {
+		x: mx,
+		y: my
+	};
+}

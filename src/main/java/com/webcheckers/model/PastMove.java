@@ -57,7 +57,7 @@ public class PastMove {
     #######################################################################################################*/
     public String getPastMoveAsString(){
         return "{"
-                + "\"player\": " + this.player + ", "
+                + "\"player\": \"" + this.player.getPlayerSessionId() + "\", "
                 + "\"type\": " + this.type.getValue()+ ", "
                 + "\"x0\": " + this.x0 + ", "
                 + "\"y0\": " + this.y0 + ", "

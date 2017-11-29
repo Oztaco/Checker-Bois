@@ -174,15 +174,16 @@ public class CheckersBoard {
      * ----------------------------------------------------------------------------------------------------
      */
     public space[][] getPlayer1Board() {
-        space[][] newArray = getBoardArrayValues();
-        for (int x = 0; x < 8 ; x++) {
-            for (int y = 0; y < 8 / 2; y++) {
-                space val = this.getCoords(x,y);
-                newArray[x][y] = newArray[x][7 - y];
-                newArray[x][7 - y] = val;
-            }
-        }
-        return newArray;
+        return getBoardArrayValues();
+        // space[][] newArray = getBoardArrayValues();
+        // for (int x = 0; x < 8 ; x++) {
+        //     for (int y = 0; y < 8 / 2; y++) {
+        //         space val = this.getCoords(x,y);
+        //         newArray[x][y] = newArray[x][7 - y];
+        //         newArray[x][7 - y] = val;
+        //     }
+        // }
+        // return newArray;
     }
 
     /**
