@@ -58,6 +58,18 @@ public class Game {
     Public Methods
     #######################################################################################################*/
 
+
+    public void playerResigned(Player p){
+        if(p == this.player1){
+            this.playerWon = player2;
+        }
+        else if(p == this.player2){
+            this.playerWon = player1;
+        }
+        else{
+            this.playerWon = null;
+        }
+    }
     /**
      * ------------------------------------------------------------------------------------------------------
      * playerWon
