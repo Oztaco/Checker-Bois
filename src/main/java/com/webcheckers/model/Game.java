@@ -216,10 +216,10 @@ public class Game {
         String JSONfill = "[ ";
 
         for(PastMove p : moveHistory){
-            JSONfill.concat(p.getPastMoveAsString());
+            JSONfill = JSONfill.concat(p.getPastMoveAsString());
         }
 
-        JSONfill.concat(" ]");
+        JSONfill = JSONfill.concat(" ]");
 
         return JSONfill;
     }
