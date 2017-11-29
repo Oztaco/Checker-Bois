@@ -173,8 +173,8 @@ public class CheckersBoardTest {
     public void testKing1() throws InvalidMoveException {
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 kings a piece");
+        System.out.println("\n---------------------BOARD 8-----------------------");
+        System.out.println("Test 8: Player 1 kings a piece");
         cb.emptyBoard();
         cb.putPiece(1, 6, CheckersBoard.space.PLAYER1);
         cb.printBoard();
@@ -191,8 +191,8 @@ public class CheckersBoardTest {
     public void testKing2() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 moves a king forwards");
+        System.out.println("\n---------------------BOARD 9-----------------------");
+        System.out.println("Test 9: Player 1 moves a king forwards");
         cb.emptyBoard();
         cb.putPiece(1,6, CheckersBoard.space.PLAYER1KING);
         cb.printBoard();
@@ -210,8 +210,8 @@ public class CheckersBoardTest {
     public void testKing3() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 moves a king backwards");
+        System.out.println("\n---------------------BOARD 10-----------------------");
+        System.out.println("Test 10: Player 1 moves a king backwards");
         cb.emptyBoard();
         cb.putPiece(1,6, CheckersBoard.space.PLAYER1KING);
         cb.printBoard();
@@ -229,8 +229,8 @@ public class CheckersBoardTest {
     public void testAttack1() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 makes an attack");
+        System.out.println("\n---------------------BOARD 11-----------------------");
+        System.out.println("Test 11: Player 1 makes an attack");
         cb.emptyBoard();
         cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
         cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
@@ -249,8 +249,8 @@ public class CheckersBoardTest {
     public void testAttack2() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 2 makes an attack");
+        System.out.println("\n---------------------BOARD 12-----------------------");
+        System.out.println("Test 12: Player 2 makes an attack");
         cb.emptyBoard();
         cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
         cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
@@ -269,8 +269,8 @@ public class CheckersBoardTest {
     public void testAttack3() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 2 makes an attack with player 1's piece");
+        System.out.println("\n---------------------BOARD 13-----------------------");
+        System.out.println("Test 13: Player 2 makes an attack with player 1's piece");
         cb.emptyBoard();
         cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
         cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
@@ -288,8 +288,8 @@ public class CheckersBoardTest {
     public void testAttack4() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 makes an attack into an occupied space");
+        System.out.println("\n---------------------BOARD 14-----------------------");
+        System.out.println("Test 14: Player 1 makes an attack into an occupied space");
         cb.emptyBoard();
         cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
         cb.putPiece(4,5, CheckersBoard.space.PLAYER2);
@@ -308,8 +308,8 @@ public class CheckersBoardTest {
     public void testAttack5() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 makes an attack over an empty space");
+        System.out.println("\n---------------------BOARD 15-----------------------");
+        System.out.println("Test 15: Player 1 makes an attack over an empty space");
         cb.emptyBoard();
         cb.putPiece(3,4, CheckersBoard.space.PLAYER1);
         cb.printBoard();
@@ -326,8 +326,8 @@ public class CheckersBoardTest {
     public void testAttack6() throws InvalidMoveException{
         CheckersBoard cb = new CheckersBoard(new Player("123","Fluffy"), new Player("123","Fatty"));
         cb.initBoard();
-        System.out.println("\n---------------------BOARD-----------------------");
-        System.out.println("Player 1 makes an attack into a space outside the board");
+        System.out.println("\n---------------------BOARD 16-----------------------");
+        System.out.println("Test 16: Player 1 makes an attack into a space outside the board");
         cb.emptyBoard();
         cb.putPiece(3,6, CheckersBoard.space.PLAYER1);
         cb.putPiece(4,7, CheckersBoard.space.PLAYER2);
