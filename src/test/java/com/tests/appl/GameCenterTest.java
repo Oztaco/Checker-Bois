@@ -10,5 +10,22 @@ import org.junit.Test;
  */
 
 public class GameCenterTest {
+    @Test
+    public void testGameCenterConstructor(){
+        GameCenter gc = new GameCenter();
+    }
 
+    @Test
+    public void testAddPlayer(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+    }
+
+    @Test
+    public void testAddNewGame(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+        gc.getLobby().addPlayer("456","testo");
+        gc.getLobby().addNewGame("123","456");
+    }
 }
