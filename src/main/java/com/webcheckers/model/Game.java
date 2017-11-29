@@ -178,11 +178,11 @@ public class Game {
 
         JSONfill = "{ "
                     + "\"activePlayer\": " + activePlayer + ", "
-                    + "\"gameID\": " + this.getId() + ", "
-                    + "\"player1_ID\": " + player1ID + ", "
-                    + "\"player2_ID\": " + player2ID + ", "
-                    + "\"player1_Name\": " + player1Name + ", "
-                    + "\"player2_Name\": " + player2Name + ", "
+                    + "\"gameID\": \"" + this.getId() + "\", "
+                    + "\"player1_ID\": \"" + player1ID + "\", "
+                    + "\"player2_ID\": \"" + player2ID + "\", "
+                    + "\"player1_Name\": \"" + player1Name + "\", "
+                    + "\"player2_Name\": \"" + player2Name + "\", "
                     + "\"board\": " + board + ", "
                     + "\"moves\": " + pastMoves + " }";
 
@@ -238,7 +238,7 @@ public class Game {
         for (int y = 0; y < 8; y++) {
             JSONFill += "[";
             for (int x = 0; x < 8; x++) {
-                JSONFill += array[x][y];
+                JSONFill += array[x][y].ordinal();
                 if (x < 8 - 1) {
                     JSONFill += ",";
                 }
