@@ -60,17 +60,16 @@ public class  PostSignInRoute implements Route {
     LOG.finer(" PostSignInRoute is invoked.");
     LOG.severe(request.queryParams("username"));
 
+    Map<String, Object> vm = new HashMap<>();
+    vm.put("title", "Welcome!");
+
     if (request.queryParams("username").equals("")) {
-      Map<String, Object> vm = new HashMap<>();
-      vm.put("title", "Welcome!");
       vm.put("error", true);
       vm.put("error_message", "Username should not be empty");
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
     if (request.queryParams("username").contains("\"")) {
-      Map<String, Object> vm = new HashMap<>();
-      vm.put("title", "Welcome!");
       vm.put("error", true);
       vm.put("error_message", "Username cannot contain \"");
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
@@ -79,8 +78,6 @@ public class  PostSignInRoute implements Route {
     String playerList = gameCenter.getPlayers();
 
     if (playerList.contains(request.queryParams("username"))) {
-      Map<String, Object> vm = new HashMap<>();
-      vm.put("title", "Welcome!");
       vm.put("error", true);
       vm.put("error_message", "User currently logged in");
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));

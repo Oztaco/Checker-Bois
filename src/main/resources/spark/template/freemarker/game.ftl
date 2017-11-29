@@ -24,12 +24,9 @@
                 <li><a href="./sign_out" style="color: #cc1b1b">Sign Out</a></li>
                 <li><a href="#" onclick="togglePlayerLobby()">Start Game</a></li>
                 <li class="title">My Games</li>
-                <li><a href="#">Person</a></li>
+                <li><a href="#">Loading...</a></li>
                 <li class="title">Other Games</li>
-                <li><a href="#">Something</a></li>
-                <li><a href="#">Efe</a></li>
-                <li><a href="#">Steven</a></li>
-                <li><a href="#">Ozai</a></li>
+                <li><a href="#">Loading...</a></li>
             </ul>
         </div>
         <div class="sidebar" id="playerLobby">
@@ -41,8 +38,8 @@
         <div id="content">
             <div id="boardContainer">
                 <div class="topbar">
-                    <p id="playerOneName" class="player left">Efe Ozturkoglu</p>
-                    <p id="playerTwoName" class="player right">Person</p>
+                    <p id="playerOneName" class="player left"></p>
+                    <p id="playerTwoName" class="player right"></p>
                 </div>
                 <canvas id="board" height="600" width="600">
                     Your browser does not support HTML5 canvas. Please update your browser.
