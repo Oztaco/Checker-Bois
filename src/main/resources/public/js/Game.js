@@ -76,7 +76,7 @@ x0 = -1;
 y0 = -1;
 x1 = -1;
 y1 = -1;
-moveType = 0; // 0 = attack, 1 = move
+moveType = 1; // 0 = attack, 1 = move
 /**
  * The scene that runs when it is the current player's turn and the player has
  * selected a specific piece to move. Should highlight possible moves

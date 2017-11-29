@@ -197,7 +197,7 @@ public class Lobby {
                 }
             }
         }
-        if(notPlayerGames.length() > 1){
+        if(notPlayerGames.length() >= 1){
             notPlayerGames = notPlayerGames.substring(0,notPlayerGames.length()-2);
         }
 
