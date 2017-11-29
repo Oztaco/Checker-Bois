@@ -95,6 +95,25 @@ postCreateBoard = function(callback, playerID) {
     request.send();
 }
 
+postMove = function(callback, gameID, moveType, x0, y0, x1, y1) {
+    var request = new ajaxRequest(
+        "POST",
+        "api/make_move",
+        {
+            "gameID": gameID,
+            "moveType": moveType,
+            "x0": x0,
+            "y0": y0,
+            "x1": x1,
+            "y1": y1
+        },
+        function(response) {
+            callback(response);
+        }
+    )
+    request.send();
+}
+
 function startGameWith(playerID) {
     hidePlayerLobby();
     postCreateBoard(function (response) {
@@ -105,7 +124,6 @@ function startGameWith(playerID) {
 function loadGame(gameID) {
     checkersBoard.gameID = gameID;
     checkersBoard.downloadBoard();
-    setScene("intro");
 }
 
 

@@ -1,6 +1,7 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.Exceptions.GameNotAddedException;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.Exceptions.PlayerNotAddedException;
 
 import java.util.logging.Logger;
@@ -136,7 +137,7 @@ public class GameCenter {
      *
      * makes a Move based on the given information
      */
-    public void makeMove(String gameID, int x0, int x1, int y0, int y1, MoveType m){
+    public void makeMove(String gameID, int x0, int x1, int y0, int y1, MoveType m) throws InvalidMoveException{
         this.lobby.makeMove(gameID, x0,y0,x1,y1,m);
     }
 

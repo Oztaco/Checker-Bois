@@ -35,7 +35,7 @@ CheckersBoard = function () {
 *   @return {Number} enum value from BOARD_SPACE
 */
 CheckersBoard.prototype.getPieceAt = function (x, y) {
-    return this.board[x][y];
+    return this.board[y][x];
 }
 
 
@@ -76,6 +76,8 @@ CheckersBoard.prototype.downloadBoard = function () {
 
         DOM.playerOneName.innerHTML = checkersBoard.player1_Name;
         DOM.playerTwoName.innerHTML = checkersBoard.player2_Name;
+
+        setScene("intro");
     }, this.gameID);
 }
 
@@ -96,4 +98,13 @@ CheckersBoard.prototype.getMoveablePieces = function () {
 */
 CheckersBoard.prototype.getPossibleMovesOfPiece = function (x, y) {
     // TODO
+}
+
+CheckersBoard.prototype.isItPlayersTurn = function (myPlayerID) {
+    if (this.activePlayer == 1) {
+        return this.player1_ID == myPlayerID;
+    }
+    else {
+        return this.player2_ID == myPlayerID;
+    }
 }

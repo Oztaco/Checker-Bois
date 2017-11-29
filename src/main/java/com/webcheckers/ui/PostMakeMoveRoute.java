@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.MoveType;
 import spark.Request;
 import spark.Response;
@@ -60,13 +61,26 @@ public class PostMakeMoveRoute implements Route{
         LOG.finer(" PostMakeMoveRoute is invoked.");
         //LOG.severe("!opponent id:" + request.headers("opponent_player_id"));
 
-        String gameID = request.headers("Game_ID");
+        String gameID = request.headers("gameID");
         int x0 = Integer.valueOf(request.headers("x0"));
         int x1 = Integer.valueOf(request.headers("x1"));
         int y0 = Integer.valueOf(request.headers("y0"));
         int y1 = Integer.valueOf(request.headers("y1"));
-        MoveType m = MoveType.values()[Integer.valueOf(request.headers("move_type"))];
-        gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
+        MoveType m = MoveType.values()[Integer.valueOf(request.headers("moveType"))];
+
+        LOG.severe("!!!!!!!!!!!!!!!!!!!! YO GOOBER MADE A MOVE ===========================");
+        LOG.severe("Movetype: " + request.headers("moveType"));
+        LOG.severe("gameID  : " + request.headers("gameID"));
+        LOG.severe("x0      : " + request.headers("x0"));
+        LOG.severe("y0      : " + request.headers("y0"));
+        LOG.severe("x1      : " + request.headers("x1"));
+        LOG.severe("y1      : " + request.headers("y1"));
+        try{
+            gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
+        }
+        catch(InvalidMoveException e){
+            LOG.severe("HOLY FUK U MADE A NASTY MOVE");
+        }
         return "";
     }
 

@@ -91,7 +91,7 @@ public class Game {
      * @param type
      * ------------------------------------------------------------------------------------------------------
      */
-    public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type){
+    public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
 
         //TODO MAKE ATTACK WORK
 /*      if(type == MoveType.ATTACK){
@@ -111,18 +111,12 @@ public class Game {
         }                                                   */
 
         if(type == MoveType.MOVE){
-            try{
-                this.board.move(x0, y0, x1, y1, currPlayer);
-                if(currPlayer.equals(this.player1)){
-                    this.playerTurn = this.player2;
-                }
-                else if(currPlayer.equals(this.player2)){
-                    this.playerTurn = this.player1;
-                }
+            this.board.move(x0, y0, x1, y1, currPlayer);
+            if(currPlayer.equals(this.player1)){
+                this.playerTurn = this.player2;
             }
-            catch(InvalidMoveException e) {
-                //Do nothing, game is not edited
-                //Prolly have some Error message eventually
+            else if(currPlayer.equals(this.player2)) {
+                this.playerTurn = this.player1;
             }
         }
         this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);              //Update Last Update Time
