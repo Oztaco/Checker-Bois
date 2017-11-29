@@ -85,6 +85,11 @@ public class WebServer {
    */
   public static final String API_POST_CREATE_BOARD_URL = "/api/create_board";
 
+  /**
+   * The URL pattern to sign out
+   */
+  public static final String SIGN_OUT_URL = "/sign_out";
+
   //
   // Attributes
   //
@@ -177,6 +182,9 @@ public class WebServer {
 
     // Shows the Checkers game Sign In page.
     get(SIGN_IN_URL, new PostSignInRoute(templateEngine, gameCenter));
+
+    // Shows the Checkers game Sign In page.
+    get(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, gameCenter));
 
     // The API call to get all the active games
     get(API_GET_ALL_GAMES_URL, new GetAllGamesRoute(templateEngine));
