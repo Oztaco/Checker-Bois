@@ -51,4 +51,17 @@ public class PastMove {
     public Player getPlayerPastMove() {
         return player;
     }
+
+/*  #######################################################################################################
+    Communication Methods
+    #######################################################################################################*/
+    public String getPastMoveAsString(){
+        return "{"
+                + "\"player\": " + this.player + ", "
+                + "\"type\": " + this.type.getValue()+ ", "
+                + "\"x0\": " + this.x0 + ", "
+                + "\"y0\": " + this.y0 + ", "
+                + "\"x\": " + this.x1 + ", "
+                + "\"y\": " + this.y1 + "}";
+    }
 }

@@ -1,6 +1,5 @@
 {
-    "activePlayer": 1, 
-    "spectating": false,
+    "activePlayer": 1,
     "gameID": "aGkuYo",
     "player1_ID": "dferwgreg", 
     "player2_ID": "gterecfre", 
