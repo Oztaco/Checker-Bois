@@ -41,6 +41,8 @@ function init() {
     DOM.canvas = document.getElementById("board");
     DOM.mainSidebar = document.getElementById("mainSidebar");
     DOM.playerLobby = document.getElementById("playerLobby");
+    DOM.playerOneName = document.getElementById("playerOneName");
+    DOM.playerTwoName = document.getElementById("playerTwoName");
     checkersBoard = new CheckersBoard();
     initBoard();
 
