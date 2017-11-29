@@ -18,7 +18,7 @@
     "moves": [
         {
             "player": 1,
-            "type": 0,
+            "type": 0, // attack, etc?
             "x0": 0,
             "y0": 0,
             "x": 0,

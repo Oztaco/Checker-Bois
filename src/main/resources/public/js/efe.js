@@ -646,7 +646,3 @@ scene("_loader", {
 		//processSprites();
 	}
 });
-function init() {
-	startEngine(pipeline, "scene");
-	requestAnimationFrame(pipeline);
-}
