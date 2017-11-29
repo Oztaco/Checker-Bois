@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Exceptions.InvalidMoveException;
 import com.webcheckers.model.MoveType;
 import spark.Request;
 import spark.Response;
@@ -74,7 +75,12 @@ public class PostMakeMoveRoute implements Route{
         LOG.severe("y0      : " + request.headers("y0"));
         LOG.severe("x1      : " + request.headers("x1"));
         LOG.severe("y1      : " + request.headers("y1"));
-        gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
+        try{
+            gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
+        }
+        catch(InvalidMoveException e){
+            LOG.severe("HOLY FUK U MADE A NASTY MOVE");
+        }
         return "";
     }
 
