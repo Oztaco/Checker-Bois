@@ -1,22 +1,40 @@
 package com.tests.appl;
-
 import com.webcheckers.appl.GameCenter;
 import org.junit.Test;
 
-//public class GameCenterTest {
 
-//    @Test
-//    public void testAddSession(){
-//        GameCenter gc = new GameCenter();
-//       gc.addSession("test", "1337");
-//    }
+/**
+ * Unit tests for the GameCenter class.
+ *
+ * @author <a href='mailto:jrh4099@rit.edu'>Jonathan Hubbard</a>
+ */
 
-//    @Test
-//    public void testGetSession(){
-//        GameCenter gc = new GameCenter();
-//        gc.addSession("test", "1337");
-//        if(gc.getSessionByIp("1337") == null){
-//            System.out.println("ERROR: IP 1337 not found in GameCenter");
-//        }
-//    }
-//}
+public class GameCenterTest {
+    @Test
+    public void testGameCenterConstructor(){
+        GameCenter gc = new GameCenter();
+    }
+
+    @Test
+    public void testAddPlayer(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+    }
+
+    @Test
+    public void testAddNewGame(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+        gc.getLobby().addPlayer("456","testo");
+        gc.getLobby().addNewGame("123","456");
+    }
+
+    @Test
+    public void testGetLobby(){
+        GameCenter gc = new GameCenter();
+        gc.getLobby().addPlayer("123","testy");
+        gc.getLobby().addPlayer("456","testo");
+        gc.getLobby().addNewGame("123","456");
+        gc.getLobby();
+    }
+}
