@@ -22,6 +22,30 @@ public class GameTest {
     }
 
     @Test
+    public void testGetID(){
+        Player p1 = new Player("123","testy");
+        Player p2 = new Player("456","testo");
+        Game g = new Game(p1,p2,"1");
+        g.getId();
+    }
+
+    @Test
+    public void testGetPlayer1(){
+        Player p1 = new Player("123","testy");
+        Player p2 = new Player("456","testo");
+        Game g = new Game(p1,p2,"1");
+        g.getPlayer(1);
+    }
+
+    @Test
+    public void testGetPlayer2(){
+        Player p1 = new Player("123","testy");
+        Player p2 = new Player("456","testo");
+        Game g = new Game(p1,p2,"1");
+        g.getPlayer(2);
+    }
+
+    @Test
     public void testPlayTurnMove1(){
         Player p1 = new Player("123","testy");
         Player p2 = new Player("456","testo");
