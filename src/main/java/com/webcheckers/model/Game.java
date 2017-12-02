@@ -162,6 +162,8 @@ public class Game {
             activePlayer = "2";
         }
 
+        String playerWon = this.playerWon().getPlayerSessionId();
+
         //Player 1 ID/Name
         String player1ID = this.player1.getPlayerSessionId();
         String player1Name = this.player1.getName();
@@ -178,6 +180,7 @@ public class Game {
 
         JSONfill = "{ "
                     + "\"activePlayer\": " + activePlayer + ", "
+                    + "\"playerWon\": \"" + playerWon + "\", "
                     + "\"gameID\": \"" + this.getId() + "\", "
                     + "\"player1_ID\": \"" + player1ID + "\", "
                     + "\"player2_ID\": \"" + player2ID + "\", "

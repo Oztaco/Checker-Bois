@@ -73,6 +73,13 @@ function updateAllBoards() {
     );
 }
 
+function resign() {
+    postResign(function(r) {
+        console.log(r);
+        checkersBoard.downloadBoard();
+    }, checkersBoard.gameID, gameState.id);
+}
+
 function initBoard() {
     return;
     req = new ajaxRequest(
