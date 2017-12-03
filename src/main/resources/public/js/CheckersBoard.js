@@ -57,6 +57,33 @@ CheckersBoard.prototype.setPieceAt = function (x, y, piece) {
 }
 
 
+/**
+ * Gets which player controls a particular space
+ * @param {int} x 
+ * @param {int} y 
+ */
+CheckersBoard.prototype.getPlayerOfPiece = function (x, y) {
+    var piece = this.board[y][x];
+    if (piece == BOARD_SPACE.PLAYER_1 || piece == BOARD_SPACE.PLAYER_1_KING)
+        return 1;
+    else if (piece == BOARD_SPACE.PLAYER_2 || piece == BOARD_SPACE.PLAYER_2_KING)
+        return 2;
+    else {
+        return -1;
+    }
+}
+
+
+CheckersBoard.prototype.getMyPlayerNumber = function () {
+    if (gameState.id == this.player1_ID)
+        return 1;
+    else if ((gameState.id == this.player2_ID))
+        return 2;
+    else
+        return -1;
+}
+
+
 /*
 *   Downloads the board configuration JSON for the given gameID, and sets the
 *   existing board configuration equal to it
