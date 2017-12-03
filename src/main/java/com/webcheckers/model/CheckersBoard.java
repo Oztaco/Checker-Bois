@@ -662,10 +662,19 @@ public class CheckersBoard {
         c.printArray(c.getPlayer2Board());
         c.printArray(c.getPlayer1Board());
 
-        CheckersBoard c1 = new CheckersBoard(new Player("123","Frank"), new Player("456","Dan"));
+        Player p1 = new Player("123","Frank");
+        Player p2 = new Player("456","Dan");
+        CheckersBoard c1 = new CheckersBoard(p1, p2);
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                c1.putPiece(i,j,space.EMPTY);
+            }
+        }
         c1.putPiece(2,1, space.PLAYER1);
         c1.putPiece(3,2, space.PLAYER2);
-        //c1.attack(3,1, );
+        c1.printBoard();
+        c1.attack(3,2, 1,0,p2);
+        c1.printBoard();
 
         //-------------------------------------------------------------------------------------------------------------
         /**
