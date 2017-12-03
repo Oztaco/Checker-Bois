@@ -126,10 +126,10 @@ public class Game {
             }
             else if(currPlayer.equals(this.player2)){
                 this.player1Pieces -= 1;
-                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2
-                    || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2
-                    || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2
-                    || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2){
+                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER1
+                    || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER1
+                    || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER1
+                    || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER1){
                     this.playerTurn = this.player2; //Player 2 Turn remains
                 }
                 else{
