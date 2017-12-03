@@ -62,6 +62,10 @@ public class Game {
 
 
     public void playerResigned(Player p){
+        // Did someone already resign?
+        if (this.playerWon == null) {
+            return;
+        }
         if(p == this.player1){
             this.playerWon = player2;
         }
