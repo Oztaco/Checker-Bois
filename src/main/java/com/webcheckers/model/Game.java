@@ -110,24 +110,51 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
-      if(type == MoveType.ATTACK){
+        if(type == MoveType.ATTACK){
             this.board.attack(x0, y0, x1, y1, currPlayer);
             if(currPlayer.equals(this.player1)){
-                this.playerTurn = this.player2;
+                this.player2Pieces -= 1;
+                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2){
+                    this.playerTurn = this.player1; //Player 1 Turn remains
+                }
+                else{
+                    this.playerTurn = this.player2;
+                }
             }
             else if(currPlayer.equals(this.player2)){
-                this.playerTurn = this.player1;
+                this.player1Pieces -= 1;
+                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2
+                    || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2){
+                    this.playerTurn = this.player2; //Player 2 Turn remains
+                }
+                else{
+                    this.playerTurn = this.player1;
+                }
             }
         }
 
         if(type == MoveType.MOVE){
-            this.board.move(x0, y0, x1, y1, currPlayer);
-            if(currPlayer.equals(this.player1)){
-                this.playerTurn = this.player2;
+            if(this.board.getCoords(x0+1,y0+1) == CheckersBoard.space.EMPTY
+                || this.board.getCoords(x0+1,y0-1) == CheckersBoard.space.EMPTY
+                || this.board.getCoords(x0-1,y0+1) == CheckersBoard.space.EMPTY
+                || this.board.getCoords(x0-1,x0-1) == CheckersBoard.space.EMPTY){
+                this.board.move(x0, y0, x1, y1, currPlayer);
+                if(currPlayer.equals(this.player1)){
+                    this.playerTurn = this.player2;
+                }
+                else if(currPlayer.equals(this.player2)) {
+                    this.playerTurn = this.player1;
+                }
             }
-            else if(currPlayer.equals(this.player2)) {
-                this.playerTurn = this.player1;
+            else{
+                throw new InvalidMoveException("You must make an attack if you can");
             }
+
         }
         this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);              //Update Last Update Time
         this.playerWon = playerWon();
