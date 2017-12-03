@@ -227,14 +227,7 @@ public class Game {
         }
         else {
             if(currPlayer.equals(this.player1)){
-                if((this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2
-                        && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2
-                        && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2
-                        && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2
-                        && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY) ){
+                if(checkAttackCoordsP1(x1,y1,CheckersBoard.space.PLAYER2, this.board.getCoords(x1,y1))){
                     this.playerTurn = this.player1; //Player 1 Turn remains if there is a valid attack to make
                     this.multiAttack = true;
                 }
@@ -244,14 +237,7 @@ public class Game {
                 }
             }
             else if(currPlayer.equals(this.player2)){
-                if((this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER1
-                        && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER1
-                        && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER1
-                        && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)
-                    || (this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER1
-                        && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY) ){
+                if(checkAttackCoordsP2(x1,y1,CheckersBoard.space.PLAYER1, this.board.getCoords(x1,y1))){
                     this.playerTurn = this.player2; //Player 2 Turn remains if there is a valid attack to make
                     this.multiAttack = true;
                 }
@@ -261,6 +247,53 @@ public class Game {
                 }
             }
         }
+    }
+
+    public boolean checkAttackCoordsP1(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
+        if(mySpace == CheckersBoard.space.PLAYER1KING){
+            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (this.board.getCoords(x1+1,y1+1) == space
+                            && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
+                    || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                        (this.board.getCoords(x1+1,y1-1) == space
+                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
+                    || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (this.board.getCoords(x1-1,y1+1) == space
+                            && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
+                    || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                        (this.board.getCoords(x1-1,y1-1) == space
+                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
+        }
+        return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (this.board.getCoords(x1+1,y1+1) == space
+                        && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
+                || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (this.board.getCoords(x1-1,y1+1) == space
+                        && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)));
+
+    }
+
+    public boolean checkAttackCoordsP2(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
+        if(mySpace == CheckersBoard.space.PLAYER2KING){
+            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (this.board.getCoords(x1+1,y1+1) == space
+                            && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
+                    || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (this.board.getCoords(x1+1,y1-1) == space
+                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
+                    || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (this.board.getCoords(x1-1,y1+1) == space
+                            && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
+                    || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (this.board.getCoords(x1-1,y1-1) == space
+                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
+        }
+        return (((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (this.board.getCoords(x1+1,y1-1) == space
+                        && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
+                || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (this.board.getCoords(x1-1,y1-1) == space
+                        && this.board.getCoords(x1-2, y1-2) == CheckersBoard.space.EMPTY)));
     }
 
     /**

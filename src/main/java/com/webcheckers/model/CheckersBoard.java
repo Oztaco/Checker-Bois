@@ -214,6 +214,9 @@ public class CheckersBoard {
 
 
     public space getCoords(int x, int y){
+        if(x < 0 || x > 8 || y < 0 || y > 8){
+            return space.INVALID;
+        }
         return this.board[x][y];
     }
 
