@@ -129,8 +129,10 @@ public class Lobby {
         this.games.get(gameID).playTurn(currPlayer, x0,y0,x1,y1,m);
     }
 
-    public void playerResigned(String playerSessionID, String gameID){
+    public void playerResigned(String gameID, String playerSessionID){
+        LOG.severe("Player ID {" + playerSessionID + "} resigned in game + {" + gameID + "}");
         Player p = this.players.get(playerSessionID);
+        LOG.severe("Name= " + p.getName());
         this.games.get(gameID).playerResigned(p);
     }
 

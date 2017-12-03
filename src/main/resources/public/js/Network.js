@@ -117,7 +117,7 @@ postMove = function(callback, gameID, moveType, x0, y0, x1, y1) {
 postResign = function(callback, gameID) {
     var request = new ajaxRequest(
         "POST",
-        "api/make_move",
+        "api/resign",
         {
             "gameID": gameID
         },

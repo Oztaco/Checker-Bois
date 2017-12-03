@@ -79,13 +79,15 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public Player playerWon(){
-        if(this.player1Pieces == 0){
-            return this.player2;
-        }
-        else if(this.player2Pieces == 0){
-            return this.player1;
-        }
-        return null;
+        return playerWon;
+        // TODO: This should go to game logic
+        // if(this.player1Pieces == 0){
+        //     return this.player2;
+        // }
+        // else if(this.player2Pieces == 0){
+        //     return this.player1;
+        // }
+        // return null;
     }
 
     /**
@@ -162,7 +164,11 @@ public class Game {
             activePlayer = "2";
         }
 
-        String playerWon = this.playerWon().getPlayerSessionId();
+        String playerWon;
+        if (this.playerWon() != null)
+            playerWon = this.playerWon().getPlayerSessionId();
+        else
+            playerWon = "-1";
 
         //Player 1 ID/Name
         String player1ID = this.player1.getPlayerSessionId();
