@@ -25,6 +25,8 @@ public class Game {
     public Game(Player p1, Player p2, String id){
         this.player1 = p1;
         this.player2 = p2;
+        this.player1Pieces = 12;
+        this.player2Pieces = 12;
         this.id = id;
         this.board = new CheckersBoard(p1,p2);
         this.board.initBoard();
