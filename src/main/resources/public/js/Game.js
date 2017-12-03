@@ -66,7 +66,13 @@ scene("currentPlayerTurn", {
 				mouseAlreadyPressed = false;
 		}
 		else if (mouseAlreadyPressed && !mouse.leftButton) {
-			setScene("playerInput");
+			if (checkersBoard.getPlayerOfPiece(x0, y0) ==
+				checkersBoard.getMyPlayerNumber()) {
+				setScene("playerInput");
+			}
+			else {
+				mouseAlreadyPressed = false;
+			}
 		}
 	},
 	draw: function () {
@@ -111,10 +117,6 @@ scene("playerInput", {
 		mouseAlreadyPressed = false;
 	},
 	update: function () {
-		if (keys.m)
-			moveType = 1;
-		else if (keys.a)
-			moveType = 0;
 		if (mouse.leftButton && !mouseAlreadyPressed) {
 			var mousepos = getMouseBoardCoords();
 			x1 = mousepos.x;
@@ -124,6 +126,12 @@ scene("playerInput", {
 			}
 			else {
 				mouseAlreadyPressed = true;
+				var dx = Math.abs(x1 - x0);
+				var dy = Math.abs(y1 - y0);
+				if (dy > 1 && dx > 1)
+					moveType = 0;
+				else
+					moveType = 1;
 				postMove(function(response) {
 					console.log("Make move returned: " + response);
 					setScene("pingingServer");				
