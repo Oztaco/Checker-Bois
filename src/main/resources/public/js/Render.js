@@ -80,13 +80,22 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
         else
             var output = winnerName + " is victorious!";
 
-        ctx.textAlign = "center";
-        ctx.font = "60px Calibri";
-        ctx.fillStyle = themes[currentTheme].textShadowColor;
-        ctx.fillText(output, canvasElm.width / 2 + 2, canvasElm.height / 2 + 2);
-        ctx.fillStyle = themes[currentTheme].textColor;
-        ctx.fillText(output, canvasElm.width / 2, canvasElm.height / 2);
+        renderBoardText(canvasElm, output);
     }
+}
+
+function renderBoardText(canvasElm, text, alpha) {
+    var ctx = canvasElm.getContext("2d");
+    if (!alpha)
+        alpha = 1.0;
+    ctx.textAlign = "center";
+    ctx.font = "60px Calibri";
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = themes[currentTheme].textShadowColor;
+    ctx.fillText(text, canvasElm.width / 2 + 2, canvasElm.height / 2 + 2);
+    ctx.fillStyle = themes[currentTheme].textColor;
+    ctx.fillText(text, canvasElm.width / 2, canvasElm.height / 2);
+    ctx.globalAlpha = 1.0;
 }
 
 

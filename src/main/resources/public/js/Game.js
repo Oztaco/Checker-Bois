@@ -39,6 +39,7 @@ scene("intro", {
 });
 
 
+sceneStartedAt = 0;
 /**
  * The scene that runs when it is the current player's turn, *before* the user
  * selects a piece to move
@@ -47,6 +48,7 @@ scene("currentPlayerTurn", {
 	init: function () {
 		console.log("Current scene: currentPlayerTurn");
 		mouseAlreadyPressed = false;
+		sceneStartedAt = Date.now();
 	},
 	update: function () {
 		if (keys.m)
@@ -64,11 +66,33 @@ scene("currentPlayerTurn", {
 				mouseAlreadyPressed = false;
 		}
 		else if (mouseAlreadyPressed && !mouse.leftButton) {
-			setScene("playerInput");
+			if (checkersBoard.getPlayerOfPiece(x0, y0) ==
+				checkersBoard.getMyPlayerNumber()) {
+				setScene("playerInput");
+			}
+			else {
+				mouseAlreadyPressed = false;
+			}
 		}
 	},
 	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
+
+		var output = "Your turn";
+		var timeElapsed = Date.now() - sceneStartedAt;
+		var step1Time = config.timing.textFadeIn
+		var step2Time = step1Time + config.timing.textDuration;
+		var step3Time = step2Time + config.timing.textFadeOut;
+		if (timeElapsed < step1Time) {
+			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
+			console.log("boy" + (timeElapsed / step1Time));
+		}
+		else if (timeElapsed < step2Time) {
+			renderBoardText(DOM.canvas, output);	
+		}
+		else if (timeElapsed < step3Time) {
+			renderBoardText(DOM.canvas, output, 1 - ((timeElapsed - step2Time) / config.timing.textFadeOut));		
+		}
 	},
 	cleanUp: function () {
 
@@ -93,10 +117,6 @@ scene("playerInput", {
 		mouseAlreadyPressed = false;
 	},
 	update: function () {
-		if (keys.m)
-			moveType = 1;
-		else if (keys.a)
-			moveType = 0;
 		if (mouse.leftButton && !mouseAlreadyPressed) {
 			var mousepos = getMouseBoardCoords();
 			x1 = mousepos.x;
@@ -106,6 +126,12 @@ scene("playerInput", {
 			}
 			else {
 				mouseAlreadyPressed = true;
+				var dx = Math.abs(x1 - x0);
+				var dy = Math.abs(y1 - y0);
+				if (dy > 1 && dx > 1)
+					moveType = 0;
+				else
+					moveType = 1;
 				postMove(function(response) {
 					console.log("Make move returned: " + response);
 					setScene("pingingServer");				
@@ -133,6 +159,7 @@ scene("playerInput", {
 scene("opponentTurn", {
 	init: function () {
 		console.log("Current scene: opponentTurn");
+		sceneStartedAt = Date.now();		
 	},
 	update: function () {
 		if (Date.now() - lastBoardUpdate > 3000) {
@@ -142,6 +169,27 @@ scene("opponentTurn", {
 	},
 	draw: function () {
 		renderBoard(DOM.canvas, checkersBoard);
+		
+		var playerName = "Player";
+		if (checkersBoard.activePlayer == 1)
+			playerName = checkersBoard.player1_Name;
+		else if (checkersBoard.activePlayer == 2)
+			playerName = checkersBoard.player2_Name;
+		var output = playerName + "'s turn"
+		var timeElapsed = Date.now() - sceneStartedAt;
+		var step1Time = config.timing.textFadeIn
+		var step2Time = step1Time + config.timing.textDuration;
+		var step3Time = step2Time + config.timing.textFadeOut;
+		if (timeElapsed < step1Time) {
+			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
+			console.log("boy" + (timeElapsed / step1Time));
+		}
+		else if (timeElapsed < step2Time) {
+			renderBoardText(DOM.canvas, output);	
+		}
+		else if (timeElapsed < step3Time) {
+			renderBoardText(DOM.canvas, output, 1 - ((timeElapsed - step2Time) / config.timing.textFadeOut));		
+		}
 	},
 	cleanUp: function () {
 
@@ -239,3 +287,10 @@ function getMouseBoardCoords() {
 }
 
 lastBoardUpdate = 0;
+config = {
+	timing: {
+		textFadeIn: 800,
+		textDuration: 1500,
+		textFadeOut: 450
+	}
+}
