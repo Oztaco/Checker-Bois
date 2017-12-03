@@ -12,6 +12,10 @@ scene("intro", {
 
 	},
 	update: function () {
+		// Check for game over
+		if (checkersBoard.playerWon != -1) {
+			setScene("gameOver");
+		}
 		// Check for spectating
 		if (checkersBoard.player1_ID != gameState.id &&
 			checkersBoard.player2_ID != gameState.id) {
@@ -177,6 +181,25 @@ scene("pingingServer", {
 	},
 	draw: function () {
 
+	},
+	cleanUp: function () {
+
+	}
+});
+
+scene("gameOver", {
+	init: function () {
+		console.log("Current scene: gameOver");		
+		
+	},
+	update: function () {
+		if (Date.now() - lastBoardUpdate > 3000) {
+			checkersBoard.downloadBoard();
+			lastBoardUpdate = Date.now();
+		}
+	},
+	draw: function () {
+		renderBoard(DOM.canvas, checkersBoard);
 	},
 	cleanUp: function () {
 
