@@ -14,6 +14,7 @@ public class Game {
     private String id;
     private long lastUpdateTime;
     private ArrayList<PastMove> moveHistory;      //TODO IMPLEMENT REVERSION OF MOVES/ATTACKS
+    private boolean multiAttack;
 
     //STATE FIELDS
     private Player playerWon;
@@ -214,6 +215,74 @@ public class Game {
         this.lastUpdateTime = (long) (System.currentTimeMillis() / 1000L);              //Update Last Update Time
         this.playerWon = playerWon();
         this.moveHistory.add(new PastMove(x0,y0,x1,y1,MoveType.MOVE,currPlayer));       //Add Move to Move History
+    }
+
+    public void playMoveNew(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
+
+        //Handle Attacks
+        if(type == MoveType.ATTACK){
+            if(this.multiAttack == true){       //Not Player's first jump thus "turn"
+                this.board.attack(x0, y0, x1, y1, currPlayer);
+                if(currPlayer.equals(this.player1)){
+                    this.player1Pieces --;
+                }
+                else if(currPlayer.equals(this.player2)){
+                    this.player2Pieces--;
+                }
+            }
+            else if(this.multiAttack == false){ //Players first jump this "turn"
+                if(checkLastInMoveHistory(x0,y0)) {
+                    this.board.attack(x0, y0, x1, y1, currPlayer);
+                }
+            }
+        }
+        //Handle Moves
+        else if(type == MoveType.MOVE){
+
+        }
+    }
+
+    public boolean checkLastInMoveHistory(int x0, int y0){
+        return (this.moveHistory.get(moveHistory.size()-1).getX1() == x0
+                && this.moveHistory.get(moveHistory.size()-1).getY1() == y0);
+    }
+
+    public Player chooseNext(int x1, int y1, Player currPlayer, MoveType type){
+        if(type == MoveType.MOVE){
+            if(currPlayer.equals(this.player1)){
+                //Player 1 just played
+                this.playerTurn = player2;
+            }
+            else if(currPlayer.equals(this.player2)){
+                //Player 2 just played
+                this.playerTurn = player1;
+            }
+        }
+        else{
+            if(currPlayer.equals(this.player1)){
+                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2
+                        || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2
+                        || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2
+                        || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2){
+                    this.playerTurn = this.player1; //Player 1 Turn remains
+                }
+                else{
+                    this.playerTurn = this.player2;
+                }
+            }
+            else if(currPlayer.equals(this.player2)){
+                if(this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER1
+                        || this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER1
+                        || this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER1
+                        || this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER1){
+                    this.playerTurn = this.player2; //Player 2 Turn remains
+                }
+                else{
+                    this.playerTurn = this.player1;
+                }
+            }
+        }
+        return null;
     }
 
     /**
