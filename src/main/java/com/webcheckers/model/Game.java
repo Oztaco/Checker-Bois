@@ -85,15 +85,13 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public Player playerWon(){
-        return playerWon;
-        // TODO: This should go to game logic
-        // if(this.player1Pieces == 0){
-        //     return this.player2;
-        // }
-        // else if(this.player2Pieces == 0){
-        //     return this.player1;
-        // }
-        // return null;
+        if(this.player1Pieces == 0){
+            return this.player2;
+        }
+        else if(this.player2Pieces == 0){
+            return this.player1;
+        }
+        return null;
     }
 
     /**
@@ -112,8 +110,6 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
-
-        //TODO DOUBLE JUMPS
       if(type == MoveType.ATTACK){
             this.board.attack(x0, y0, x1, y1, currPlayer);
             if(currPlayer.equals(this.player1)){
