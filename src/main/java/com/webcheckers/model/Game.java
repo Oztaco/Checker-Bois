@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 import com.webcheckers.model.Exceptions.InvalidMoveException;
+import javafx.scene.control.cell.CheckBoxListCell;
 
 import java.util.ArrayList;
 
@@ -94,6 +95,32 @@ public class Game {
         return null;
     }
 
+    public boolean checkCorners(int x0, int y0, CheckersBoard.space me, CheckersBoard.space meKing){
+        return (this.board.getCoords(x0+1,y0+1) == CheckersBoard.space.EMPTY
+                    || this.board.getCoords(x0+1,y0+1) == me
+                    || this.board.getCoords(x0+1,y0+1) == meKing) //Check if Bottom Right is Empty or controlled by same player
+                && (this.board.getCoords(x0+1,y0-1) == CheckersBoard.space.EMPTY
+                    || this.board.getCoords(x0+1,y0-1) == me
+                    || this.board.getCoords(x0+1,y0-1) == meKing) //Check if Top Right is Empty or controlled by same player
+                && (this.board.getCoords(x0-1,y0+1) == CheckersBoard.space.EMPTY
+                    || this.board.getCoords(x0-1,y0+1) == me
+                    || this.board.getCoords(x0-1,y0+1) == meKing) //Check if Bottom LeftRight is Empty or controlled by same player
+                && (this.board.getCoords(x0-1,x0-1) == CheckersBoard.space.EMPTY
+                    || this.board.getCoords(x0-1,y0-1) == me
+                    || this.board.getCoords(x0-1,y0-1) == meKing);
+    }
+
+    public boolean checkCornersOther(int x0, int y0, CheckersBoard.space other, CheckersBoard.space otherKing){
+        return (this.board.getCoords(x0+1,y0+1) == other
+                    && this.board.getCoords(x0+2, y0+2) == CheckersBoard.space.EMPTY)
+                && (this.board.getCoords(x0+1,y0-1) == other
+                    && this.board.getCoords(x0+2, y0-2) == CheckersBoard.space.EMPTY)
+                && (this.board.getCoords(x0-1,y0+1) == other
+                    && this.board.getCoords(x0-2, y0+2) == CheckersBoard.space.EMPTY)
+                && (this.board.getCoords(x0-1,x0-1) == other
+                    && this.board.getCoords(x0-2, y0-2) == CheckersBoard.space.EMPTY);
+    }
+
     /**
      * ------------------------------------------------------------------------------------------------------
      * playTurn
@@ -110,6 +137,25 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
+        //Initialize Player1 space and Player 2 space
+        CheckersBoard.space me = null;
+        CheckersBoard.space meKing = null;
+        CheckersBoard.space other = null;
+        CheckersBoard.space otherKing = null;
+        if(currPlayer == this.player1){
+            me = CheckersBoard.space.PLAYER1;
+            meKing = CheckersBoard.space.PLAYER1KING;
+            other = CheckersBoard.space.PLAYER2;
+            otherKing = CheckersBoard.space.PLAYER2KING;
+        }
+        else if(currPlayer == this.player2){
+            me = CheckersBoard.space.PLAYER2;
+            meKing = CheckersBoard.space.PLAYER2KING;
+            other = CheckersBoard.space.PLAYER1;
+            otherKing = CheckersBoard.space.PLAYER1KING;
+        }
+
+        //Handle Attacks
         if(type == MoveType.ATTACK){
             this.board.attack(x0, y0, x1, y1, currPlayer);
             if(currPlayer.equals(this.player1)){
@@ -138,11 +184,20 @@ public class Game {
             }
         }
 
+        //Handle Moves
         if(type == MoveType.MOVE){
-            if(this.board.getCoords(x0+1,y0+1) == CheckersBoard.space.EMPTY
-                || this.board.getCoords(x0+1,y0-1) == CheckersBoard.space.EMPTY
-                || this.board.getCoords(x0-1,y0+1) == CheckersBoard.space.EMPTY
-                || this.board.getCoords(x0-1,x0-1) == CheckersBoard.space.EMPTY){
+            if(checkCorners(x0,y0,me,meKing)){
+                //If all Kiddie Corner spaces are empty or self-controlled, a move is valid
+                this.board.move(x0, y0, x1, y1, currPlayer);
+                if(currPlayer.equals(this.player1)){
+                    this.playerTurn = this.player2;
+                }
+                else if(currPlayer.equals(this.player2)) {
+                    this.playerTurn = this.player1;
+                }
+            }
+            else if(checkCornersOther(x0, y0, other, otherKing)){
+                //Or if any kiddie corner space is of the other player with no empty spaces beyond it
                 this.board.move(x0, y0, x1, y1, currPlayer);
                 if(currPlayer.equals(this.player1)){
                     this.playerTurn = this.player2;
