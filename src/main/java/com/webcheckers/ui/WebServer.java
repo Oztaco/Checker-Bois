@@ -212,7 +212,7 @@ public class WebServer {
     post(API_POST_MOVE_URL, new PostMakeMoveRoute(templateEngine, gameCenter));
 
     // The API call to resign
-    post(API_POST_RESIGN, new PostMakeMoveRoute(templateEngine, gameCenter));
+    post(API_POST_RESIGN, new PostResignRoute(templateEngine, gameCenter));
 
     // Log for debugging
     LOG.config("WebServer is initialized.");

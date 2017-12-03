@@ -66,6 +66,27 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
             }
         }
     }
+
+    if (checkerBoard.playerWon != -1) {
+        if (checkerBoard.player1_ID == checkerBoard.playerWon)
+            var winnerName = checkerBoard.player1_Name;
+        else if (checkerBoard.player2_ID == checkerBoard.playerWon)
+            var winnerName = checkerBoard.player2_Name;
+        else
+            var winnerName = "";
+        
+        if (winnerName === "")
+            var output = "Draw game";
+        else
+            var output = winnerName + " is victorious!";
+
+        ctx.textAlign = "center";
+        ctx.font = "60px Calibri";
+        ctx.fillStyle = themes[currentTheme].textShadowColor;
+        ctx.fillText(output, canvasElm.width / 2 + 2, canvasElm.height / 2 + 2);
+        ctx.fillStyle = themes[currentTheme].textColor;
+        ctx.fillText(output, canvasElm.width / 2, canvasElm.height / 2);
+    }
 }
 
 
@@ -74,6 +95,8 @@ themes = [
     {
         primaryColor: "#fdfdfd",
         secondaryColor: "#222",
-        highlightColor: "#444"
+        highlightColor: "#444",
+        textColor: "#f22",
+        textShadowColor: "#111"
     }
 ]

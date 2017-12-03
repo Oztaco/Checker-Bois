@@ -67,6 +67,7 @@ CheckersBoard.prototype.downloadBoard = function () {
         var responseJSON = JSON.parse(response);
         checkersBoard.activePlayer = responseJSON.activePlayer;
         checkersBoard.spectating = responseJSON.spectating;
+        checkersBoard.playerWon = responseJSON.playerWon;
         checkersBoard.player1_ID = responseJSON.player1_ID;
         checkersBoard.player2_ID = responseJSON.player2_ID;
         checkersBoard.player1_Name = responseJSON.player1_Name;
