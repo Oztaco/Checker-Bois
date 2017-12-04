@@ -243,11 +243,11 @@ public class CheckersBoard {
      * -------------------------------------------------------------------------------------------------------
      */
     public void kingPiece(int x, int y){
-        if(this.board[y][x] == space.PLAYER1){
-            this.board[y][x] = space.PLAYER1KING;
+        if(getCoords(x, y) == space.PLAYER1){
+            setCoords(x, y, space.PLAYER1KING);
         }
-        else if(this.board[y][x] == space.PLAYER2) {
-            this.board[y][x] = space.PLAYER2KING;
+        else if(getCoords(x, y) == space.PLAYER2) {
+            setCoords(x, y, space.PLAYER2KING);
         }
     }
 
@@ -311,6 +311,7 @@ public class CheckersBoard {
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
+                    kingCorrectPieces();
                 }
                 else {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
@@ -321,6 +322,7 @@ public class CheckersBoard {
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
+                    kingCorrectPieces();
                 }
                 else {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
@@ -332,6 +334,7 @@ public class CheckersBoard {
                         space tempSpace = getCoords(x0,y0);
                         setCoords(x0,y0,space.EMPTY);
                         setCoords(x1,y1,tempSpace);
+                        kingCorrectPieces();
                     }
                     else {
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
@@ -347,6 +350,7 @@ public class CheckersBoard {
                         space tempSpace = getCoords(x0,y0);
                         setCoords(x0,y0,space.EMPTY);
                         setCoords(x1,y1,tempSpace);
+                        kingCorrectPieces();
                     }
                     else {
                         throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
@@ -357,7 +361,16 @@ public class CheckersBoard {
                 }
             }
         }
+    }
 
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * kingCorrectPieces()
+     *
+     * Checks if a piece should be kinged and kings it
+     * -----------------------------------------------------------------------------------------------------------------
+     */
+    public void kingCorrectPieces(){
         //Check if any players should be kinged after a move
         for(int x = 0; x < 8; x++){
             if(getCoords(x,0) == space.PLAYER2){
@@ -370,6 +383,7 @@ public class CheckersBoard {
     }
 
     /**
+     * -----------------------------------------------------------------------------------------------------------------
      * uncheckedMove
      *
      * Moves a piece without checking validity, used for reverting moves and testing
@@ -378,6 +392,7 @@ public class CheckersBoard {
      * @param x1
      * @param y1
      * @param player
+     * -----------------------------------------------------------------------------------------------------------------
      */
     public void uncheckedMove(int x0, int y0, int x1, int y1, Player player){
         space tempSpace = this.board[y0][x0];
@@ -487,6 +502,7 @@ public class CheckersBoard {
                 space tempSpace = getCoords(x0,y0);
                 setCoords(x0,y0,space.EMPTY);
                 setCoords(x1,y1,tempSpace);
+                kingCorrectPieces();
 
                 //Handle Deletion of other player's piece
                 if(changeInX > 0 && changeInY > 0){
@@ -511,6 +527,7 @@ public class CheckersBoard {
                 space tempSpace = getCoords(x0,y0);
                 setCoords(x0,y0,space.EMPTY);
                 setCoords(x1,y1,tempSpace);
+                kingCorrectPieces();
 
                 //Handle Deletion of other player's piece
                 if(changeInX > 0 && changeInY > 0){
@@ -536,6 +553,7 @@ public class CheckersBoard {
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
+                    kingCorrectPieces();
 
                     //Handle Deletion of other player's piece
                     if(changeInX > 0 && changeInY > 0){
@@ -547,8 +565,8 @@ public class CheckersBoard {
                     else if(changeInX < 0 && changeInY > 0){
                         setCoords(x0-1, y0+1, space.EMPTY);
                     }
-                    else if(changeInX < 0 && changeInY < 0){
-                        setCoords(x0-1, y0-1, space.EMPTY);
+                    else if(changeInX < 0 && changeInY < 0) {
+                        setCoords(x0 - 1, y0 - 1, space.EMPTY);
                     }
                 }
                 else {
@@ -565,6 +583,7 @@ public class CheckersBoard {
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
+                    kingCorrectPieces();
 
                     //Handle Deletion of other player's piece
                     if(changeInX > 0 && changeInY > 0){
@@ -586,16 +605,6 @@ public class CheckersBoard {
             }
             else {
                 throw new InvalidMoveException("Only kings can move backwards");
-            }
-        }
-
-        //Check if any players should be kinged after a move
-        for(int x = 0; x < 8; x++){
-            if(getCoords(x,0) == space.PLAYER2){
-                kingPiece(x,0);     //King piece located at
-            }
-            else if(getCoords(x,7) == space.PLAYER1){
-                kingPiece(x,7);     //King piece located at
             }
         }
     }
