@@ -630,15 +630,15 @@ function inRange(n, min, max) { // Checks if 'n' is between 'min' and 'max'
 
 scene("_loader", {
 	init: function() {
-		//downloadResources();
+		downloadResources();
 	},
 	update: function() {
 		//console.log("load update");
-		//if (downloadDone) 
+		if (downloadDone) 
 			setScene("intro");
-		//else {
+		else {
 		//	console.log("Not done yet");
-		//}
+		}
 	},
 	draw: function() {
 	},
