@@ -161,6 +161,7 @@ public class Game {
             if(this.multiAttack == false){           //Not Player's first jump thus "turn"
                 this.board.attack(x0, y0, x1, y1, currPlayer);
                 this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                playerWon();
                 if (currPlayer.equals(this.player1)) {
                     this.player2Pieces--;
                 }
@@ -172,17 +173,18 @@ public class Game {
                 if(checkLastInMoveHistory(x0,y0)) {
                     this.board.attack(x0, y0, x1, y1, currPlayer);
                     this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    playerWon();
+                    if(currPlayer.equals(this.player1)){
+                        this.player2Pieces --;
+                    }
+                    else if(currPlayer.equals(this.player2)){
+                        this.player1Pieces--;
+                    }
                 }
                 else{
                     //Invalid to double jump with a different piece
                     throw(new InvalidMoveException("You must double attack with the same piece"));
                 }
-            }
-            if(currPlayer.equals(this.player1)){
-                this.player1Pieces --;
-            }
-            else if(currPlayer.equals(this.player2)){
-                this.player2Pieces--;
             }
         }
         //Handle Moves
@@ -203,6 +205,7 @@ public class Game {
                 if(!checkAttackCoordsP1(x0, y0, this.board.getCoords(x0, y0))){
                     this.board.move(x0,y0,x1,y1,currPlayer);
                     this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    playerWon();
                 }
                 else{
                     throw new InvalidMoveException("You must attack if you can: Move piece another direction");
@@ -224,6 +227,7 @@ public class Game {
                 if(!checkAttackCoordsP2(x0, y0, this.board.getCoords(x0, y0))){
                     this.board.move(x0,y0,x1,y1,currPlayer);
                     this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    playerWon();
                 }
                 else{
                     throw new InvalidMoveException("You must attack if you can: Move piece another direction");
