@@ -150,9 +150,9 @@ public class GameCenter {
     // Public Methods
     //##################################################################################################################
     public Lobby getLobby() {
-        Logger LOG = Logger.getLogger("DEBUG!!!!!!!!");
+        Logger LOG = Logger.getLogger("getLobby called: ");
 
-        LOG.severe("Oh my PEPEE lobby=" + this.lobby);
+        LOG.severe("lobby=" + this.lobby);
         return this.lobby;
     }
 }
