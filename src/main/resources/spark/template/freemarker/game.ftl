@@ -44,7 +44,7 @@
                     <p id="playerOneName" class="player left">Efe Ozturkoglu</p>
                     <p id="playerTwoName" class="player right">Person</p>
                 </div>
-                <canvas id="board" height="600" width="600">
+                <canvas id="board" height="1200" width="1200">
                     Your browser does not support HTML5 canvas. Please update your browser.
                 </canvas>
                 <a href="#" onclick="resign()">Resign</a>

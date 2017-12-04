@@ -143,8 +143,14 @@ function populateSidebarGames(sectionNum, gamesObject) {
                         var username2 = gamesObject.list[j].playerTwoUsername;
                         var id = gamesObject.list[j].id;
                         var listNode = stringToDOMNode(
-                            "<li><a href=\"#\" onclick=\"loadGame('" + id + "')\">"
-                                + username1 + "<br>" + username2 + "</a></li>"
+                            "<li>" +
+                                "<a href=\"#\" onclick=\"loadGame('" + id + "')\">" +
+                                "<div class=\"game\"><div>" +
+                                username1 + "</div>" +
+                                "<div class=\"versus\">VS</div><div class=\"right\">" +
+                                username2 + "</div>" +
+                                "</div></a>" +
+                            "</li>"
                         );
                         if (lobbyListItems[i + j])
                             insertAfter(lobbyListItems[i + j], listNode);
