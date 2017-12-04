@@ -155,12 +155,5 @@ themes = [
         playerOneStroke: "#B21E32",
         playerTwoFill: "#fdfdfd",
         playerTwoStroke: "#2B964D"
-    },
-    { // old
-        primaryColor: "#fdfdfd",
-        secondaryColor: "#222",
-        highlightColor: "#444",
-        textColor: "#f22",
-        textShadowColor: "#111"
     }
 ]
