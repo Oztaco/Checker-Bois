@@ -447,52 +447,60 @@ public class CheckersBoard {
             throw new InvalidMoveException("The contents of the tile do not match the player trying to play");
         }
 
-        //Throw exception if Moves have a distance of 1 from the original space
+        //Throw exception if Attacks have a distance of 2 from the original space
         else if(Math.abs(changeInX) != 2 || Math.abs(changeInY) != 2) {
-            throw new InvalidMoveException("Attacks must be a distance of 1 from the piece");
+            throw new InvalidMoveException("Attacks must be a distance of 2 from the piece");
         }
 
         else if(changeInX > 0 && changeInY > 0){ //BOTTOM RIGHT
             if(player.equals(player1) &&
-                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING
+                        ||this.getCoords(x0+1, y0+1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
             else if(player.equals(player2) &&
-                    (this.getCoords(x0+1, y0+1) == space.PLAYER2 || this.getCoords(x0+1, y0+1) == space.PLAYER2KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER2 || this.getCoords(x0+1, y0+1) == space.PLAYER2KING
+                            ||this.getCoords(x0+1, y0+1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
         }
 
         else if(changeInX > 0 && changeInY < 0){ //TOP RIGHT
             if(player.equals(player1) &&
-                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING
+                            ||this.getCoords(x0+1, y0-1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
             else if(player.equals(player2) &&
-                    (this.getCoords(x0+1, y0-1) == space.PLAYER2 || this.getCoords(x0+1, y0-1) == space.PLAYER2KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER2 || this.getCoords(x0+1, y0-1) == space.PLAYER2KING
+                            ||this.getCoords(x0+1, y0-1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
         }
 
         else if(changeInX < 0 && changeInY > 0){ //BOTTOM LEFT
             if(player.equals(player1) &&
-                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING
+                            ||this.getCoords(x0-1, y0+1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
             else if(player.equals(player2) &&
-                    (this.getCoords(x0-1, y0+1) == space.PLAYER2 || this.getCoords(x0-1, y0+1) == space.PLAYER2KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER2 || this.getCoords(x0-1, y0+1) == space.PLAYER2KING
+                            ||this.getCoords(x0-1, y0+1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
         }
 
         else if(changeInX < 0 && changeInY < 0){ //TOP LEFT
             if(player.equals(player1) &&
-                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING
+                            ||this.getCoords(x0-1, y0-1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
             else if(player.equals(player2) &&
-                    (this.getCoords(x0-1, y0-1) == space.PLAYER2 || this.getCoords(x0-1, y0-1) == space.PLAYER2KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER2 || this.getCoords(x0-1, y0-1) == space.PLAYER2KING
+                            ||this.getCoords(x0-1, y0-1) == space.EMPTY)){
+                throw new InvalidMoveException("You can't attack your own piece or an empty space!");
             }
         }
 

@@ -102,26 +102,6 @@ public class Game {
         return null;
     }
 
-    public boolean checkCorners(int x0, int y0, CheckersBoard.space me, CheckersBoard.space meKing){
-
-        return (   ((x0+1 < 8 && x0+1 > 0 && y0+1 < 8 && y0+1 > 0) &&
-                    (this.board.getCoords(x0+1,y0+1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0+1,y0+1) == me
-                    || this.board.getCoords(x0+1,y0+1) == meKing)) //Check if Bottom Right is Empty or controlled by same player
-                && ((x0+1 < 8 && x0+1 > 0 && y0-1 < 8 && y0-1 > 0) &&
-                    (this.board.getCoords(x0+1,y0-1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0+1,y0-1) == me
-                    || this.board.getCoords(x0+1,y0-1) == meKing)) //Check if Top Right is Empty or controlled by same player
-                && ((x0-1 < 8 && x0-1 > 0 && y0+1 < 8 && y0+1 > 0) &&
-                    (this.board.getCoords(x0-1,y0+1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0-1,y0+1) == me
-                    || this.board.getCoords(x0-1,y0+1) == meKing)) //Check if Bottom LeftRight is Empty or controlled by same player
-                && ((x0-1 < 8 && x0-1 > 0 && y0-1 < 8 && y0-1 > 0) &&
-                    (this.board.getCoords(x0-1,x0-1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0-1,y0-1) == me
-                    || this.board.getCoords(x0-1,y0-1) == meKing)));
-    }
-
     /**
      * ------------------------------------------------------------------------------------------------------
      * playTurn
@@ -138,47 +118,32 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
-        //setup me and others
-        CheckersBoard.space me = null;
-        CheckersBoard.space meKing = null;
-        CheckersBoard.space other = null;
-        CheckersBoard.space otherKing = null;
-        if(currPlayer == this.player1){
-            me = CheckersBoard.space.PLAYER1;
-            meKing = CheckersBoard.space.PLAYER1KING;
-            other = CheckersBoard.space.PLAYER2;
-            otherKing = CheckersBoard.space.PLAYER2KING;
-        }
-        else if(currPlayer == this.player2){
-            me = CheckersBoard.space.PLAYER2;
-            meKing = CheckersBoard.space.PLAYER2KING;
-            other = CheckersBoard.space.PLAYER1;
-            otherKing = CheckersBoard.space.PLAYER1KING;
-        }
 
         //Handle Attacks
         if(type == MoveType.ATTACK){
             if(this.multiAttack == false){           //Not Player's first jump thus "turn"
                 this.board.attack(x0, y0, x1, y1, currPlayer);
                 this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
-                playerWon();
                 if (currPlayer.equals(this.player1)) {
                     this.player2Pieces--;
+                    playerWon();
                 }
                 else if(currPlayer.equals(player2)){
                     this.player1Pieces--;
+                    playerWon();
                 }
             }
             else if(this.multiAttack == true){     //Players first jump this "turn"
                 if(checkLastInMoveHistory(x0,y0)) {
                     this.board.attack(x0, y0, x1, y1, currPlayer);
                     this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
-                    playerWon();
                     if(currPlayer.equals(this.player1)){
                         this.player2Pieces --;
+                        playerWon();
                     }
                     else if(currPlayer.equals(this.player2)){
                         this.player1Pieces--;
+                        playerWon();
                     }
                 }
                 else{
