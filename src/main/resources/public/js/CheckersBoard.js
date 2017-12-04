@@ -63,6 +63,10 @@ CheckersBoard.prototype.setPieceAt = function (x, y, piece) {
  * @param {int} y 
  */
 CheckersBoard.prototype.getPlayerOfPiece = function (x, y) {
+    if (!this.board[y]) {
+        console.log("Error in getPlayerOfPiece");
+        return -1;
+    }
     var piece = this.board[y][x];
     if (piece == BOARD_SPACE.PLAYER_1 || piece == BOARD_SPACE.PLAYER_1_KING)
         return 1;
