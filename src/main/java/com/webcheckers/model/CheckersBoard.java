@@ -305,50 +305,6 @@ public class CheckersBoard {
             throw new InvalidMoveException("Moves must be a distance of 1 from the piece");
         }
 
-        else if(changeInX > 0 && changeInY > 0){ //BOTTOM RIGHT
-            if(player.equals(player1) &&
-                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-            else if(player.equals(player2) &&
-                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-        }
-
-        else if(changeInX > 0 && changeInY < 0){ //TOP RIGHT
-            if(player.equals(player1) &&
-                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-            else if(player.equals(player2) &&
-                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-        }
-
-        else if(changeInX < 0 && changeInY > 0){ //BOTTOM LEFT
-            if(player.equals(player1) &&
-                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-            else if(player.equals(player2) &&
-                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-        }
-
-        else if(changeInX < 0 && changeInY < 0){ //TOP LEFT
-            if(player.equals(player1) &&
-                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-            else if(player.equals(player2) &&
-                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
-                throw new InvalidMoveException("You can't attack your own piece!");
-            }
-        }
-
         else {
             if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
                 if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
@@ -477,13 +433,106 @@ public class CheckersBoard {
         }
 
         //Throw exception if Moves have a distance of 1 from the original space
-        if(Math.abs(changeInX) != 2 || Math.abs(changeInY) != 2) {
+        else if(Math.abs(changeInX) != 2 || Math.abs(changeInY) != 2) {
             throw new InvalidMoveException("Attacks must be a distance of 1 from the piece");
         }
 
-        else {
-            if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
-                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+        else if(changeInX > 0 && changeInY > 0){ //BOTTOM RIGHT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER2 || this.getCoords(x0+1, y0+1) == space.PLAYER2KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX > 0 && changeInY < 0){ //TOP RIGHT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER2 || this.getCoords(x0+1, y0-1) == space.PLAYER2KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX < 0 && changeInY > 0){ //BOTTOM LEFT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER2 || this.getCoords(x0-1, y0+1) == space.PLAYER2KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX < 0 && changeInY < 0){ //TOP LEFT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER2 || this.getCoords(x0-1, y0-1) == space.PLAYER2KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+
+        if(me == space.PLAYER1KING){                //If space has a Player 1 King on tile, register move
+            if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                space tempSpace = getCoords(x0,y0);
+                setCoords(x0,y0,space.EMPTY);
+                setCoords(x1,y1,tempSpace);
+
+                //Handle Deletion of other player's piece
+                if(changeInX > 0 && changeInY > 0){
+                    setCoords(x0+1, y0+1, space.EMPTY);
+                }
+                else if(changeInX > 0 && changeInY < 0){
+                    setCoords(x0+1, y0-1, space.EMPTY);
+                }
+                else if(changeInX < 0 && changeInY > 0){
+                    setCoords(x0-1, y0+1, space.EMPTY);
+                }
+                else if(changeInX < 0 && changeInY < 0){
+                    setCoords(x0-1, y0-1, space.EMPTY);
+                }
+            }
+            else {
+                throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+            }
+        }
+        else if(me == space.PLAYER2KING){           //If space has a Player 2 King on tile, register move
+            if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+                space tempSpace = getCoords(x0,y0);
+                setCoords(x0,y0,space.EMPTY);
+                setCoords(x1,y1,tempSpace);
+
+                //Handle Deletion of other player's piece
+                if(changeInX > 0 && changeInY > 0){
+                    setCoords(x0+1, y0+1, space.EMPTY);
+                }
+                else if(changeInX > 0 && changeInY < 0){
+                    setCoords(x0+1, y0-1, space.EMPTY);
+                }
+                else if(changeInX < 0 && changeInY > 0){
+                    setCoords(x0-1, y0+1, space.EMPTY);
+                }
+                else if(changeInX < 0 && changeInY < 0){
+                    setCoords(x0-1, y0-1, space.EMPTY);
+                }
+            }
+            else {
+                throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
+            }
+        }
+        else if(me == space.PLAYER1){               //If space has a Player 1 on tile, register move
+            if(changeInY > 0){                      //if player is moving in the appropriate direction
+                if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
@@ -506,8 +555,13 @@ public class CheckersBoard {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                 }
             }
-            else if(me == space.PLAYER2KING){           //If space has a Player 2 King on tile, register move
-                if (getCoords(x1,y1) == space.EMPTY) {     //if space is not occupied, exception otherwise
+            else {
+                throw new InvalidMoveException("Only kings can move backwards");
+            }
+        }
+        else if(me == space.PLAYER2){               //If space has a Player 2 on tile, register move
+            if(changeInY < 0){                      //if player is moving in the appropriate direction
+                if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
                     space tempSpace = getCoords(x0,y0);
                     setCoords(x0,y0,space.EMPTY);
                     setCoords(x1,y1,tempSpace);
@@ -530,63 +584,8 @@ public class CheckersBoard {
                     throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
                 }
             }
-            else if(me == space.PLAYER1){               //If space has a Player 1 on tile, register move
-                if(changeInY > 0){                      //if player is moving in the appropriate direction
-                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
-                        space tempSpace = getCoords(x0,y0);
-                        setCoords(x0,y0,space.EMPTY);
-                        setCoords(x1,y1,tempSpace);
-
-                        //Handle Deletion of other player's piece
-                        if(changeInX > 0 && changeInY > 0){
-                            setCoords(x0+1, y0+1, space.EMPTY);
-                        }
-                        else if(changeInX > 0 && changeInY < 0){
-                            setCoords(x0+1, y0-1, space.EMPTY);
-                        }
-                        else if(changeInX < 0 && changeInY > 0){
-                            setCoords(x0-1, y0+1, space.EMPTY);
-                        }
-                        else if(changeInX < 0 && changeInY < 0){
-                            setCoords(x0-1, y0-1, space.EMPTY);
-                        }
-                    }
-                    else {
-                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
-                    }
-                }
-                else {
-                    throw new InvalidMoveException("Only kings can move backwards");
-                }
-            }
-            else if(me == space.PLAYER2){               //If space has a Player 2 on tile, register move
-                if(changeInY < 0){                      //if player is moving in the appropriate direction
-                    if (getCoords(x1,y1) == space.EMPTY) { //and if space if not occupied
-                        space tempSpace = getCoords(x0,y0);
-                        setCoords(x0,y0,space.EMPTY);
-                        setCoords(x1,y1,tempSpace);
-
-                        //Handle Deletion of other player's piece
-                        if(changeInX > 0 && changeInY > 0){
-                            setCoords(x0+1, y0+1, space.EMPTY);
-                        }
-                        else if(changeInX > 0 && changeInY < 0){
-                            setCoords(x0+1, y0-1, space.EMPTY);
-                        }
-                        else if(changeInX < 0 && changeInY > 0){
-                            setCoords(x0-1, y0+1, space.EMPTY);
-                        }
-                        else if(changeInX < 0 && changeInY < 0){
-                            setCoords(x0-1, y0-1, space.EMPTY);
-                        }
-                    }
-                    else {
-                        throw new InvalidMoveException("Space you want to move to is Occupied or Invalid");
-                    }
-                }
-                else {
-                    throw new InvalidMoveException("Only kings can move backwards");
-                }
+            else {
+                throw new InvalidMoveException("Only kings can move backwards");
             }
         }
 
