@@ -7,7 +7,7 @@
     <#if error??>
         <style>
             .modal.login {
-                height: 276px;
+                height: 296px;
                 width: 280px;
                 border-radius: 6px;
                 margin: 80px auto;

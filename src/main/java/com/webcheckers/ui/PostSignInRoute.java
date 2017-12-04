@@ -62,6 +62,7 @@ public class  PostSignInRoute implements Route {
 
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
+    vm.put("numPlayers", gameCenter.getNumOfPlayers());
 
     if (request.queryParams("username").equals("")) {
       vm.put("error", true);
