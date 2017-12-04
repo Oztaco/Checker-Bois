@@ -68,7 +68,7 @@ public class PostMakeMoveRoute implements Route{
         int y1 = Integer.valueOf(request.headers("y1"));
         MoveType m = MoveType.values()[Integer.valueOf(request.headers("moveType"))];
 
-        LOG.severe("!!!!!!!!!!!!!!!!!!!! YO GOOBER MADE A MOVE ===========================");
+        LOG.severe("=========== A MOVE WAS MADE ============");
         LOG.severe("Movetype: " + request.headers("moveType"));
         LOG.severe("gameID  : " + request.headers("gameID"));
         LOG.severe("x0      : " + request.headers("x0"));
@@ -79,7 +79,7 @@ public class PostMakeMoveRoute implements Route{
             gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
         }
         catch(InvalidMoveException e){
-            LOG.severe("HOLY FUK U MADE A NASTY MOVE");
+            LOG.severe("ERROR IN MOVE: "+ e.getMessage());
         }
         return "";
     }

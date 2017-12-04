@@ -251,23 +251,29 @@ public class Game {
 
     public boolean checkAttackCoordsP1(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
         if(mySpace == CheckersBoard.space.PLAYER1KING){
-            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+            return (   ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
                         (this.board.getCoords(x1+1,y1+1) == space
                             && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                        (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
                         (this.board.getCoords(x1+1,y1-1) == space
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
                         (this.board.getCoords(x1-1,y1+1) == space
                             && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                        (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
                         (this.board.getCoords(x1-1,y1-1) == space
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
         }
-        return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+        return (    ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
                     (this.board.getCoords(x1+1,y1+1) == space
                         && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                 || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
                     (this.board.getCoords(x1-1,y1+1) == space
                         && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)));
 
@@ -275,23 +281,29 @@ public class Game {
 
     public boolean checkAttackCoordsP2(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
         if(mySpace == CheckersBoard.space.PLAYER2KING){
-            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1+1,y1+1) == space
+            return (   ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        (this.board.getCoords(x1+1,y1+1) == space
                             && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1+1,y1-1) == space
+                        (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        (this.board.getCoords(x1+1,y1-1) == space
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1-1,y1+1) == space
+                        (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        (this.board.getCoords(x1-1,y1+1) == space
                             && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1-1,y1-1) == space
+                        (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        (this.board.getCoords(x1-1,y1-1) == space
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
         }
-        return (((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+        return (   ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
                     (this.board.getCoords(x1+1,y1-1) == space
                         && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                 || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
                     (this.board.getCoords(x1-1,y1-1) == space
                         && this.board.getCoords(x1-2, y1-2) == CheckersBoard.space.EMPTY)));
     }
