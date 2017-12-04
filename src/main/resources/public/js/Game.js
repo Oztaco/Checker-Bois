@@ -166,7 +166,7 @@ scene("opponentTurn", {
 		sceneStartedAt = Date.now();		
 	},
 	update: function () {
-		if (Date.now() - lastBoardUpdate > 3000) {
+		if (Date.now() - lastBoardUpdate > 1200) {
 			checkersBoard.downloadBoard();
 			lastBoardUpdate = Date.now();
 		}
@@ -226,7 +226,7 @@ scene("pingingServer", {
 
 	},
 	update: function () {
-		if (Date.now() - lastBoardUpdate > 3000) {
+		if (Date.now() - lastBoardUpdate > 1200) {
 			checkersBoard.downloadBoard();
 			lastBoardUpdate = Date.now();
 		}
