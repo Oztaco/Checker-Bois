@@ -132,6 +132,10 @@ function startGameWith(playerID) {
     hidePlayerLobby();
     postCreateBoard(function (response) {
         loadGame(response);
+        getLobby(function(response) {
+            var responseJSON = JSON.parse(response);
+            populateFullGamesLobby(responseJSON);
+        });
     }, playerID);
 }
 
