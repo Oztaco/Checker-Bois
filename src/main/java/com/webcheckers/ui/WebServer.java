@@ -95,6 +95,11 @@ public class WebServer {
    */
   public static final String API_POST_MOVE_URL = "api/make_move";
 
+  /**
+   * The URL pattern to make a move with the API
+   */
+  public static final String API_POST_RESIGN = "api/resign";
+
   //
   // Attributes
   //
@@ -205,6 +210,9 @@ public class WebServer {
 
     // The API call to create a game
     post(API_POST_MOVE_URL, new PostMakeMoveRoute(templateEngine, gameCenter));
+
+    // The API call to resign
+    post(API_POST_RESIGN, new PostResignRoute(templateEngine, gameCenter));
 
     // Log for debugging
     LOG.config("WebServer is initialized.");

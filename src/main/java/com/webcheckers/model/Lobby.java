@@ -129,8 +129,10 @@ public class Lobby {
         this.games.get(gameID).playTurn(currPlayer, x0,y0,x1,y1,m);
     }
 
-    public void playerResigned(String playerSessionID, String gameID){
+    public void playerResigned(String gameID, String playerSessionID) {
+        LOG.severe("Player ID {" + playerSessionID + "} resigned in game {" + gameID + "}");
         Player p = this.players.get(playerSessionID);
+        LOG.severe("Name= " + p.getName());
         this.games.get(gameID).playerResigned(p);
     }
 
@@ -180,6 +182,12 @@ public class Lobby {
     }
 
     public String getGameAsString(String gameID, String sessionID){
+        if (!this.games.containsKey(gameID)) {
+            String errorMsg =
+                "Game {" + gameID + "} not found in the lobby. Can not complete getGameAsString request.";
+            LOG.severe(errorMsg);
+            return errorMsg;
+        }
         return this.games.get(gameID).getGameAsString(this.players.get(sessionID));
     }
 
@@ -219,6 +227,12 @@ public class Lobby {
      * ----------------------------------------------------------------------------------------------------
      */
     public String getGamesAsStringForPlayer(String player){
+        if (!this.players.containsKey(player)) {
+            String errorMsg =
+                "Player {" + player + "} not found in the lobby. Can not complete getGamesAsStringForPlayer request.";
+            LOG.severe(errorMsg);
+            return errorMsg;
+        }
         String playerGames = "";
         if(this.players.get(player).getIds().size() > 0){
             for(String id : this.players.get(player).getIds()){     //For each game the player is currently enrolled in

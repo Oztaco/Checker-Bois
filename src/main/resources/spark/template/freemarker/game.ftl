@@ -44,7 +44,7 @@
                 <canvas id="board" height="600" width="600">
                     Your browser does not support HTML5 canvas. Please update your browser.
                 </canvas>
-                <a href="#">Resign</a>
+                <a href="#" onclick="resign()">Resign</a>
             </div>
         </div>
     </body>

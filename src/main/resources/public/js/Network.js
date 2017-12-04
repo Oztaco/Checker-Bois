@@ -31,7 +31,7 @@ ajaxRequest.prototype.send = function() {
     xhttp.open(this.method, this.path, true);
     for (var key in this.headers) {
         if (this.headers.hasOwnProperty(key)) {           
-            console.log(key, this.headers[key]);
+            // console.log(key, this.headers[key]);
             xhttp.setRequestHeader(key, this.headers[key]);
         }
     }
@@ -106,6 +106,20 @@ postMove = function(callback, gameID, moveType, x0, y0, x1, y1) {
             "y0": y0,
             "x1": x1,
             "y1": y1
+        },
+        function(response) {
+            callback(response);
+        }
+    )
+    request.send();
+}
+
+postResign = function(callback, gameID) {
+    var request = new ajaxRequest(
+        "POST",
+        "api/resign",
+        {
+            "gameID": gameID
         },
         function(response) {
             callback(response);
