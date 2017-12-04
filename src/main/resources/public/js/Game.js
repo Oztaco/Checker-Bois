@@ -2,8 +2,8 @@
  * This file handles the game states and animations
  */
 
-
-resource("kingHighlight", "image", ["img/king.png"])
+resource("kingHighlight", "image", ["img/king.png"]);
+resource("kingHighlightReverse", "image", ["img/king_retard.png"]);
 /**
  * The scene that runs when a game is not currently being displayed to the
  * player
@@ -281,6 +281,22 @@ function getMouseBoardCoords() {
 	var my = mouse.y - (DOM.canvas.getBoundingClientRect().top + 6 + document.documentElement.scrollTop);
 	my /= (DOM.canvas.clientHeight / 8);
 	my = Math.floor(my);
+	if (checkersBoard.getMyPlayerNumber() == 1) {
+		// mx = 7 - mx;
+		// my = 7 - my;
+		mx /= 7;
+		my /= 7;
+		mx -= .5;
+		my -= .5;
+		mx = (-1) * mx;
+		my = (-1) * my;
+		mx += .5;
+		my += .5;
+		mx *= 7;
+		my *= 7;
+		mx = Math.floor(mx);
+		my = Math.floor(my);
+	}
 	return {
 		x: mx,
 		y: my

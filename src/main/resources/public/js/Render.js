@@ -12,6 +12,14 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
     ctx.fillStyle = themes[currentTheme].secondaryColor;
     ctx.fillRect(0, 0, width, height);
 
+    var playerNumber = checkerBoard.getMyPlayerNumber();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (playerNumber == 1) {
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(Math.PI);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    }
+
     ctx.fillStyle = themes[currentTheme].primaryColor;
     for (var x = 0; x < 8; x++) {
         for (var y = 0; y < 8; y++) {
@@ -49,8 +57,12 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
                 );
                 ctx.fill();
                 ctx.stroke();
-                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1_KING)
-                    ctx.drawImage(res.kingHighlight.data, x * squareSize, y * squareSize, squareSize, squareSize);    
+                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1_KING) {
+                    var img = res.kingHighlight.data;
+                    if (playerNumber == 1)
+                        var img = res.kingHighlightReverse.data;
+                    ctx.drawImage(img, x * squareSize, y * squareSize, squareSize, squareSize);     
+                } 
             }
             else if (checkerBoard.getPlayerOfPiece(x, y) == 2) {
                 ctx.fillStyle = themes[currentTheme].playerTwoFill;
@@ -66,13 +78,17 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
                 );
                 ctx.fill();
                 ctx.stroke();
-                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2_KING)                
-                    ctx.drawImage(res.kingHighlight.data, x * squareSize, y * squareSize, squareSize, squareSize);    
-                
+                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2_KING) {
+                    var img = res.kingHighlight.data;
+                    if (playerNumber == 1)
+                        var img = res.kingHighlightReverse.data;            
+                    ctx.drawImage(img, x * squareSize, y * squareSize, squareSize, squareSize);  
+                }  
             }
         }
     }
 
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (checkerBoard.playerWon != -1) {
         if (checkerBoard.player1_ID == checkerBoard.playerWon)
             var winnerName = checkerBoard.player1_Name;
