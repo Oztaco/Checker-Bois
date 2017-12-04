@@ -134,6 +134,9 @@ scene("playerInput", {
 				else
 					moveType = 1;
 				postMove(function(response) {
+					if (response != "Valid Move") {
+						alert(response);
+					}
 					console.log("Make move returned: " + response);
 					setScene("pingingServer");				
 				}, checkersBoard.gameID, moveType, x0, y0, x1, y1);
