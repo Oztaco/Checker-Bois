@@ -57,7 +57,12 @@ public class Game {
     public Player getPlayerTurn() {
         return playerTurn;
     }
-
+    public int getPlayer1Pieces(){
+        return player1Pieces;
+    }
+    public int getPlayer2Pieces() {
+        return player2Pieces;
+    }
 
 /*  #######################################################################################################
     Public Methods
@@ -97,32 +102,6 @@ public class Game {
         return null;
     }
 
-    public boolean checkCorners(int x0, int y0, CheckersBoard.space me, CheckersBoard.space meKing){
-        return (this.board.getCoords(x0+1,y0+1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0+1,y0+1) == me
-                    || this.board.getCoords(x0+1,y0+1) == meKing) //Check if Bottom Right is Empty or controlled by same player
-                && (this.board.getCoords(x0+1,y0-1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0+1,y0-1) == me
-                    || this.board.getCoords(x0+1,y0-1) == meKing) //Check if Top Right is Empty or controlled by same player
-                && (this.board.getCoords(x0-1,y0+1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0-1,y0+1) == me
-                    || this.board.getCoords(x0-1,y0+1) == meKing) //Check if Bottom LeftRight is Empty or controlled by same player
-                && (this.board.getCoords(x0-1,x0-1) == CheckersBoard.space.EMPTY
-                    || this.board.getCoords(x0-1,y0-1) == me
-                    || this.board.getCoords(x0-1,y0-1) == meKing);
-    }
-
-    public boolean checkCornersOther(int x0, int y0, CheckersBoard.space other, CheckersBoard.space otherKing){
-        return (this.board.getCoords(x0+1,y0+1) == other
-                    && this.board.getCoords(x0+2, y0+2) == CheckersBoard.space.EMPTY)
-                && (this.board.getCoords(x0+1,y0-1) == other
-                    && this.board.getCoords(x0+2, y0-2) == CheckersBoard.space.EMPTY)
-                && (this.board.getCoords(x0-1,y0+1) == other
-                    && this.board.getCoords(x0-2, y0+2) == CheckersBoard.space.EMPTY)
-                && (this.board.getCoords(x0-1,x0-1) == other
-                    && this.board.getCoords(x0-2, y0-2) == CheckersBoard.space.EMPTY);
-    }
-
     /**
      * ------------------------------------------------------------------------------------------------------
      * playTurn
@@ -139,51 +118,87 @@ public class Game {
      * ------------------------------------------------------------------------------------------------------
      */
     public void playTurn(Player currPlayer, int x0, int y0, int x1, int y1, MoveType type) throws InvalidMoveException{
-        //setup me and others
-        CheckersBoard.space me = null;
-        CheckersBoard.space meKing = null;
-        CheckersBoard.space other = null;
-        CheckersBoard.space otherKing = null;
-        if(currPlayer == this.player1){
-            me = CheckersBoard.space.PLAYER1;
-            meKing = CheckersBoard.space.PLAYER1KING;
-            other = CheckersBoard.space.PLAYER2;
-            otherKing = CheckersBoard.space.PLAYER2KING;
-        }
-        else if(currPlayer == this.player2){
-            me = CheckersBoard.space.PLAYER2;
-            meKing = CheckersBoard.space.PLAYER2KING;
-            other = CheckersBoard.space.PLAYER1;
-            otherKing = CheckersBoard.space.PLAYER1KING;
-        }
 
         //Handle Attacks
         if(type == MoveType.ATTACK){
             if(this.multiAttack == false){           //Not Player's first jump thus "turn"
                 this.board.attack(x0, y0, x1, y1, currPlayer);
                 this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                if (currPlayer.equals(this.player1)) {
+                    this.player2Pieces--;
+                    playerWon();
+                }
+                else if(currPlayer.equals(player2)){
+                    this.player1Pieces--;
+                    playerWon();
+                }
             }
             else if(this.multiAttack == true){     //Players first jump this "turn"
                 if(checkLastInMoveHistory(x0,y0)) {
                     this.board.attack(x0, y0, x1, y1, currPlayer);
                     this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    if(currPlayer.equals(this.player1)){
+                        this.player2Pieces --;
+                        playerWon();
+                    }
+                    else if(currPlayer.equals(this.player2)){
+                        this.player1Pieces--;
+                        playerWon();
+                    }
                 }
                 else{
                     //Invalid to double jump with a different piece
-                    throw(new InvalidMoveException("You fuck fucked it fuck"));
+                    throw(new InvalidMoveException("You must double attack with the same piece"));
                 }
-            }
-            if(currPlayer.equals(this.player1)){
-                this.player1Pieces --;
-            }
-            else if(currPlayer.equals(this.player2)){
-                this.player2Pieces--;
             }
         }
         //Handle Moves
         else if(type == MoveType.MOVE){
-            this.board.move(x0,y0,x1,y1,currPlayer);
-            this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+            if(currPlayer.equals(this.player1)){
+                for(int i =0; i < 8; i++){
+                    for(int j = 0; j < 8; j++){
+                        if(this.board.getCoords(i,j) == CheckersBoard.space.PLAYER1 ||
+                                this.board.getCoords(i, j) == CheckersBoard.space.PLAYER1KING){
+                            if(i != x0 && j != y0){
+                                if(checkAttackCoordsP1(i, j, this.board.getCoords(i, j))){
+                                    throw new InvalidMoveException("You must attack if you can: Move another piece");
+                                }
+                            }
+                        }
+                    }
+                }
+                if(!checkAttackCoordsP1(x0, y0, this.board.getCoords(x0, y0))){
+                    this.board.move(x0,y0,x1,y1,currPlayer);
+                    this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    playerWon();
+                }
+                else{
+                    throw new InvalidMoveException("You must attack if you can: Move piece another direction");
+                }
+            }
+            else if(currPlayer.equals(this.player2)){
+                for(int i =0; i < 8; i++){
+                    for(int j = 0; j < 8; j++){
+                        if(this.board.getCoords(i,j) == CheckersBoard.space.PLAYER2 ||
+                                this.board.getCoords(i, j) == CheckersBoard.space.PLAYER2KING){
+                            if(i != x0 && j != y0){
+                                if(checkAttackCoordsP2(i, j, this.board.getCoords(i, j))){
+                                    throw new InvalidMoveException("You must attack if you can: Move another piece");
+                                }
+                            }
+                        }
+                    }
+                }
+                if(!checkAttackCoordsP2(x0, y0, this.board.getCoords(x0, y0))){
+                    this.board.move(x0,y0,x1,y1,currPlayer);
+                    this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                    playerWon();
+                }
+                else{
+                    throw new InvalidMoveException("You must attack if you can: Move piece another direction");
+                }
+            }
+
         }
         chooseNext(x1, y1, currPlayer, type);
     }
@@ -227,7 +242,7 @@ public class Game {
         }
         else {
             if(currPlayer.equals(this.player1)){
-                if(checkAttackCoordsP1(x1,y1,CheckersBoard.space.PLAYER2, this.board.getCoords(x1,y1))){
+                if(checkAttackCoordsP1(x1, y1, this.board.getCoords(x1,y1))){
                     this.playerTurn = this.player1; //Player 1 Turn remains if there is a valid attack to make
                     this.multiAttack = true;
                 }
@@ -237,7 +252,7 @@ public class Game {
                 }
             }
             else if(currPlayer.equals(this.player2)){
-                if(checkAttackCoordsP2(x1,y1,CheckersBoard.space.PLAYER1, this.board.getCoords(x1,y1))){
+                if(checkAttackCoordsP2(x1, y1, this.board.getCoords(x1,y1))){
                     this.playerTurn = this.player2; //Player 2 Turn remains if there is a valid attack to make
                     this.multiAttack = true;
                 }
@@ -249,50 +264,74 @@ public class Game {
         }
     }
 
-    public boolean checkAttackCoordsP1(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
+    public boolean checkAttackCoordsP1(int x1, int y1, CheckersBoard.space mySpace){
         if(mySpace == CheckersBoard.space.PLAYER1KING){
-            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                        (this.board.getCoords(x1+1,y1+1) == space
+            return (   ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        ((this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2 ||
+                            this.board.getCoords(x1+1, y1+1) == CheckersBoard.space.PLAYER2KING)
                             && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                        (this.board.getCoords(x1+1,y1-1) == space
+                        (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        ((this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER2 ||
+                            this.board.getCoords(x1+1, y1-1) == CheckersBoard.space.PLAYER2KING)
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                        (this.board.getCoords(x1-1,y1+1) == space
+                        (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        ((this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2 ||
+                            this.board.getCoords(x1-1, y1+1) == CheckersBoard.space.PLAYER2KING)
                             && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                        (this.board.getCoords(x1-1,y1-1) == space
-                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
+                        (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        ((this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER2 ||
+                            this.board.getCoords(x1-1, y1-1) == CheckersBoard.space.PLAYER2KING)
+                            && this.board.getCoords(x1-2, y1-2) == CheckersBoard.space.EMPTY)));
         }
-        return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1+1,y1+1) == space
+        return (   ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                    (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                    ((this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER2 ||
+                        this.board.getCoords(x1+1, y1+1) == CheckersBoard.space.PLAYER2KING)
                         && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                 || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1-1,y1+1) == space
+                    (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                    ((this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2 ||
+                        this.board.getCoords(x1-1, y1+1) == CheckersBoard.space.PLAYER2KING)
                         && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)));
 
     }
 
-    public boolean checkAttackCoordsP2(int x1, int y1, CheckersBoard.space space, CheckersBoard.space mySpace){
+    public boolean checkAttackCoordsP2(int x1, int y1, CheckersBoard.space mySpace){
         if(mySpace == CheckersBoard.space.PLAYER2KING){
-            return (((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1+1,y1+1) == space
+            return (   ((x1+1 < 8 && x1+1 > 0 && y1+1 < 8 && y1+1 > 0) &&
+                        (x1+2 < 8 && x1+2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        ((this.board.getCoords(x1+1,y1+1) == CheckersBoard.space.PLAYER1 ||
+                            this.board.getCoords(x1+1, y1+1) == CheckersBoard.space.PLAYER1KING)
                             && this.board.getCoords(x1+2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1+1,y1-1) == space
+                        (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        ((this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER1 ||
+                            this.board.getCoords(x1+1, y1-1) == CheckersBoard.space.PLAYER1KING)
                             && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1+1 < 8 && y1+1 > 0) &&
-                    (this.board.getCoords(x1-1,y1+1) == space
+                        (x1-2 < 8 && x1-2 > 0 && y1+2 < 8 && y1+2 > 0) &&
+                        ((this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER1 ||
+                            this.board.getCoords(x1-1, y1+1) == CheckersBoard.space.PLAYER1KING)
                             && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY))
                     || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1-1,y1-1) == space
-                            && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY)));
+                        (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                        ((this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER1 ||
+                            this.board.getCoords(x1-1, y1-1) == CheckersBoard.space.PLAYER1KING)
+                            && this.board.getCoords(x1-2, y1-2) == CheckersBoard.space.EMPTY)));
         }
-        return (((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1+1,y1-1) == space
+        return (   ((x1+1 < 8 && x1+1 > 0 && y1-1 < 8 && y1-1 > 0) &&
+                    (x1+2 < 8 && x1+2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                    ((this.board.getCoords(x1+1,y1-1) == CheckersBoard.space.PLAYER1 ||
+                        this.board.getCoords(x1+1, y1-1) == CheckersBoard.space.PLAYER1KING)
                         && this.board.getCoords(x1+2, y1-2) == CheckersBoard.space.EMPTY))
                 || ((x1-1 < 8 && x1-1 > 0 && y1-1 < 8 && y1-1 > 0) &&
-                    (this.board.getCoords(x1-1,y1-1) == space
+                    (x1-2 < 8 && x1-2 > 0 && y1-2 < 8 && y1-2 > 0) &&
+                    ((this.board.getCoords(x1-1,y1-1) == CheckersBoard.space.PLAYER1 ||
+                        this.board.getCoords(x1-1, y1-1) == CheckersBoard.space.PLAYER1KING)
                         && this.board.getCoords(x1-2, y1-2) == CheckersBoard.space.EMPTY)));
     }
 

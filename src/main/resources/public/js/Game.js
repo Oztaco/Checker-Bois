@@ -3,6 +3,7 @@
  */
 
 
+resource("kingHighlight", "image", ["img/king.png"])
 /**
  * The scene that runs when a game is not currently being displayed to the
  * player
@@ -85,7 +86,7 @@ scene("currentPlayerTurn", {
 		var step3Time = step2Time + config.timing.textFadeOut;
 		if (timeElapsed < step1Time) {
 			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
-			console.log("boy" + (timeElapsed / step1Time));
+			// console.log("boy" + (timeElapsed / step1Time));
 		}
 		else if (timeElapsed < step2Time) {
 			renderBoardText(DOM.canvas, output);	
@@ -275,10 +276,10 @@ scene("spectating", {
 
 function getMouseBoardCoords() {
 	var mx = mouse.x - (DOM.canvas.getBoundingClientRect().left + 6 + document.documentElement.scrollLeft);
-	mx /= (DOM.canvas.width / 8);
+	mx /= (DOM.canvas.clientWidth / 8);
 	mx = Math.floor(mx);
 	var my = mouse.y - (DOM.canvas.getBoundingClientRect().top + 6 + document.documentElement.scrollTop);
-	my /= (DOM.canvas.height / 8);
+	my /= (DOM.canvas.clientHeight / 8);
 	my = Math.floor(my);
 	return {
 		x: mx,

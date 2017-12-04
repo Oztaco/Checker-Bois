@@ -150,9 +150,17 @@ public class GameCenter {
     // Public Methods
     //##################################################################################################################
     public Lobby getLobby() {
-        Logger LOG = Logger.getLogger("DEBUG!!!!!!!!");
+        Logger LOG = Logger.getLogger("getLobby called: ");
 
-        LOG.severe("Oh my PEPEE lobby=" + this.lobby);
+        LOG.severe("lobby=" + this.lobby);
         return this.lobby;
+    }
+
+    public int getPlayer1Pieces(String gameID){
+        return this.lobby.getPlayer1Pieces(gameID);
+    }
+
+    public int getPlayer2Pieces(String gameID){
+        return this.lobby.getPlayer2Pieces(gameID);
     }
 }

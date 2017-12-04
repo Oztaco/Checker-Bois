@@ -42,6 +42,14 @@ public class Lobby {
 
     }
 
+    public int getPlayer1Pieces(String gameID){
+        return this.getGame(gameID).getPlayer1Pieces();
+    }
+
+    public int getPlayer2Pieces(String gameID){
+        return this.getGame(gameID).getPlayer2Pieces();
+    }
+
 /*  #######################################################################################################
     Lobby Management Methods
     #######################################################################################################*/

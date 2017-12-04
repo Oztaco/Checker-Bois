@@ -138,6 +138,7 @@ function startGameWith(playerID) {
 function loadGame(gameID) {
     checkersBoard.gameID = gameID;
     checkersBoard.downloadBoard();
+    DOM.canvas.style.outlineColor = themes[currentTheme].secondaryColor;
 }
 
 
