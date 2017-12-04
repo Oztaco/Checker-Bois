@@ -13,7 +13,7 @@
         <p class="label">Please pick a username</p>
         <input type="text" name="username" placeholder="Username" />
     <#if error??>
-        <div>
+        <div class="error">
         ${error_message}
         </div>
     </#if>

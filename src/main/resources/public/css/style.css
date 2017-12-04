@@ -70,3 +70,8 @@ input[type=submit]:hover {
   margin: 80px auto;
   box-shadow: 0 12px 50px rgba(0,0,0,0.3);
 }
+
+.modal .error {
+  color: #F00;
+  padding: 14px 14px;
+}
