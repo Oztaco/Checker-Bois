@@ -212,16 +212,21 @@ public class CheckersBoard {
         this.board[x][y] = newSpace;
     }
 
-
+    /**
+     * ----------------------------------------------------------------------------------------------------
+     * getCoords
+     *
+     * gets the coordinates of the specified position
+     * @param x
+     * @param y
+     * @return
+     * -----------------------------------------------------------------------------------------------------
+     */
     public space getCoords(int x, int y){
         if(x < 0 || x > 8 || y < 0 || y > 8){
             return space.INVALID;
         }
         return this.board[x][y];
-    }
-
-    public space getCoords(space[][] board2, int x, int y){
-        return board2[x][y];
     }
 
 
@@ -296,8 +301,52 @@ public class CheckersBoard {
         }
 
         //Throw exception if Moves have a distance of 1 from the original space
-        if(Math.abs(changeInX) != 1 || Math.abs(changeInY) != 1) {
+        else if(Math.abs(changeInX) != 1 || Math.abs(changeInY) != 1) {
             throw new InvalidMoveException("Moves must be a distance of 1 from the piece");
+        }
+
+        else if(changeInX > 0 && changeInY > 0){ //BOTTOM RIGHT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0+1, y0+1) == space.PLAYER1 || this.getCoords(x0+1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX > 0 && changeInY < 0){ //TOP RIGHT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0+1, y0-1) == space.PLAYER1 || this.getCoords(x0+1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX < 0 && changeInY > 0){ //BOTTOM LEFT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0-1, y0+1) == space.PLAYER1 || this.getCoords(x0-1, y0+1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+        }
+
+        else if(changeInX < 0 && changeInY < 0){ //TOP LEFT
+            if(player.equals(player1) &&
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
+            else if(player.equals(player2) &&
+                    (this.getCoords(x0-1, y0-1) == space.PLAYER1 || this.getCoords(x0-1, y0-1) == space.PLAYER1KING)){
+                throw new InvalidMoveException("You can't attack your own piece!");
+            }
         }
 
         else {
@@ -389,8 +438,6 @@ public class CheckersBoard {
      * Performs an attack, where the current player's
      * piece leaps over an enemy piece, which is then
      * removed from the board.
-     *
-     * //TODO REDO FOR NEW STYLE
      *
      * @param x0 - initial x position
      * @param y0 - initial y position
@@ -624,6 +671,14 @@ public class CheckersBoard {
         }
     }
 
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * printArray
+     *
+     * prints any 2d array
+     * @param board
+     * -----------------------------------------------------------------------------------------------------------------
+     */
     public void printArray(space[][] board){
         System.out.println("");
         String val;
@@ -653,6 +708,21 @@ public class CheckersBoard {
             }
             System.out.println("");
         }
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * getCoords
+     *
+     * Gets coordinates specified in a specified 2d array
+     * @param board2
+     * @param x
+     * @param y
+     * @return
+     * -----------------------------------------------------------------------------------------------------------------
+     */
+    public space getCoords(space[][] board2, int x, int y){
+        return board2[x][y];
     }
 
     public static void main(String args[]) throws InvalidMoveException {
