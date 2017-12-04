@@ -77,11 +77,14 @@ public class PostMakeMoveRoute implements Route{
         LOG.severe("y1      : " + request.headers("y1"));
         try{
             gameCenter.makeMove(gameID, x0,y0,x1,y1,m);
+            LOG.severe("Player 1 Pieces: " + gameCenter.getPlayer1Pieces(gameID));
+            LOG.severe("Player 2 Pieces: " + gameCenter.getPlayer2Pieces(gameID));
+            return "Valid Move";
         }
         catch(InvalidMoveException e){
             LOG.severe("ERROR IN MOVE: "+ e.getMessage());
+            return e.getMessage();
         }
-        return "";
     }
 
 }

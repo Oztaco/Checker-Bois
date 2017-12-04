@@ -57,7 +57,12 @@ public class Game {
     public Player getPlayerTurn() {
         return playerTurn;
     }
-
+    public int getPlayer1Pieces(){
+        return player1Pieces;
+    }
+    public int getPlayer2Pieces() {
+        return player2Pieces;
+    }
 
 /*  #######################################################################################################
     Public Methods
@@ -156,6 +161,12 @@ public class Game {
             if(this.multiAttack == false){           //Not Player's first jump thus "turn"
                 this.board.attack(x0, y0, x1, y1, currPlayer);
                 this.moveHistory.add(new PastMove(x0, y0, x1, y1, type, currPlayer));
+                if (currPlayer.equals(this.player1)) {
+                    this.player2Pieces--;
+                }
+                else if(currPlayer.equals(player2)){
+                    this.player1Pieces--;
+                }
             }
             else if(this.multiAttack == true){     //Players first jump this "turn"
                 if(checkLastInMoveHistory(x0,y0)) {
@@ -164,7 +175,7 @@ public class Game {
                 }
                 else{
                     //Invalid to double jump with a different piece
-                    throw(new InvalidMoveException("You fuck fucked it fuck"));
+                    throw(new InvalidMoveException("You must double attack with the same piece"));
                 }
             }
             if(currPlayer.equals(this.player1)){

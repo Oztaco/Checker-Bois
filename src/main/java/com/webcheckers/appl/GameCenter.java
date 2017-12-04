@@ -155,4 +155,12 @@ public class GameCenter {
         LOG.severe("lobby=" + this.lobby);
         return this.lobby;
     }
+
+    public int getPlayer1Pieces(String gameID){
+        return this.lobby.getPlayer1Pieces(gameID);
+    }
+
+    public int getPlayer2Pieces(String gameID){
+        return this.lobby.getPlayer2Pieces(gameID);
+    }
 }
