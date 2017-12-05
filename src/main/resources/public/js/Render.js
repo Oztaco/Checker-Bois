@@ -155,5 +155,49 @@ themes = [
         playerOneStroke: "#B21E32",
         playerTwoFill: "#fdfdfd",
         playerTwoStroke: "#2B964D"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#F29C32",
+        highlightColor: "#542CAA",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#8D5AED",
+        playerOneStroke: "#6031BF",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#CC740A"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#FA6BAA",
+        highlightColor: "#962558",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#962558",
+        playerOneStroke: "#541B3D",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#BA306E"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#82C440",
+        highlightColor: "#357299",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#4CC3FF",
+        playerOneStroke: "#438FC1",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#5F8D31"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#D82920",
+        highlightColor: "#68120F",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#FF5B5B",
+        playerOneStroke: "#821713",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#991B16"
     }
 ]
