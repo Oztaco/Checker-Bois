@@ -59,7 +59,7 @@ function init() {
             var responseJSON = JSON.parse(response);
             populateFullGamesLobby(responseJSON);
         });
-    }, 5000);
+    }, 2500);
 }
 
 function updateAllBoards() {

@@ -2,7 +2,8 @@
  * This file handles the game states and animations
  */
 
-
+resource("kingHighlight", "image", ["img/king.png"]);
+resource("kingHighlightReverse", "image", ["img/king_retard.png"]);
 /**
  * The scene that runs when a game is not currently being displayed to the
  * player
@@ -49,6 +50,7 @@ scene("currentPlayerTurn", {
 		console.log("Current scene: currentPlayerTurn");
 		mouseAlreadyPressed = false;
 		sceneStartedAt = Date.now();
+		opponentTurnAnimed = false;
 	},
 	update: function () {
 		if (keys.m)
@@ -85,7 +87,7 @@ scene("currentPlayerTurn", {
 		var step3Time = step2Time + config.timing.textFadeOut;
 		if (timeElapsed < step1Time) {
 			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
-			console.log("boy" + (timeElapsed / step1Time));
+			// console.log("boy" + (timeElapsed / step1Time));
 		}
 		else if (timeElapsed < step2Time) {
 			renderBoardText(DOM.canvas, output);	
@@ -133,6 +135,9 @@ scene("playerInput", {
 				else
 					moveType = 1;
 				postMove(function(response) {
+					if (response != "Valid Move") {
+						alert(response);
+					}
 					console.log("Make move returned: " + response);
 					setScene("pingingServer");				
 				}, checkersBoard.gameID, moveType, x0, y0, x1, y1);
@@ -152,6 +157,7 @@ scene("playerInput", {
 	}
 });
 
+var opponentTurnAnimed = false;
 /**
  * The scene that runs when it is the opponent's turn. Should keep pinging the
  * server every 5 second to check for a move.
@@ -162,7 +168,7 @@ scene("opponentTurn", {
 		sceneStartedAt = Date.now();		
 	},
 	update: function () {
-		if (Date.now() - lastBoardUpdate > 3000) {
+		if (Date.now() - lastBoardUpdate > 1200) {
 			checkersBoard.downloadBoard();
 			lastBoardUpdate = Date.now();
 		}
@@ -180,12 +186,13 @@ scene("opponentTurn", {
 		var step1Time = config.timing.textFadeIn
 		var step2Time = step1Time + config.timing.textDuration;
 		var step3Time = step2Time + config.timing.textFadeOut;
-		if (timeElapsed < step1Time) {
+		if (timeElapsed < step1Time && !opponentTurnAnimed) {
 			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
 			console.log("boy" + (timeElapsed / step1Time));
 		}
-		else if (timeElapsed < step2Time) {
-			renderBoardText(DOM.canvas, output);	
+		else if (timeElapsed < step2Time || opponentTurnAnimed) {
+			renderBoardText(DOM.canvas, output);
+			opponentTurnAnimed = true;
 		}
 		else if (timeElapsed < step3Time) {
 			renderBoardText(DOM.canvas, output, 1 - ((timeElapsed - step2Time) / config.timing.textFadeOut));		
@@ -222,7 +229,7 @@ scene("pingingServer", {
 
 	},
 	update: function () {
-		if (Date.now() - lastBoardUpdate > 3000) {
+		if (Date.now() - lastBoardUpdate > 1200) {
 			checkersBoard.downloadBoard();
 			lastBoardUpdate = Date.now();
 		}
@@ -275,11 +282,27 @@ scene("spectating", {
 
 function getMouseBoardCoords() {
 	var mx = mouse.x - (DOM.canvas.getBoundingClientRect().left + 6 + document.documentElement.scrollLeft);
-	mx /= (DOM.canvas.width / 8);
+	mx /= (DOM.canvas.clientWidth / 8);
 	mx = Math.floor(mx);
 	var my = mouse.y - (DOM.canvas.getBoundingClientRect().top + 6 + document.documentElement.scrollTop);
-	my /= (DOM.canvas.height / 8);
+	my /= (DOM.canvas.clientHeight / 8);
 	my = Math.floor(my);
+	if (checkersBoard.getMyPlayerNumber() == 1) {
+		// mx = 7 - mx;
+		// my = 7 - my;
+		mx /= 7;
+		my /= 7;
+		mx -= .5;
+		my -= .5;
+		mx = (-1) * mx;
+		my = (-1) * my;
+		mx += .5;
+		my += .5;
+		mx *= 7;
+		my *= 7;
+		mx = Math.floor(mx);
+		my = Math.floor(my);
+	}
 	return {
 		x: mx,
 		y: my

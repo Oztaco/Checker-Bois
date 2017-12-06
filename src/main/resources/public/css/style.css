@@ -78,7 +78,7 @@ input[type=submit]:hover {
 }
 
 #numPlayers {
-  color: #fff;
-  font-size: 10px;
+  color: #ff0000;
+  padding: 8px;
   text-align: center;
 }

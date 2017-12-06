@@ -12,6 +12,14 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
     ctx.fillStyle = themes[currentTheme].secondaryColor;
     ctx.fillRect(0, 0, width, height);
 
+    var playerNumber = checkerBoard.getMyPlayerNumber();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (playerNumber == 1) {
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(Math.PI);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    }
+
     ctx.fillStyle = themes[currentTheme].primaryColor;
     for (var x = 0; x < 8; x++) {
         for (var y = 0; y < 8; y++) {
@@ -26,18 +34,19 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
 
     if (highlights) {
         for (var i = 0; i < highlights.length; i++) {
-            ctx.fillStyle = themes[currentTheme].highlightColor;
-            ctx.fillRect(highlights[i].x * squareSize, highlights[i].y * squareSize, squareSize, squareSize);
+            ctx.strokeStyle = themes[currentTheme].highlightColor;
+            ctx.lineWidth = 12;
+            ctx.strokeRect(highlights[i].x * squareSize + 6, highlights[i].y * squareSize + 6, squareSize - 12, squareSize - 12);
         }
     }
 
-    var pieceSize = squareSize * .75;
+    var pieceSize = squareSize * .70;
     for (var x = 0; x < 8; x++) {
         for (var y = 0; y < 8; y++) {
-            if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1) {
-                ctx.fillStyle = "#d00";
-                ctx.strokeStyle = "#500";
-                ctx.lineWidth = 3;
+            if (checkerBoard.getPlayerOfPiece(x, y) == 1) {
+                ctx.fillStyle = themes[currentTheme].playerOneFill;
+                ctx.strokeStyle = themes[currentTheme].playerOneStroke;
+                ctx.lineWidth = 8;
                 ctx.beginPath();
                 ctx.arc(
                     (x * squareSize) + (squareSize / 2),
@@ -48,11 +57,17 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
                 );
                 ctx.fill();
                 ctx.stroke();
+                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_1_KING) {
+                    var img = res.kingHighlight.data;
+                    if (playerNumber == 1)
+                        var img = res.kingHighlightReverse.data;
+                    ctx.drawImage(img, x * squareSize, y * squareSize, squareSize, squareSize);     
+                } 
             }
-            else if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2) {
-                ctx.fillStyle = "#ddd";
-                ctx.strokeStyle = "#444";
-                ctx.lineWidth = 3;
+            else if (checkerBoard.getPlayerOfPiece(x, y) == 2) {
+                ctx.fillStyle = themes[currentTheme].playerTwoFill;
+                ctx.strokeStyle = themes[currentTheme].playerTwoStroke;
+                ctx.lineWidth = 8;
                 ctx.beginPath();
                 ctx.arc(
                     (x * squareSize) + (squareSize / 2),
@@ -63,10 +78,17 @@ renderBoard = function(canvasElm, checkerBoard, highlights) {
                 );
                 ctx.fill();
                 ctx.stroke();
+                if (checkerBoard.getPieceAt(x, y) == BOARD_SPACE.PLAYER_2_KING) {
+                    var img = res.kingHighlight.data;
+                    if (playerNumber == 1)
+                        var img = res.kingHighlightReverse.data;            
+                    ctx.drawImage(img, x * squareSize, y * squareSize, squareSize, squareSize);  
+                }  
             }
         }
     }
 
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (checkerBoard.playerWon != -1) {
         if (checkerBoard.player1_ID == checkerBoard.playerWon)
             var winnerName = checkerBoard.player1_Name;
@@ -91,10 +113,17 @@ function renderBoardText(canvasElm, text, alpha) {
     ctx.textAlign = "center";
     ctx.font = "60px Calibri";
     ctx.globalAlpha = alpha;
-    ctx.fillStyle = themes[currentTheme].textShadowColor;
-    ctx.fillText(text, canvasElm.width / 2 + 2, canvasElm.height / 2 + 2);
-    ctx.fillStyle = themes[currentTheme].textColor;
-    ctx.fillText(text, canvasElm.width / 2, canvasElm.height / 2);
+    ctx.fillStyle = "#fdfdfd";
+    ctx.strokeStyle = themes[currentTheme].playerOneStroke;
+    ctx.lineWidth = 8;
+    var width = (text.length * 30) + 60;
+    var x = (canvasElm.width / 2) - (width / 2);
+    var height = (100);
+    var y = (canvasElm.height / 2) - (height / 2);
+    ctx.fillRect(x, y, width, height);
+    ctx.strokeRect(x, y, width, height);
+    ctx.fillStyle = themes[currentTheme].playerOneStroke;
+    ctx.fillText(text, canvasElm.width / 2, canvasElm.height / 2 + 25);
     ctx.globalAlpha = 1.0;
 }
 
@@ -103,9 +132,79 @@ currentTheme = 0;
 themes = [
     {
         primaryColor: "#fdfdfd",
-        secondaryColor: "#222",
-        highlightColor: "#444",
+        secondaryColor: "#BF3939",
+        highlightColor: "#7C2525",
         textColor: "#f22",
-        textShadowColor: "#111"
+        textShadowColor: "#111",
+        playerOneFill: "#F7B036",
+        playerOneStroke: "#C67D07",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#892929"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#3FB6D3",
+        highlightColor: "#2D8396",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#72E837",
+        playerOneStroke: "#51A026",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#3394AA"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#3BCC69",
+        highlightColor: "#247F41",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#FF2B47",
+        playerOneStroke: "#B21E32",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#2B964D"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#F29C32",
+        highlightColor: "#542CAA",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#8D5AED",
+        playerOneStroke: "#6031BF",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#CC740A"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#FA6BAA",
+        highlightColor: "#962558",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#962558",
+        playerOneStroke: "#541B3D",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#BA306E"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#82C440",
+        highlightColor: "#357299",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#4CC3FF",
+        playerOneStroke: "#438FC1",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#5F8D31"
+    },
+    {
+        primaryColor: "#fdfdfd",
+        secondaryColor: "#D82920",
+        highlightColor: "#68120F",
+        textColor: "#f22",
+        textShadowColor: "#111",
+        playerOneFill: "#FF5B5B",
+        playerOneStroke: "#821713",
+        playerTwoFill: "#fdfdfd",
+        playerTwoStroke: "#991B16"
     }
 ]

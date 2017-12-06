@@ -132,12 +132,28 @@ function startGameWith(playerID) {
     hidePlayerLobby();
     postCreateBoard(function (response) {
         loadGame(response);
+        getLobby(function(response) {
+            var responseJSON = JSON.parse(response);
+            populateFullGamesLobby(responseJSON);
+        });
     }, playerID);
 }
 
 function loadGame(gameID) {
+    var alpha = "abcdmnopqvwxyzABCSTUVWXYZ0123DEFGrstuHIJefghijklKLMNOPQR456789";
+    var num = 0;
+    for (var i = 0; i < alpha.length; i++) {
+        if (gameID.substring(0, 1) == alpha.substring(i, i + 1)) {
+            num = i;
+            break;
+        }
+    }
+    console.log(num);
+    num = num % themes.length;
+    currentTheme = num;
     checkersBoard.gameID = gameID;
     checkersBoard.downloadBoard();
+    DOM.canvas.style.outlineColor = themes[currentTheme].secondaryColor;
 }
 
 
