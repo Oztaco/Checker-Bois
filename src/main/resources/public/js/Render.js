@@ -113,10 +113,17 @@ function renderBoardText(canvasElm, text, alpha) {
     ctx.textAlign = "center";
     ctx.font = "60px Calibri";
     ctx.globalAlpha = alpha;
-    ctx.fillStyle = themes[currentTheme].textShadowColor;
-    ctx.fillText(text, canvasElm.width / 2 + 2, canvasElm.height / 2 + 2);
-    ctx.fillStyle = themes[currentTheme].textColor;
-    ctx.fillText(text, canvasElm.width / 2, canvasElm.height / 2);
+    ctx.fillStyle = "#fdfdfd";
+    ctx.strokeStyle = themes[currentTheme].playerOneStroke;
+    ctx.lineWidth = 8;
+    var width = (text.length * 30) + 60;
+    var x = (canvasElm.width / 2) - (width / 2);
+    var height = (100);
+    var y = (canvasElm.height / 2) - (height / 2);
+    ctx.fillRect(x, y, width, height);
+    ctx.strokeRect(x, y, width, height);
+    ctx.fillStyle = themes[currentTheme].playerOneStroke;
+    ctx.fillText(text, canvasElm.width / 2, canvasElm.height / 2 + 25);
     ctx.globalAlpha = 1.0;
 }
 
