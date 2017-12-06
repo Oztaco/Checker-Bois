@@ -71,13 +71,10 @@ public class Game {
 
     public void playerResigned(Player p){
         // Did someone already resign?
-        if (this.playerWon == null) {
-            return;
-        }
-        if(p == this.player1){
+        if(p.equals(this.player1)){
             this.playerWon = player2;
         }
-        else if(p == this.player2){
+        else if(p.equals(this.player2)){
             this.playerWon = player1;
         }
         else{
@@ -297,7 +294,6 @@ public class Game {
                     ((this.board.getCoords(x1-1,y1+1) == CheckersBoard.space.PLAYER2 ||
                         this.board.getCoords(x1-1, y1+1) == CheckersBoard.space.PLAYER2KING)
                         && this.board.getCoords(x1-2, y1+2) == CheckersBoard.space.EMPTY)));
-
     }
 
     public boolean checkAttackCoordsP2(int x1, int y1, CheckersBoard.space mySpace){
