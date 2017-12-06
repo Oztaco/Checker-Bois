@@ -50,6 +50,7 @@ scene("currentPlayerTurn", {
 		console.log("Current scene: currentPlayerTurn");
 		mouseAlreadyPressed = false;
 		sceneStartedAt = Date.now();
+		opponentTurnAnimed = false;
 	},
 	update: function () {
 		if (keys.m)
@@ -156,6 +157,7 @@ scene("playerInput", {
 	}
 });
 
+var opponentTurnAnimed = false;
 /**
  * The scene that runs when it is the opponent's turn. Should keep pinging the
  * server every 5 second to check for a move.
@@ -184,12 +186,13 @@ scene("opponentTurn", {
 		var step1Time = config.timing.textFadeIn
 		var step2Time = step1Time + config.timing.textDuration;
 		var step3Time = step2Time + config.timing.textFadeOut;
-		if (timeElapsed < step1Time) {
+		if (timeElapsed < step1Time && !opponentTurnAnimed) {
 			renderBoardText(DOM.canvas, output, (timeElapsed / step1Time));
 			console.log("boy" + (timeElapsed / step1Time));
 		}
-		else if (timeElapsed < step2Time) {
-			renderBoardText(DOM.canvas, output);	
+		else if (timeElapsed < step2Time || opponentTurnAnimed) {
+			renderBoardText(DOM.canvas, output);
+			opponentTurnAnimed = true;
 		}
 		else if (timeElapsed < step3Time) {
 			renderBoardText(DOM.canvas, output, 1 - ((timeElapsed - step2Time) / config.timing.textFadeOut));		
