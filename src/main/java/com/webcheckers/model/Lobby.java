@@ -259,6 +259,15 @@ public class Lobby {
         return this.games.get(id).getGameBoardAsString(theOneWhoKnocks);
     }
 
+    /**
+     * ----------------------------------------------------------------------------------------------------
+     * getNumOfPlayers
+     *
+     * Gets the number of Players currently signed in
+     * @return numPlayers
+     * ----------------------------------------------------------------------------------------------------
+     */
+    public int getNumOfPlayers() { return this.players.size(); }
 
 /*  #######################################################################################################
     Main Testing

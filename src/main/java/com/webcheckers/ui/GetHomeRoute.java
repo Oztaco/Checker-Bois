@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.GameCenter;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -21,9 +22,8 @@ import spark.TemplateEngine;
 public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-  static final String TITLE_ATTR = "title";
-
   private final TemplateEngine templateEngine;
+  private final GameCenter gameCenter;
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -32,11 +32,12 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine) {
+  public GetHomeRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
+    this.gameCenter = gameCenter;
     //
     LOG.config("GetHomeRoute is initialized.");
   }
@@ -58,6 +59,7 @@ public class GetHomeRoute implements Route {
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
+    vm.put("numPlayers", gameCenter.getNumOfPlayers());
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
   }
 

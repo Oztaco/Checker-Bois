@@ -145,6 +145,8 @@ public class GameCenter {
         this.lobby.playerResigned(gameID, sessionID);
     }
 
+    public int getNumOfPlayers() { return lobby.getNumOfPlayers(); }
+
 
     //##################################################################################################################
     // Public Methods

@@ -7,7 +7,7 @@
     <#if error??>
         <style>
             .modal.login {
-                height: 276px;
+                height: 296px;
                 width: 280px;
                 border-radius: 6px;
                 margin: 80px auto;
@@ -24,10 +24,14 @@
         <p class="label">Please pick a username</p>
         <input type="text" name="username" placeholder="Username" />
     <#if error??>
-        <p id="error">${error_message}</p>
+        <p id="error">
+            ${error_message}
+        </p>
     </#if>
         <input type="submit" value="Play" /><br/>
     </form>
+
+    <p id="numPlayers">Number of Players Signed In: ${numPlayers}</p>
 </div>
 </body>
 </html>
