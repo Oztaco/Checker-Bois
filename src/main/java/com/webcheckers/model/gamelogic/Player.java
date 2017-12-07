@@ -1,6 +1,4 @@
-package com.webcheckers.model;
-
-import spark.Session;
+package com.webcheckers.model.gamelogic;
 
 import java.util.ArrayList;
 

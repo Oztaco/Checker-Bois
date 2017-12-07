@@ -1,7 +1,6 @@
-package com.webcheckers.model;
+package com.webcheckers.model.gamelogic;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
+import com.webcheckers.Exceptions.InvalidMoveException;
 
 public class CheckersBoard {
 

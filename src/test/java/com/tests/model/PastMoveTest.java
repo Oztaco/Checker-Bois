@@ -1,8 +1,8 @@
 package com.tests.model;
 
-import com.webcheckers.model.MoveType;
-import com.webcheckers.model.PastMove;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.MoveType;
+import com.webcheckers.model.gamelogic.PastMove;
+import com.webcheckers.model.gamelogic.Player;
 import org.junit.Test;
 
 /**

@@ -1,4 +1,4 @@
-package com.webcheckers.model.Exceptions;
+package com.webcheckers.Exceptions;
 
 public class PlayerNotAddedException extends Throwable{
     public PlayerNotAddedException(String message){

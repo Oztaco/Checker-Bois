@@ -1,11 +1,10 @@
-package com.webcheckers.model;
+package com.webcheckers.model.gamelogic;
 
-import com.webcheckers.model.Exceptions.GameNotAddedException;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.Exceptions.PlayerNotAddedException;
+import com.webcheckers.Exceptions.GameNotAddedException;
+import com.webcheckers.Exceptions.InvalidMoveException;
+import com.webcheckers.Exceptions.PlayerNotAddedException;
 
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Logger;
 
 public class Lobby {

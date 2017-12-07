@@ -14,8 +14,6 @@ import spark.Route;
 import spark.TemplateEngine;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Lobby;
-import com.webcheckers.model.Player;
 
 /**
  * The API route to get a JSON representation of the entire lobby

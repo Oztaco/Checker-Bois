@@ -1,6 +1,5 @@
-package com.webcheckers.model;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import javafx.scene.control.cell.CheckBoxListCell;
+package com.webcheckers.model.gamelogic;
+import com.webcheckers.Exceptions.InvalidMoveException;
 
 import java.util.ArrayList;
 

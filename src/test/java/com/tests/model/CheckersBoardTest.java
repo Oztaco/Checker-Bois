@@ -1,8 +1,8 @@
 package com.tests.model;
 
-import com.webcheckers.model.CheckersBoard;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.CheckersBoard;
+import com.webcheckers.Exceptions.InvalidMoveException;
+import com.webcheckers.model.gamelogic.Player;
 import org.junit.Test;
 
 //import static org.junit.jupiter.api.Assertions.*; //TODO

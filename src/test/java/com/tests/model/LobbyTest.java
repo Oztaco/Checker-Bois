@@ -1,10 +1,6 @@
 package com.tests.model;
 
-import com.webcheckers.model.CheckersBoard;
-import com.webcheckers.model.Exceptions.GameNotAddedException;
-import com.webcheckers.model.Exceptions.PlayerNotAddedException;
-import com.webcheckers.model.Lobby;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.Lobby;
 import org.junit.Test;
 
 /**

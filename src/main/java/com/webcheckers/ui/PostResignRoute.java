@@ -1,8 +1,6 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.MoveType;
 import spark.Request;
 import spark.Response;
 import spark.Route;

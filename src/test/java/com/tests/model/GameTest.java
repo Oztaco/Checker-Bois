@@ -1,9 +1,7 @@
 package com.tests.model;
 
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.Game;
-import com.webcheckers.model.MoveType;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.Game;
+import com.webcheckers.model.gamelogic.Player;
 import org.junit.Test;
 
 /**

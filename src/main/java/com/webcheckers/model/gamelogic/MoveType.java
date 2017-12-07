@@ -1,4 +1,4 @@
-package com.webcheckers.model;
+package com.webcheckers.model.gamelogic;
 
 public enum MoveType {
     ATTACK(0),

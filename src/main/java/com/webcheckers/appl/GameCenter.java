@@ -1,13 +1,11 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Exceptions.GameNotAddedException;
-import com.webcheckers.model.Exceptions.InvalidMoveException;
-import com.webcheckers.model.Exceptions.PlayerNotAddedException;
+import com.webcheckers.Exceptions.InvalidMoveException;
 
 import java.util.logging.Logger;
 
-import com.webcheckers.model.Lobby;
-import com.webcheckers.model.MoveType;
+import com.webcheckers.model.gamelogic.Lobby;
+import com.webcheckers.model.gamelogic.MoveType;
 
 /**
  * The class that centralizes communication within the server,

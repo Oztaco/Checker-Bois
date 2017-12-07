@@ -1,6 +1,6 @@
 package com.tests.model;
 
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.Player;
 import org.junit.Test;
 
 /**

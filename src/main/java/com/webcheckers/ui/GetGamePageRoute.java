@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameCenter;
 
-import com.webcheckers.model.Lobby;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.gamelogic.Lobby;
+import com.webcheckers.model.gamelogic.Player;
 
 public class GetGamePageRoute implements Route {
     private static final Logger LOG = Logger.getLogger( GetGamePageRoute.class.getName());
@@ -41,10 +41,10 @@ public class GetGamePageRoute implements Route {
         // final PlayerServices playerServices = httpSession.attribute(GetHomeRoute.PLAYERSERVICES_KEY);
         // GuessGame game = playerServices.currentGame();
 
-        // com.webcheckers.model.Player ploop = new com.webcheckers.model.Player("blub");
-        // com.webcheckers.model.Player red = new com.webcheckers.model.Player("red");
-        // com.webcheckers.model.Player blue = new com.webcheckers.model.Player("blue");
-        // com.webcheckers.model.CheckersBoard board = new com.webcheckers.model.CheckersBoard(red, blue);
+        // com.webcheckers.model.gamelogic.Player ploop = new com.webcheckers.model.gamelogic.Player("blub");
+        // com.webcheckers.model.gamelogic.Player red = new com.webcheckers.model.gamelogic.Player("red");
+        // com.webcheckers.model.gamelogic.Player blue = new com.webcheckers.model.gamelogic.Player("blue");
+        // com.webcheckers.model.gamelogic.CheckersBoard board = new com.webcheckers.model.gamelogic.CheckersBoard(red, blue);
 
         final Map<String, Object> vm = new HashMap<>();
         vm.put(VIEWMODE_ATTR, "Unknown");
