@@ -17,7 +17,6 @@
   </properties>
 
   <dependencies>
-
     <!-- Spark Java -->
     <dependency>
       <groupId>com.sparkjava</groupId>
@@ -59,7 +58,6 @@
       <version>2.3.5</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
